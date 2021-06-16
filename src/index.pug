@@ -4,7 +4,10 @@
     scroll: 'Скролл',
     city:'Проживаю',
     age:'Возраст',
-    birth:"Родился"
+    birth:"Родился",
+    skills_title:"Чем я могу быть полезен вам",
+    frontend:"Front-end",
+    workflow:"Workflow"
   };
 
 - 
@@ -31,7 +34,10 @@
     about_site:"Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!",
     city:"Новосибирск",
     age:25,
-    birth:"1 января 1991"
+    birth:"1 января 1991",
+    skills_description:"Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!",
+    skills_frontend:['HTML5','CSS3','Javascript','Jquery и Vue.js'],
+    skills_workflow:['GIT','Terminal','Gulp','Webpack'],
   }
 
 include ./mixins.pug
@@ -72,23 +78,40 @@ html(lang="en")
           .about__item
             .about__image 
               +image('content/user.jpg', 'about__img')
-              .data
-                .data__line
-                  .data__name #{lang['city']}
-                  .data__value #{user['city']}
-                .data__line
-                  .data__name #{lang['age']}
-                  .data__value #{user['age']}
-                .data__line
-                  .data__name #{lang['birth']}
-                  .data__value #{user['birth']}
+            .data
+              .data__line
+                .data__name #{lang['city']}
+                .data__value #{user['city']}
+              .data__line
+                .data__name #{lang['age']}
+                .data__value #{user['age']}
+              .data__line
+                .data__name #{lang['birth']}
+                .data__value #{user['birth']}
           .about__item
             .about__text #{lang['hello']}
             .about__name #{user['name']}
             .about__text #{user['about']}
-            .about__text #{user['about_site']}
+            .about__info
+              .about__svg 
+                +icon('star', 'about__star')
+              .about__text #{user['about_site']}
       .skills
-        .container
+        .container.skill__container
+          .skills__title #{lang['skills_title']}
+          .skills__description #{user['skills_description']}
+          .skills__group
+            .skills__group-title #{lang['frontend']}
+            ul.skills__list
+              each value, key in user['skills_frontend'] 
+                li.skills__item
+                  span.skills__value #{value}
+          .skills__group
+            .skills__group-title #{lang['workflow']}
+            ul.skills__list
+              each value, key in user['skills_workflow'] 
+                li.skills__item
+                  span.skills__value #{value}
       .works
         .container
       .talsk

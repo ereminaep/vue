@@ -1,0 +1,64 @@
+.skills {
+    background: url('/src/images/content/skills.webp');
+    background-size:cover;
+    min-height:100vh;
+    height:100%;
+    display: flex;
+    align-items:center;
+    color:$white-color;
+    &:before{
+        content:'';
+        background: url('/src/images/content/hands.webp');
+        background-size: cover;
+        width: 662px;
+        height: 983px;
+    }
+}
+.skill__container{
+    display: flex;
+    align-items: flex-start;
+    justify-content:center;
+    width:60%;
+}
+.skills__title{
+    font-size: 30px;
+    line-height: 41px;
+    font-weight: bold;
+}
+.skills__description{
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 30px;
+    width:50%;
+    margin-top:50px;
+}
+.skills__group{
+    position:relative;
+    left:160px;
+    margin-top:55px;
+}
+.skills__group-title{
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 33px;
+    margin-bottom:40px;
+}
+.skills__item{
+    width:132px;
+    height:132px;
+    border-radius:50%;
+    border:1px solid rgba(255, 255, 255, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    margin-right:70px;
+    color: rgba(255, 255, 255, 0.5);
+    &:last-of-type {
+        margin-right:0;
+    }
+}
+.skills__list{
+    display: flex;
+
+}
