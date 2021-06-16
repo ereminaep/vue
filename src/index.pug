@@ -1,3 +1,39 @@
+-
+  const lang={
+    hello: 'Привет, меня зовут',
+    scroll: 'Скролл',
+    city:'Проживаю',
+    age:'Возраст',
+    birth:"Родился"
+  };
+
+- 
+  const menu = {
+      about: 'Обо мне',
+      skills: 'Навыки',
+      works: 'Работы',
+      talks: 'Отзывы'
+  };
+
+- 
+  const soc = {
+      insta: 'href',
+      github: 'href',
+      vk: 'href',
+      envelope: 'mailto:admin@mail.ru'
+  };
+
+- 
+  const user={
+    name:'Владимир Астаханов',
+    description_site: "Личный сайт веб-разработчика",
+    about:"Я занимаюсь разработкой современных сайтов и приложений. Мне нравится делать интересные и современные проекты.",
+    about_site:"Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!",
+    city:"Новосибирск",
+    age:25,
+    birth:"1 января 1991"
+  }
+
 include ./mixins.pug
 
 <!DOCTYPE html>
@@ -6,10 +42,56 @@ html(lang="en")
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     meta(http-equiv="X-UA-Compatible", content="ie=edge")
-    title Portfolio | main page
+    title Portfolio
   body
     .wrapper
-      .maincontent
-        +image('content/user.jpg', 'user-pic')
-        +icon('link', 'link-class')
-        .icon-bg
+      .main
+        .container.main__container
+          .header
+            .logo
+              a(class='logo__href',href='#')
+                +icon('logo', 'logo__svg')
+            .menu
+              ul.menu__list 
+                each value, key in menu 
+                  li.menu__item
+                    a(href='#'+key class="menu__link") #{value}
+            .soc
+                each value, key in soc
+                  .soc__item
+                    a(href='#'+key class="soc__link")
+                     +icon(key, 'soc__svg')
+          .main__content
+            .main__description #{user['description_site']}
+            .main__name #{user['name']}
+          .scroll
+            .scroll__text Скролл
+            +icon('down', 'scroll__svg')
+      .about
+        .container.about__container
+          .about__item
+            .about__image 
+              +image('content/user.jpg', 'about__img')
+              .data
+                .data__line
+                  .data__name #{lang['city']}
+                  .data__value #{user['city']}
+                .data__line
+                  .data__name #{lang['age']}
+                  .data__value #{user['age']}
+                .data__line
+                  .data__name #{lang['birth']}
+                  .data__value #{user['birth']}
+          .about__item
+            .about__text #{lang['hello']}
+            .about__name #{user['name']}
+            .about__text #{user['about']}
+            .about__text #{user['about_site']}
+      .skills
+        .container
+      .works
+        .container
+      .talsk
+        .container
+      .footer 
+        .container
