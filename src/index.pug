@@ -6,8 +6,12 @@
     age:'Возраст',
     birth:"Родился",
     skills_title:"Чем я могу быть полезен вам",
+    talks_title:"Что обо мне говорят",
     frontend:"Front-end",
-    workflow:"Workflow"
+    workflow:"Workflow",
+    works_title:"Мои работы",
+    quote:"Всегда пишите код так, будто сопровождать его будет склонный к насилию психопат, который знает где вы живете",
+    quote_author:"Martin Golding"
   };
 
 - 
@@ -38,7 +42,23 @@
     skills_description:"Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!",
     skills_frontend:['HTML5','CSS3','Javascript','Jquery и Vue.js'],
     skills_workflow:['GIT','Terminal','Gulp','Webpack'],
+    footer_description:"Этот сайт я сделал в рамках обучения в Школе онлайн образования Loftschool"
   }
+- 
+  const review=[
+    {
+      name:'Ковальчук Дмитрий',
+      work:'Основатель Loftschool',
+      photo:'1.png',
+      text:'Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!'
+    },
+    {
+      name:'Владимир Сабанцев',
+      work:'Преподаватель',
+      photo:'2.png',
+      text:'Этот код выдержит любые испытания. Только пожалуйста, не загружайте сайт на слишком старых браузерах'
+    }
+  ]
 
 include ./mixins.pug
 
@@ -71,8 +91,9 @@ html(lang="en")
             .main__description #{user['description_site']}
             .main__name #{user['name']}
           .scroll
-            .scroll__text Скролл
-            +icon('down', 'scroll__svg')
+            .scroll__text 
+              a(href='#'+key class="scroll__link") Скролл
+              +icon('down', 'scroll__svg')
       .about
         .container.about__container
           .about__item
@@ -113,8 +134,48 @@ html(lang="en")
                 li.skills__item
                   span.skills__value #{value}
       .works
-        .container
-      .talsk
-        .container
+        .container.works__container
+          .works__title #{lang['works_title']}
+      .talks
+        .container.talks__container
+          .talks__header
+            .talks__title #{lang['talks_title']}
+            .arrows
+              .arrows__item.arrows__item--left
+                +icon('arrow-down', 'arrow__svg')
+              .arrows__item.arrows__item--right
+                +icon('arrow-down', 'arrow__svg')
+          .talks__list 
+            each value in review
+              .talks__item
+                .talks__text #{value['text']}
+                  .talks__quote
+                    +icon('quote', 'talks__svg')
+                .talks__person
+                  +image('content/'+value['photo'], 'about__img')
+                  .talks__info
+                    .talks__name #{value['name']}
+                    .talks__work #{value['work']}
+
       .footer 
-        .container
+        .container.footer__container
+          .footer__column 
+            .footer__copy © 2020
+          .footer__column 
+            .footer__author #{user['name']}
+            .footer__about #{user['description_site']}
+          .footer__column 
+            .menu
+              ul.menu__list 
+                each value, key in menu 
+                  li.menu__item
+                    a(href='#'+key class="menu__link") #{value}
+            .footer__description #{user['footer_description']}
+            .soc
+              each value, key in soc
+                .soc__item.soc__item--footer
+                  a(href='#'+key class="soc__link")
+                    +icon(key, 'soc__svg')
+          .footer__column
+            .footer__quote #{lang['quote']}
+            .footer__quote-author #{lang['quote_author']}

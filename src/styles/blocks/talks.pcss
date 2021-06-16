@@ -1,0 +1,76 @@
+.talks{
+    min-height: calc(100vh - 370px);
+    height: calc(100vh - 370px);
+    background: url('/src/images/content/blatt.webp');
+    background-size:cover;
+    display: flex;
+    flex-direction:column;
+    justify-content:center;
+}
+.talks__container{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:flex-start;
+}
+.talks__header{
+    display:flex;
+}
+.talks__title{
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 49px;
+    color:$white-color;
+    margin-right:110px;
+}
+.talks__list{
+    display:flex;
+    flex-direction:row;
+    margin-top:78px;
+}
+.talks__item{
+    display:flex;
+    flex-wrap:wrap;
+    width:30%;
+    justify-content: center;
+    &:nth-of-type(2n+1) {
+        margin-right:60px;
+    }
+}
+.talks__quote{
+    height: 57px;
+    width: 76px;
+    fill:#303133;
+    margin-right:20px;
+}
+.talks__text{
+    color: rgba(255, 255, 255, 0.6);
+    display:flex;
+    flex-direction:row-reverse;
+    font-size: 16px;
+    line-height: 30px;
+}
+
+.talks__svg{
+    height: 3.5625rem;
+    width: 4.75rem;
+}
+
+.talks__name{
+    font-size: 18px;
+    line-height: 25px;
+    color: $white-color;
+}
+.talks__work{
+    font-size: 16px;
+    line-height: 22px;
+    color: rgba(255, 255, 255, 0.5);
+}
+.talks__person{
+    display:flex;
+    margin-top:30px;
+    width: 100%;
+}
+.talks__info{
+    margin-left:31px;
+}
