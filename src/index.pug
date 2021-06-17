@@ -59,6 +59,10 @@
       text:'Этот код выдержит любые испытания. Только пожалуйста, не загружайте сайт на слишком старых браузерах'
     }
   ]
+-
+  const works=[
+    "work1.jpg",'work2.jpg','work3.jpg','work4.jpg'
+  ]
 
 include ./mixins.pug
 
@@ -136,6 +140,25 @@ html(lang="en")
       .works
         .container.works__container
           .works__title #{lang['works_title']}
+          .works__content
+            .works__slider
+              .works__slide-full 
+                +image('content/'+works[0], 'works__img-full')
+              .works__slide-items
+                each value in works
+                  .works__slide-item
+                    .works__slide-image
+                      +image('content/'+value, 'works__slide-img')
+              .works__slide--number 2       
+            .works__description
+              .works__tags
+                .works__tag Html
+                .works__tag Css
+                .works__tag Javascript
+              .works__name Сайт школы образования
+              .works__text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 2 месяца только самых тяжелых испытаний и бессонных ночей!
+              a(href="#",class="works__link") Посмотреть сайт
+
       .talks
         .container.talks__container
           .talks__header
