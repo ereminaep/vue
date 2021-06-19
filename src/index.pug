@@ -2,6 +2,7 @@
   const lang={
     hello: 'Привет, меня зовут',
     scroll: 'Скролл',
+    title: 'Проект на vue',
     city:'Проживаю',
     age:'Возраст',
     birth:"Родился",
@@ -11,7 +12,9 @@
     workflow:"Workflow",
     works_title:"Мои работы",
     quote:"Всегда пишите код так, будто сопровождать его будет склонный к насилию психопат, который знает где вы живете",
-    quote_author:"Martin Golding"
+    quote_author:"Martin Golding",
+    work_link:"Посмотреть сайт",
+    copy:"© 2020"
   };
 
 - 
@@ -40,8 +43,39 @@
     age:25,
     birth:"1 января 1991",
     skills_description:"Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!",
-    skills_frontend:['HTML5','CSS3','Javascript','Jquery и Vue.js'],
-    skills_workflow:['GIT','Terminal','Gulp','Webpack'],
+    skills_frontend:[
+      {
+        name:'HTML5',
+        percent:80
+      },{
+        name:'CSS3',
+        percent:55
+      },{
+        name:'Javascript',
+        percent:40
+      },{
+        name:'Jquery и Vue.js',
+        percent:25
+      }
+    ],
+    skills_workflow:[
+      {
+        name:'GIT',
+        percent:80
+      },
+      {
+        name:'Terminal',
+        percent:76
+      },
+      {
+        name:'Gulp',
+        percent:30
+      },
+     {
+        name:'Webpack',
+        percent:50
+      }
+    ],
     footer_description:"Этот сайт я сделал в рамках обучения в Школе онлайн образования Loftschool"
   }
 - 
@@ -59,10 +93,14 @@
       text:'Этот код выдержит любые испытания. Только пожалуйста, не загружайте сайт на слишком старых браузерах'
     }
   ]
--
-  const works=[
-    "work1.jpg",'work2.jpg','work3.jpg','work4.jpg'
-  ]
+- 
+  const works={
+    name:"Сайт школы образования",
+    description:"Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 2 месяца только самых тяжелых испытаний и бессонных ночей!",
+    images:["work1.jpg",'work2.jpg','work3.jpg','work4.jpg']
+  }
+
+  const tags=['Html','Css','Javascript']
 
 include ./mixins.pug
 
@@ -72,7 +110,7 @@ html(lang="en")
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     meta(http-equiv="X-UA-Compatible", content="ie=edge")
-    title Portfolio
+    title #{lang['title']}
   body
     .wrapper
       .main
@@ -93,10 +131,10 @@ html(lang="en")
                      +icon(key, 'soc__svg')
           .main__content
             .main__description #{user['description_site']}
-            .main__name #{user['name']}
+            h1.main__name #{user['name']}
           .scroll
             .scroll__text 
-              a(href='#'+key class="scroll__link") Скролл
+              a(href='#'+key class="scroll__link") #{lang['scroll']}
               +icon('down', 'scroll__svg')
       .about
         .container.about__container
@@ -127,37 +165,41 @@ html(lang="en")
           .skills__description #{user['skills_description']}
           .skills__group
             .skills__group-title #{lang['frontend']}
-            ul.skills__list
-              each value, key in user['skills_frontend'] 
-                li.skills__item
-                  span.skills__value #{value}
+            .skills__list
+                each value, key in user['skills_frontend'] 
+                  .skill(data-line=8,data-size="132",data-percent=value['percent'],data-text=value['name'])
           .skills__group
             .skills__group-title #{lang['workflow']}
-            ul.skills__list
+            .skills__list
               each value, key in user['skills_workflow'] 
-                li.skills__item
-                  span.skills__value #{value}
+                .skill(data-line=8,data-size="132",data-percent=value['percent'],data-text=value['name'])
       .works
         .container.works__container
           .works__title #{lang['works_title']}
           .works__content
             .works__slider
               .works__slide-full 
-                +image('content/'+works[0], 'works__img-full')
+                +image('content/'+works['images'][0], 'works__img-full')
               .works__slide-items
-                each value in works
+                each value in works['images']
                   .works__slide-item
                     .works__slide-image
                       +image('content/'+value, 'works__slide-img')
+              .arrows.arrows--work
+                .arrows__item.arrows__item--work.arrows__item--left
+                  +icon('arrow-down', 'arrow__svg')
+                .arrows__item.arrows__item--work.arrows__item--right
+                  +icon('arrow-down', 'arrow__svg')
               .works__slide--number 2       
             .works__description
               .works__tags
-                .works__tag Html
-                .works__tag Css
-                .works__tag Javascript
-              .works__name Сайт школы образования
-              .works__text Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 2 месяца только самых тяжелых испытаний и бессонных ночей!
-              a(href="#",class="works__link") Посмотреть сайт
+                each value in tags
+                  .works__tag #{value}
+              .works__name #{works['name']}
+              .works__text #{works['description']}
+              a(href="#",class="works__link") 
+                +icon('link', 'works__svg') 
+                span #{lang['work_link']}
 
       .talks
         .container.talks__container
@@ -175,7 +217,7 @@ html(lang="en")
                   .talks__quote
                     +icon('quote', 'talks__svg')
                 .talks__person
-                  +image('content/'+value['photo'], 'about__img')
+                  +image('content/'+value['photo'], 'talks__img')
                   .talks__info
                     .talks__name #{value['name']}
                     .talks__work #{value['work']}
@@ -183,7 +225,7 @@ html(lang="en")
       .footer 
         .container.footer__container
           .footer__column 
-            .footer__copy © 2020
+            .footer__copy #{lang['copy']}
           .footer__column 
             .footer__author #{user['name']}
             .footer__about #{user['description_site']}

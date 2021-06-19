@@ -21,6 +21,7 @@
     align-items: flex-start;
     justify-content:center;
     width:60%;
+    flex-direction: column;
 }
 .skills__title{
     font-size: 30px;
@@ -56,11 +57,18 @@
     align-items:center;
     margin-right:70px;
     color: rgba(255, 255, 255, 0.5);
+    position:relative;
     &:last-of-type {
         margin-right:0;
     }
 }
+.skills__svg{
+    width:132px;
+    height:132px;
+    position:absolute;
+    fill:none;
+    stroke:#DC9322;
+}
 .skills__list{
     display: flex;
-
 }
