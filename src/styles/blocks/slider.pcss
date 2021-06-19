@@ -1,0 +1,34 @@
+.slider{
+    position:relative;
+    display:flex;
+}
+.slider__slide--number{
+    color: #E6E6E6;
+    font-weight: 800;
+    font-size: 400px;
+    line-height: 48px;
+    position:absolute;
+    right:-60px;
+    top:40%;
+    z-index:0;
+}
+.slider__slide-items{
+    display:flex;
+    position:absolute;
+    bottom:60px;
+    right:120px;
+    z-index:20;
+}
+
+.slider__slide-full{
+    margin-right:120px;
+    z-index:10;
+}
+
+.slider__slide-image{
+    height:103px;
+    cursor: pointer;
+    &:hover{
+        border: 3px solid #DC9322;
+    }
+}

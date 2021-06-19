@@ -1,38 +1,29 @@
 .skills {
     background: url('/src/images/content/skills.webp');
     background-size:cover;
-    min-height:100vh;
-    height:100%;
-    display: flex;
-    align-items:center;
+    @include section;
+    flex-direction:row;
     color:$white-color;
     &:before{
         content:'';
-        background: url('/src/images/content/hands.webp');
-        background-size: cover;
-        width: 662px;
-        height: 983px;
+        background: url('/src/images/content/hands.webp') no-repeat;
+        background-size: contain;
+        width: 40%;
         position: relative;
         top: 100px;
     }
 }
-.skill__container{
-    display: flex;
-    align-items: flex-start;
+.skills__container{
+    @include container;
     justify-content:center;
     width:60%;
-    flex-direction: column;
 }
 .skills__title{
-    font-size: 30px;
-    line-height: 41px;
-    font-weight: bold;
+    @include title_level_3;
 }
 .skills__description{
     color: rgba(255, 255, 255, 0.8);
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 30px;
+    @include text;
     width:50%;
     margin-top:50px;
 }
@@ -47,28 +38,33 @@
     line-height: 33px;
     margin-bottom:40px;
 }
-.skills__item{
-    width:132px;
-    height:132px;
-    border-radius:50%;
-    border:1px solid rgba(255, 255, 255, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items:center;
-    margin-right:70px;
-    color: rgba(255, 255, 255, 0.5);
-    position:relative;
-    &:last-of-type {
-        margin-right:0;
-    }
-}
-.skills__svg{
-    width:132px;
-    height:132px;
-    position:absolute;
-    fill:none;
-    stroke:#DC9322;
-}
 .skills__list{
     display: flex;
+}
+
+@media(max-width:$bp-desktop){
+    .skills:before{
+        left:-30px;
+        top:300px;
+    }
+    .skills__group{
+        left:60px;
+    }
+}
+
+@media(max-width:$bp-tablets){
+    .skills{
+        flex-direction:column-reverse;
+    }
+    .skills__container{
+        flex-direction:column;
+        width:90%;
+        align-items:center;
+    }
+    .skills__description{
+        width:100%;
+    }
+    .skills__group{
+        left:0;
+    }
 }

@@ -21,3 +21,54 @@
     @content;
   }
 }
+
+@mixin section(){
+  min-height:100vh;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+@mixin container() {
+  display:flex;
+  align-items:flex-start;
+  flex-direction:column;
+}
+
+@mixin text(){
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 30px;
+}
+@mixin title_level_1($color:$white-color){
+  font-size: 72px;
+  line-height: 60px;
+  font-weight:800;
+  color: $color;
+}
+@mixin title_level_2($color:$white-color){
+  font-size: 36px;
+  line-height: 49px;
+  color: $color;
+  font-weight: bold;
+}
+
+@mixin title_level_3($color:$white-color){
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 41px;
+  color:$color;
+}
+
+@mixin title_level_4($color:$white-color){
+  font-size: 18px;
+  line-height: 25px;
+  color:$color;
+}
+
+@mixin title_level_5($color:$white-color){
+  font-size: 16px;
+  line-height: 22px;
+  color:$color;
+}
+

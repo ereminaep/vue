@@ -14,16 +14,6 @@
     align-items: center;
     justify-content: center;
 }
-.soc__item--footer{
-    border: 1px solid $grey-color;
-    border-radius:50%;
-    width:50px;
-    height:48px;
-    display: flex;
-    justify-content: center;
-    align-items:center;
-}
-
 .soc__svg{
     height:25px;
     fill: rgba(255, 255, 255, 0.3);
@@ -31,3 +21,20 @@
         fill:$white-color;
     }
 }
+
+@media (max-width:$bp-tablets) {
+    .soc {
+        margin-right:120px;
+    }
+    .soc__svg{
+        height:25px;
+    }
+}
+@media (max-width:$bp-phones) {
+    .soc--header{
+        display:none;
+    }
+}
+
+
+

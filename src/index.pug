@@ -119,16 +119,20 @@ html(lang="en")
             .logo
               a(class='logo__href',href='#')
                 +icon('logo', 'logo__svg')
-            .menu
+            .menu.menu--header
               ul.menu__list 
                 each value, key in menu 
                   li.menu__item
                     a(href='#'+key class="menu__link") #{value}
-            .soc
+            .soc.soc--header
                 each value, key in soc
                   .soc__item
                     a(href='#'+key class="soc__link")
                      +icon(key, 'soc__svg')
+            .hamburger
+              +icon('hamburger', 'hamburger__icon')
+              +icon('hamburger', 'hamburger__icon')
+              +icon('hamburger', 'hamburger__icon')
           .main__content
             .main__description #{user['description_site']}
             h1.main__name #{user['name']}
@@ -153,49 +157,49 @@ html(lang="en")
                 .data__value #{user['birth']}
           .about__item
             .about__text #{lang['hello']}
-            .about__name #{user['name']}
+            h2.about__name #{user['name']}
             .about__text #{user['about']}
             .about__info
               .about__svg 
                 +icon('star', 'about__star')
               .about__text #{user['about_site']}
       .skills
-        .container.skill__container
-          .skills__title #{lang['skills_title']}
+        .container.skills__container
+          h2.skills__title #{lang['skills_title']}
           .skills__description #{user['skills_description']}
           .skills__group
-            .skills__group-title #{lang['frontend']}
+            h3.skills__group-title #{lang['frontend']}
             .skills__list
                 each value, key in user['skills_frontend'] 
                   .skill(data-line=8,data-size="132",data-percent=value['percent'],data-text=value['name'])
           .skills__group
-            .skills__group-title #{lang['workflow']}
+            h3.skills__group-title #{lang['workflow']}
             .skills__list
               each value, key in user['skills_workflow'] 
                 .skill(data-line=8,data-size="132",data-percent=value['percent'],data-text=value['name'])
       .works
         .container.works__container
-          .works__title #{lang['works_title']}
+          h2.works__title #{lang['works_title']}
           .works__content
-            .works__slider
-              .works__slide-full 
+            .slider
+              .slider__slide-full 
                 +image('content/'+works['images'][0], 'works__img-full')
-              .works__slide-items
+              .slider__slide-items
                 each value in works['images']
-                  .works__slide-item
-                    .works__slide-image
+                  .slider__slide-item
+                    .slider__slide-image
                       +image('content/'+value, 'works__slide-img')
               .arrows.arrows--work
                 .arrows__item.arrows__item--work.arrows__item--left
                   +icon('arrow-down', 'arrow__svg')
                 .arrows__item.arrows__item--work.arrows__item--right
                   +icon('arrow-down', 'arrow__svg')
-              .works__slide--number 2       
+              .slider__slide--number 2       
             .works__description
-              .works__tags
+              .tags
                 each value in tags
-                  .works__tag #{value}
-              .works__name #{works['name']}
+                  .tag #{value}
+              h3.works__name #{works['name']}
               .works__text #{works['description']}
               a(href="#",class="works__link") 
                 +icon('link', 'works__svg') 
@@ -204,23 +208,23 @@ html(lang="en")
       .talks
         .container.talks__container
           .talks__header
-            .talks__title #{lang['talks_title']}
+            h2.talks__title #{lang['talks_title']}
             .arrows
               .arrows__item.arrows__item--left
                 +icon('arrow-down', 'arrow__svg')
               .arrows__item.arrows__item--right
                 +icon('arrow-down', 'arrow__svg')
-          .talks__list 
+          .reviews 
             each value in review
-              .talks__item
-                .talks__text #{value['text']}
-                  .talks__quote
+              .review
+                .review__text #{value['text']}
+                  .review__quote
                     +icon('quote', 'talks__svg')
-                .talks__person
+                .review__person
                   +image('content/'+value['photo'], 'talks__img')
-                  .talks__info
-                    .talks__name #{value['name']}
-                    .talks__work #{value['work']}
+                  .review__info
+                    .review__name #{value['name']}
+                    .review__work #{value['work']}
 
       .footer 
         .container.footer__container

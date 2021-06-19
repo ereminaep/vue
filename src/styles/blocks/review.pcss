@@ -1,0 +1,53 @@
+
+.review{
+    display:flex;
+    flex-wrap:wrap;
+    width:30%;
+    justify-content: center;
+    &:nth-of-type(2n+1) {
+        margin-right:60px;
+    }
+}
+.review__img{
+    width:75px;
+    height:75px;
+}
+.review__quote{
+    height: 57px;
+    width: 76px;
+    fill:#303133;
+    margin-right:20px;
+}
+.review__text{
+    color: rgba(255, 255, 255, 0.6);
+    display:flex;
+    flex-direction:row-reverse;
+    @include text;
+}
+
+.review__svg{
+    height: 3.5625rem;
+    width: 4.75rem;
+}
+
+.review__name{
+    @include title_level_4;
+    color: $white-color;
+}
+.review__work{
+    @include title_level_5;
+    color: rgba(255, 255, 255, 0.5);
+}
+.review__person{
+    display:flex;
+    margin-top:30px;
+    width: 100%;
+}
+.review__info{
+    margin-left:31px;
+}
+@media(max-width:$bp-desktop){
+    .review{
+        width:40%;
+    }
+}

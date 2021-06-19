@@ -16,9 +16,7 @@
     align-self: center;
 }
 .main__name{
-    font-size: 72px;
-    line-height: 60px;
-    font-weight:800;
+    @include title_level_1;
     color:$white-color;
 }
 .main__description{
@@ -28,4 +26,12 @@
     color:$grey-color;
     margin-right:56px;
     text-align:right;
+}
+@media(max-width:$bp-tablets){
+    .main__content{
+        flex-direction:column;
+    }
+    .main__name{
+        @include title_level_1;
+    }
 }

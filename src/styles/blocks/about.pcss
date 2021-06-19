@@ -1,8 +1,6 @@
 .about{
-    min-height:100vh;
-    height:100%;
+   @include section;
     color:$white-color;
-    display:flex;
     align-items: center;
 }
 
@@ -10,7 +8,7 @@
     display: flex;
     flex-direction:row;
     align-items: flex-start;
-    width:50%;
+    width:60%;
 }
 .about__item{
     &:first-of-type{
@@ -22,10 +20,8 @@
 }
 
 .about__name{
-    font-weight: bold;
-    font-size: 36px;
-    line-height: 49px;
-    margin:30px 0;
+   @include title_level_2;
+   margin:30px 0;
 }
 .about__image{
     width:200px;
@@ -50,4 +46,20 @@
     align-items: flex-start;
     position:relative;
     right:50px;
+}
+
+@media(max-width:$bp-desktop){
+    .about__container.container{
+        width:90%;
+    }
+    .about__item{
+        &:first-of-type{
+            margin-right:30px;
+        }
+    }
+}
+@media (max-width:$bp-phones) {
+    .about__container.container{
+        flex-direction:column;
+    }
 }

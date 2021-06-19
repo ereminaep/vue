@@ -4,12 +4,12 @@ for (let i = 0; i < el.length; i++) {
         percent: el[i].getAttribute('data-percent') || 25,
         size: el[i].getAttribute('data-size') || 220,
         text: el[i].getAttribute('data-text') || 220,
-        lineWidth: el[i].getAttribute('data-line') || 15,
+        lineWidth: el[i].getAttribute('data-line') || 10,
         rotate: el[i].getAttribute('data-rotate') || 0
     }
 
-    var canvas = document.createElement('canvas');
-    var span = document.createElement('span');
+    let canvas = document.createElement('canvas');
+    let span = document.createElement('span');
     span.classList.add('skill__text');
     span.textContent = options.text;
 
@@ -38,7 +38,7 @@ for (let i = 0; i < el.length; i++) {
         ctx.stroke();
     };
 
-    drawCircle('rgba(255, 255, 255, 1)', 1, 100 / 100);
+    drawCircle('hsla(0,0%,100%,.3)', 1, 100 / 100);
     drawCircle('#dc9322', options.lineWidth, options.percent / 100);
 
 }
