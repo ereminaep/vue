@@ -1,12 +1,12 @@
 .skills {
-    background: url('/src/images/content/skills.webp');
+    background: url('../images/content/skills.webp');
     background-size:cover;
     @include section;
     flex-direction:row;
     color:$white-color;
     &:before{
         content:'';
-        background: url('/src/images/content/hands.webp') no-repeat;
+        background: url('../images/content/hands.webp') no-repeat;
         background-size: contain;
         width: 40%;
         position: relative;
@@ -17,6 +17,7 @@
     @include container;
     justify-content:center;
     width: 68%;
+    margin-bottom:70px;
 }
 .skills__title{
     @include title_level_3;
@@ -29,14 +30,14 @@
 }
 .skills__group{
     position:relative;
-    left: 5rem;
+    left: 8rem;
     margin-top: 4rem;
 }
 .skills__group-title{
     font-weight: bold;
     font-size: 24px;
     line-height: 33px;
-    margin-bottom:2rem;
+    margin-bottom:1rem;
 }
 .skills__list{
     display: flex;
