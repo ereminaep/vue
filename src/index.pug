@@ -14,7 +14,7 @@
     quote:"Всегда пишите код так, будто сопровождать его будет склонный к насилию психопат, который знает где вы живете",
     quote_author:"Martin Golding",
     work_link:"Посмотреть сайт",
-    copy:"© 2020"
+    copy:"2020"
   };
 
 - 
@@ -229,22 +229,24 @@ html(lang="en")
       .footer 
         .container.footer__container
           .footer__column 
-            .footer__copy #{lang['copy']}
-          .footer__column 
-            .footer__author #{user['name']}
-            .footer__about #{user['description_site']}
+            .footer__copy ©&nbsp;#{lang['copy']}
+            .footer__group
+              .footer__author #{user['name']}
+              .footer__about #{user['description_site']}
           .footer__column 
             .menu
               ul.menu__list 
                 each value, key in menu 
                   li.menu__item
                     a(href='#'+key class="menu__link") #{value}
-            .footer__description #{user['footer_description']}
-            .soc
-              each value, key in soc
-                .soc__item.soc__item--footer
-                  a(href='#'+key class="soc__link")
-                    +icon(key, 'soc__svg')
-          .footer__column
-            .footer__quote #{lang['quote']}
-            .footer__quote-author #{lang['quote_author']}
+            .footer__parts
+              .footer__left
+                .footer__description #{user['footer_description']}
+                .soc
+                  each value, key in soc
+                    .soc__item.soc__item--footer
+                      a(href='#'+key class="soc__link")
+                        +icon(key, 'soc__svg')
+              .footer__right
+                .footer__quote #{lang['quote']}
+                .footer__quote-author #{lang['quote_author']}
