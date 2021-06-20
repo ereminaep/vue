@@ -1,7 +1,8 @@
 .footer{
     background: #222427;
-    min-height: 370px;
+    height: 370px;
     display:flex;
+    flex-wrap:wrap;
     flex-direction: row;
 }
 .footer__container{
@@ -9,8 +10,16 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-    margin-top:62px;
-    margin-bottom:62px;
+    padding:75px 0;
+}
+.footer__column{
+    &:first-of-type{
+        display:flex;
+        flex-direction:row;
+    }
+    &:last-of-type{
+        display:block;
+    }
 }
 .footer__copy{
     font-weight: 600;
@@ -18,77 +27,50 @@
     line-height: 65px;
     color: rgba(255, 255, 255, 0.3);
     margin-right:56px;
-}
-.footer__group{
-    display:flex;
-    flex-direction:column;
-    width:40%;
-}
-.footer__column{
-    display:flex;
-    flex-direction:column;
-    &:first-of-type {
-        flex-direction:row;
-        justify-content:space-around;
-        margin-right:141px;
-    }
+
 }
 .footer__author{
+    margin-right:56px;
+    width:150px;
+}
+.footer--menu{
+    margin-bottom:50px;
+}
+.footer__author-name{
     color:$white-color;
     font-weight: bold;
     font-size: 18px;
     line-height: 30px;
     text-transform:uppercase;
-    margin-bottom:20px;
+    margin-bottom:16px;
+}
+.footer__author-description{
+    color: rgba(255, 255, 255, 0.3);
 }
 .footer__description{
     color: rgba(255, 255, 255, 0.6);  
-    margin-top:47px;
+    width:50%;
     margin-bottom:40px;
 }
-.footer__about{
-    color: rgba(255, 255, 255, 0.3);
+.footer--soc{
+    width:50%;
 }
 .footer__quote{
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 16px;
-    line-height: 30px;
+    width:45%;
+    float:right;
+    position: relative;
+    bottom: 130px;
 }
-.footer__quote-author{
-    font-size: 16px;
-    line-height: 22px;
-    font-style: italic;  
-    color:$white-color;
-    margin-top:31px;
-}
-.footer__left{
-    display: flex;
-    flex-direction:column;
-}
-.footer__right{
-    display: flex;
-    flex-direction:column;
-    justify-content:flex-end;
-}
-.footer__parts{
-    display: flex;
-    flex-direction:row;
-    justify-content: space-between;
-}
+
 @media(max-width:$bp-desktop){
     .footer__column{
-        &:first-of-type {
+        &:first-of-type{
             flex-direction:column;
         }
-     }
-    .footer__group{
-         width:100%;
-     }
+    }
 }
 @media(max-width:$bp-tablets){
-    .footer__parts{
-        flex-direction:column;
-    }
+
 }
 @media(max-width:$bp-phones){
     .footer__container{

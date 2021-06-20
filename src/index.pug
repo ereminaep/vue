@@ -223,25 +223,23 @@ html(lang="en")
 
       .footer 
         .container.footer__container
-          .footer__column 
+          .footer__column
             .footer__copy ©&nbsp;#{lang['copy']}
-            .footer__group
-              .footer__author #{user['name']}
-              .footer__about #{user['description_site']}
-          .footer__column 
-            .menu
+            .footer__author 
+              .footer__author-name #{user['name']}
+              .footer__author-description #{user['description_site']}
+          .footer__column
+            .menu.footer--menu
               ul.menu__list 
                 each value, key in menu 
                   li.menu__item
                     a(href='#'+key class="menu__link") #{value}
-            .footer__parts
-              .footer__left
-                .footer__description #{user['footer_description']}
-                .soc
-                  each value, key in soc
-                    .soc__item.soc__item--footer
-                      a(href=value class="soc__link" target="_blank")
-                        +icon(key, 'soc__svg')
-              .footer__right
-                .footer__quote #{lang['quote']}
-                .footer__quote-author #{lang['quote_author']}
+            .footer__description #{user['footer_description']}
+            .soc.footer--soc
+              each value, key in soc
+                .soc__item.soc__item--footer
+                  a(href=value class="soc__link" target="_blank")
+                    +icon(key, 'soc__svg')
+            .quote.footer__quote
+              .quote__text #{lang['quote']}
+              .quote__author #{lang['quote_author']}
