@@ -43,8 +43,10 @@
     age:25,
     birth:"1 января 1991",
     skills_description:"Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!",
-    skills_frontend:[
+    skills:[
       {
+      group:"Front-end",
+      items:[{
         name:'HTML5',
         percent:80
       },{
@@ -56,10 +58,9 @@
       },{
         name:'Jquery и Vue.js',
         percent:25
-      }
-    ],
-    skills_workflow:[
-      {
+      }]},{
+            group:"Workflow",
+      items:[{
         name:'GIT',
         percent:80
       },
@@ -74,8 +75,8 @@
      {
         name:'Webpack',
         percent:50
-      }
-    ],
+      }]
+      }],
     footer_description:"Этот сайт я сделал в рамках обучения в Школе онлайн образования Loftschool"
   }
 - 
@@ -167,16 +168,13 @@ html(lang="en")
         .container.skills__container
           h2.skills__title #{lang['skills_title']}
           .skills__description #{user['skills_description']}
-          .skills__group
-            h3.skills__group-title #{lang['frontend']}
-            .skills__list
-                each value, key in user['skills_frontend'] 
-                  .skill(data-line=8,data-size="132",data-percent=value['percent'],data-text=value['name'])
-          .skills__group
-            h3.skills__group-title #{lang['workflow']}
-            .skills__list
-              each value, key in user['skills_workflow'] 
-                .skill(data-line=8,data-size="132",data-percent=value['percent'],data-text=value['name'])
+          each value, key in user['skills'] 
+            .skills__group
+              h3.skills__group-title #{value['group']}
+                .skills__list
+                  each items in value['items'] 
+                    .skill(data-line=8,data-size="132",data-percent=items['percent'],data-text=items['name'])
+
       .works
         .container.works__container
           h2.works__title #{lang['works_title']}
