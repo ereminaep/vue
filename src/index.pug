@@ -164,18 +164,18 @@ html(lang="en")
               .about__text #{user['about_site']}
       .skills
         .container.skills__container
-          h2.skills__title #{lang['skills_title']}
+          h2.title-level2.skills__title #{lang['skills_title']}
           .skills__description #{user['skills_description']}
           each value, key in user['skills'] 
             .skills__group
               h3.skills__group-title #{value['group']}
-                .skills__list
-                  each items in value['items'] 
-                    .skill(data-line=8,data-size="132",data-percent=items['percent'],data-text=items['name'])
+              .skills__list
+                each items in value['items'] 
+                  .skill(data-line=8,data-size="132",data-percent=items['percent'],data-text=items['name'])
 
       .works
         .container.works__container
-          h2.works__title #{lang['works_title']}
+          h2.title-level2.works__title #{lang['works_title']}
           .works__content
             .slider
               .slider__slide-full 
@@ -192,10 +192,10 @@ html(lang="en")
                   +icon('arrow-down', 'arrow__svg')
               .slider__slide--number 2       
             .works__description
-              .tags
+              .tags.works__tags
                 each value in tags
                   .tag #{value}
-              h3.works__name #{works['name']}
+              h3.title-level3.works__name #{works['name']}
               .works__text #{works['description']}
               a(href="#" class="works__link" target="_blank") 
                 +icon('link', 'works__svg') 
