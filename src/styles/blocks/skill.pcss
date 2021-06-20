@@ -23,8 +23,11 @@ canvas {
     left: 0;
 }
 
-@media(max-width:$bp-desktop){
-    .skill{
-        margin-right:30px;
+@media(max-width:$bp-tablets){
+    .skill {
+        &+&{
+            margin-left:37px;
+        }
     }
 }
+

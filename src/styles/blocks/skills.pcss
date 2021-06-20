@@ -1,23 +1,27 @@
 .skills {
-    background: url('../images/content/skills.webp');
+    background: url('../images/content/skills.webp') no-repeat;
     background-size:cover;
     @include section;
     flex-direction:row;
     color:$white-color;
+    position:relative;
+    overflow:hidden;
     &:before{
         content:'';
         background: url('../images/content/hands.webp') no-repeat;
         background-size: contain;
-        width: 40%;
-        position: relative;
-        top: 100px;
+        width: 662px;
+        height: 983px;
+        position: absolute;
+        left: 0;
+        bottom: -100px;
     }
 }
 .skills__container{
     @include container;
     justify-content:center;
-    width: 68%;
-    margin-bottom:70px;
+    align-items:center;
+    padding: 70px 0;
 }
 .skills__title{
     margin-bottom:50px;
@@ -29,9 +33,11 @@
     margin-bottom:50px;
 }
 .skills__group{
-    position:relative;
-    left: 8rem;
+    align-self: flex-end;
     margin-bottom:50px;
+    &:last-of-type{
+        margin-bottom:0;
+    }
 }
 .skills__group-title{
     font-weight: bold;
@@ -45,30 +51,32 @@
 
 @media(max-width:$bp-desktop){
     .skills:before{
-        left:-30px;
-        top:6rem;
-    }
-    .skills__group{
-        left:60px;
+        width: 490px;
+        height: 728px;
     }
 }
 
 @media(max-width:$bp-tablets){
     .skills{
         flex-direction:column-reverse;
+        align-items:center;
         &:before{
-            width:30%;
+            position: relative;
+            transform: rotate(-90deg);
+            height: 486px;
+            width: 337px;  
         }
+    }
+    .skills__group{
+        align-self: center;
     }
     .skills__container{
         flex-direction:column;
         width:90%;
         align-items:center;
+        padding-bottom:0;
     }
     .skills__description{
         width:100%;
-    }
-    .skills__group{
-        left:0;
     }
 }
