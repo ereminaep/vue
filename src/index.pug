@@ -8,8 +8,6 @@
     birth:"Родился",
     skills_title:"Чем я могу быть полезен вам",
     talks_title:"Что обо мне говорят",
-    frontend:"Front-end",
-    workflow:"Workflow",
     works_title:"Мои работы",
     quote:"Всегда пишите код так, будто сопровождать его будет склонный к насилию психопат, который знает где вы живете",
     quote_author:"Martin Golding",
@@ -27,10 +25,10 @@
 
 - 
   const soc = {
-      insta: 'href',
-      github: 'href',
-      vk: 'href',
-      envelope: 'mailto:admin@mail.ru'
+      insta: 'https://www.instagram.com/eremina_127/',
+      github: 'https://github.com/ereminaep/',
+      vk: 'https://vk.com/tkatya',
+      envelope: 'mailto:ereminaep127@gmail.com'
   };
 
 - 
@@ -128,7 +126,7 @@ html(lang="en")
             .soc.soc--header
                 each value, key in soc
                   .soc__item
-                    a(href='#'+key class="soc__link")
+                    a(href=value class="soc__link" target="_blank")
                      +icon(key, 'soc__svg')
             .hamburger
               +icon('hamburger', 'hamburger__icon')
@@ -139,7 +137,7 @@ html(lang="en")
             h1.main__name #{user['name']}
           .scroll
             .scroll__text 
-              a(href='#'+key class="scroll__link") #{lang['scroll']}
+              a(href='#'+key,class="scroll__link") #{lang['scroll']}
               +icon('down', 'scroll__svg')
       .about
         .container.about__container
@@ -199,7 +197,7 @@ html(lang="en")
                   .tag #{value}
               h3.works__name #{works['name']}
               .works__text #{works['description']}
-              a(href="#",class="works__link") 
+              a(href="#" class="works__link" target="_blank") 
                 +icon('link', 'works__svg') 
                 span #{lang['work_link']}
 
@@ -243,7 +241,7 @@ html(lang="en")
                 .soc
                   each value, key in soc
                     .soc__item.soc__item--footer
-                      a(href='#'+key class="soc__link")
+                      a(href=value class="soc__link" target="_blank")
                         +icon(key, 'soc__svg')
               .footer__right
                 .footer__quote #{lang['quote']}
