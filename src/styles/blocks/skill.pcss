@@ -22,12 +22,14 @@ canvas {
     top: 0;
     left: 0;
 }
-
-@media(max-width:$bp-tablets){
+@media(max-width:$bp-phones){
     .skill {
-        &+&{
-            margin-left:37px;
+        margin-bottom:30px;
+        &:nth-of-type(2n){
+            margin-left:30px;
+        }
+        &:nth-of-type(2n+1){
+            margin-left:0px;
         }
     }
 }
-
