@@ -139,7 +139,7 @@ html(lang="en")
             .scroll__text 
               a(href='#'+key,class="scroll__link") #{lang['scroll']}
               +icon('down', 'scroll__svg')
-      .about
+      .about#about
         .container.about__container
           .about__item
             .about__image 
@@ -162,7 +162,7 @@ html(lang="en")
               .about__svg 
                 +icon('star', 'about__star')
               .about__text #{user['about_site']}
-      .skills
+      .skills#skills
         .container.skills__container
           h2.title-level2.skills__title #{lang['skills_title']}
           .skills__description #{user['skills_description']}
@@ -173,7 +173,7 @@ html(lang="en")
                 each items in value['items'] 
                   .skill(data-line=8,data-size="132",data-percent=items['percent'],data-text=items['name'])
 
-      .works
+      .works#works
         .container.works__container
           h2.title-level2.works__title #{lang['works_title']}
           .works__content
@@ -201,7 +201,7 @@ html(lang="en")
                 +icon('link', 'works__svg') 
                 span #{lang['work_link']}
 
-      .talks
+      .talks#talks
         .container.talks__container
           .talks__header
             h2.talks__title #{lang['talks_title']}
