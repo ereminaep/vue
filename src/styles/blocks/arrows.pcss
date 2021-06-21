@@ -24,9 +24,11 @@
 }
 .arrows--work{
     position:absolute;
-    right:67px;
-    bottom:57px;
+    right: -50px;
     flex-direction:column;
+    .arrows__item{
+        border:0;
+    }
 }
 .arrows__item--work{
     background: #333C49;
@@ -34,4 +36,23 @@
     border-radius:0px;
     margin:0;
     z-index:20;
+}
+@media(max-width:$bp-desktop){
+    .arrows__item{
+        width:35px;
+        height:35px;
+    }
+    .arrow__svg{
+        width:9px;
+        height:11px;
+    }
+    .arrows--work{
+        right:-35px;
+        bottom:30%;
+    }
+}
+@media(max-width:$bp-phones){
+    .arrows--work {
+        right:0;
+    }
 }
