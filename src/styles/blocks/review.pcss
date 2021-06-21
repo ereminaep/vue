@@ -4,8 +4,10 @@
     flex-wrap:wrap;
     width:30%;
     justify-content: center;
-    &:nth-of-type(2n+1) {
-        margin-right:60px;
+    flex-direction: column;
+    justify-content: space-between;
+    &+&{
+        margin-left:60px;
     }
 }
 .review__img{
@@ -50,5 +52,21 @@
 @media(max-width:$bp-desktop){
     .review{
         width:40%;
+    }
+}
+@media(max-width:$bp-tablets){
+    .review {
+        width:50%;
+        &+&{
+            margin-left:20px;
+        }
+    }
+}
+@media(max-width:$bp-phones){
+    .review {
+        width:100%;
+        &+&{
+            display: none;
+        }
     }
 }
