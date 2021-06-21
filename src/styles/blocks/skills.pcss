@@ -15,6 +15,7 @@
         position: absolute;
         left: 0;
         top: 30%;
+        z-index:0;
     }
 }
 .skills__container{
@@ -22,6 +23,7 @@
     justify-content:center;
     align-items:center;
     padding: 70px 0;
+    z-index: 10;
 }
 .skills__title{
     margin-bottom:50px;
@@ -52,9 +54,11 @@
 
 @media(max-width:$bp-desktop){
     .skills:after{
-        width: 30%;
-        height: 728px;
-        top:70%;
+        width: 390px;
+        height: 528px;
+        left:-5%;
+        bottom: -10%;
+        top:auto;
     }
 }
 
@@ -63,6 +67,7 @@
         flex-direction:column;
         align-items:center;
         overflow:hidden;
+        justify-content: space-around;
         &:after{
             background: url('../images/content/hands2.webp') no-repeat;
             background-size:contain;
@@ -74,6 +79,9 @@
     }
     .skills__container{
         margin-bottom:40px;
+    }
+    .skills__list{
+        justify-content: center;
     }
     .skills__group{
         align-self: center;
@@ -92,9 +100,6 @@
 @media(max-width:$bp-phones){
     .skills__group-title{
         text-align:center;
-    }
-    .skills__list{
-        justify-content: center;
     }
 
 }
