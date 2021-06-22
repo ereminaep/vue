@@ -1,4 +1,14 @@
-(function() {
+import Vue from 'vue';
+let skills = require('./skills.json');
+console.log(skills);
+let a = new Vue({
+    el: '#skills',
+    data: {
+        title: 'Hello!!'
+    }
+});
+
+/*(function() {
     let el = document.querySelectorAll('.skill');
     for (let i = 0; i < el.length; i++) {
         var options = {
@@ -43,4 +53,4 @@
         drawCircle('#dc9322', options.lineWidth, options.percent / 100);
 
     }
-})()
+})()*/

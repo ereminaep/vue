@@ -164,7 +164,7 @@ html(lang="en")
               .about__text #{user['about_site']}
       .skills#skills
         .container.skills__container
-          h2.title-level2.skills__title #{lang['skills_title']}
+          h2.title-level2.skills__title {{ title }}
           .skills__description #{user['skills_description']}
           each value, key in user['skills'] 
             .skills__group
