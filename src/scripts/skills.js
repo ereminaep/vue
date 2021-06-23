@@ -1,56 +1,64 @@
 import Vue from 'vue';
-let skills = require('./skills.json');
-console.log(skills);
-let a = new Vue({
-    el: '#skills',
-    data: {
-        title: 'Hello!!'
-    }
-});
+let skills_data = require('./../data/skills.json');
 
-/*(function() {
-    let el = document.querySelectorAll('.skill');
-    for (let i = 0; i < el.length; i++) {
-        var options = {
-            percent: el[i].getAttribute('data-percent') || 25,
-            size: el[i].getAttribute('data-size') || 220,
-            text: el[i].getAttribute('data-text') || 220,
-            lineWidth: el[i].getAttribute('data-line') || 10,
-            rotate: el[i].getAttribute('data-rotate') || 0
+let skills = Vue.component('skills', {
+    template: "<div><div class='skill__group' v-for='item in groups'><h3 class='skill__group__title'>{{ item.group }}</h3><skills-list v-bind:items='item.items'></skills-list></div></div>",
+    data: function() {
+        return {
+            groups: skills_data
         }
-
-        let canvas = document.createElement('canvas');
-        let span = document.createElement('span');
-        span.classList.add('skill__text');
-        span.textContent = options.text;
-
-        if (typeof(G_vmlCanvasManager) !== 'undefined') {
-            G_vmlCanvasManager.initElement(canvas);
-        }
-
-        var ctx = canvas.getContext('2d');
-        canvas.width = canvas.height = options.size;
-
-        el[i].appendChild(span);
-        el[i].appendChild(canvas);
-
-        ctx.translate(options.size / 2, options.size / 2);
-        ctx.rotate((-1 / 2 + options.rotate / 180) * Math.PI);
-
-        //imd = ctx.getImageData(0, 0, 240, 240);
-        var radius = (options.size - options.lineWidth) / 2;
-
-        var drawCircle = function(color, lineWidth, percent) {
-            percent = Math.min(Math.max(0, percent || 1), 1);
-            ctx.beginPath();
-            ctx.arc(0, 0, radius, 0, Math.PI * 2 * percent, false);
-            ctx.strokeStyle = color;
-            ctx.lineWidth = lineWidth
-            ctx.stroke();
-        };
-
-        drawCircle('hsla(0,0%,100%,.3)', 1, 100 / 100);
-        drawCircle('#dc9322', options.lineWidth, options.percent / 100);
-
     }
-})()*/
+})
+
+let skillsList = Vue.component('skillsList', {
+    props: ['items'],
+    template: "<div class='skills__list'><div class='skill' v-for='value in items'><skill :percent='value.percent' :name='value.name'></skill></div></div>",
+    data: function() {
+        return {}
+    },
+})
+
+let skill = Vue.component('skill', {
+    props: ['percent', 'name'],
+    template: "<div><span class='skill__text'>{{ name }}</span><canvas @click='makeCicrce'></canvas></div>",
+    data: function() {
+        return {
+            size: 132,
+            lineWidth: 8,
+            innerColor: 'hsla(0,0%,100%,.3)',
+            outerColor: '#dc9322'
+        }
+    },
+    methods: {
+        makeCicrce(e) {
+            let canvas = e.target;
+            if (typeof(G_vmlCanvasManager) !== 'undefined') {
+                G_vmlCanvasManager.initElement(canvas);
+            }
+
+            let ctx = canvas.getContext('2d');
+            canvas.width = canvas.height = this.size;
+
+            ctx.translate(this.size / 2, this.size / 2);
+
+            let radius = (this.size - this.lineWidth) / 2;
+
+
+            let drawCircle = function(color, lineWidth, percent) {
+                percent = Math.min(Math.max(0, percent || 1), 1);
+                ctx.beginPath();
+                ctx.arc(0, 0, radius, 0, Math.PI * 2 * percent, false);
+                ctx.strokeStyle = color;
+                ctx.lineWidth = lineWidth
+                ctx.stroke();
+            };
+
+            drawCircle(this.innerColor, 1, 100 / 100);
+            drawCircle(this.outerColor, this.lineWidth, this.percent / 100);
+        }
+    }
+})
+
+const vueModel = new Vue();
+
+vueModel.$mount('#skills__widget');
