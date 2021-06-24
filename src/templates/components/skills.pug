@@ -1,0 +1,15 @@
+script(type='text/x-template')#skills-groups
+    div
+        .skill__group(v-for='item in groups')
+            h3.skill__group__title {{ item.group }} 
+            skills-list(v-bind:items='item.items')
+
+script(type='text/x-template')#skills-list
+    .skills__list
+        .skill(v-for='value in items')
+            skill(v-bind:percent='value.percent' v-bind:name='value.name')
+
+script(type='text/x-template')#skill
+    div
+       span.skill__text {{ name }}
+       canvas.canvas
