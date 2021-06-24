@@ -44,21 +44,6 @@
     footer_description:"Этот сайт я сделал в рамках обучения в Школе онлайн образования Loftschool"
   }
 - 
-  const review=[
-    {
-      name:'Ковальчук Дмитрий',
-      work:'Основатель Loftschool',
-      photo:'1.png',
-      text:'Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!'
-    },
-    {
-      name:'Владимир Сабанцев',
-      work:'Преподаватель',
-      photo:'2.png',
-      text:'Этот код выдержит любые испытания. Только пожалуйста, не загружайте сайт на слишком старых браузерах'
-    }
-  ]
-- 
   const works={
     name:"Сайт школы образования",
     description:"Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 2 месяца только самых тяжелых испытаний и бессонных ночей!",
@@ -171,17 +156,9 @@ html(lang="en")
                 +icon('arrow-down', 'arrow__svg')
               .arrows__item.arrows__item--right
                 +icon('arrow-down', 'arrow__svg')
-          .reviews 
-            each value in review
-              .review
-                .review__text #{value['text']}
-                  .review__quote
-                .review__person
-                  +image('content/'+value['photo'], 'talks__img')
-                  .review__info
-                    .review__name #{value['name']}
-                    .review__work #{value['work']}
-
+          .reviews
+            #reviews__widget
+              reviews
       .footer 
         .container.footer__container
           .footer__column
