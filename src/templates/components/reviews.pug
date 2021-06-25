@@ -1,18 +1,16 @@
 script(type='text/x-template')#reviews__components
-    reviews
+    reviews(v-bind:items='reviews_data')
 
 script(type='text/x-template')#reviews-list
-    div 
-        .reviews
-           div(v-for='item in reviews_data')
-                review(v-bind:image='item.image' v-bind:name='item.name' v-bind:text='item.text' v-bind:work='item.work')
+    .reviews
+        div(v-for='item in items' :key=item)
+            review(v-bind:image='item.image' v-bind:name='item.name' v-bind:text='item.text' v-bind:work='item.work')
 
 script(type='text/x-template')#review
     div
        .review__text {{ text }}
        .review__person
-            p {{ image }}
-            img(v-bind:src=image )       
+            img(class="review_img" :data-src='image')       
             .review__info
                 .review__name {{ name }}
                 .review__work {{ work }}
