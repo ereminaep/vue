@@ -3,7 +3,7 @@ script(type='text/x-template')#reviews__components
 
 script(type='text/x-template')#reviews-list
     .reviews
-        div(v-for='item in items' :key=item)
+        .review(v-for='item in items' :key=item)
             review(v-bind:image='item.image' v-bind:name='item.name' v-bind:text='item.text' v-bind:work='item.work')
 
 script(type='text/x-template')#review
