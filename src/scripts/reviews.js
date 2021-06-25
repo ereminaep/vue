@@ -1,18 +1,34 @@
 import Vue from 'vue';
-let reviews_data = require('./../data/reviews.json');
 
 let reviews = Vue.component('reviews', {
-    template: "<p>123123</p>",
-    data: function() {
-        return {
-            groups: reviews_data
-        }
-    }
+    props: ['items'],
+    template: "#reviews-list"
 })
 
+let review = Vue.component('review', {
+    props: ['text', 'name', 'work', 'image'],
+    template: "#review"
+})
 
-const vueModel = new Vue();
-
-console.log(123123);
-
-vueModel.$mount('#reviews__widget');
+const vueModel = new Vue({
+    el: '#reviews__widget',
+    template: '#reviews__components',
+    components: { reviews, review },
+    data() {
+        return {
+            reviews_data: require('./../data/reviews.json')
+        }
+    },
+    methods: {
+        /*requareImagesToArray(data) {
+            return data.map(item => {
+                const requiredImage = requare(`../images/content/${item.image}`);
+                item.image = requiredImage;
+                return item
+            })
+        }*/
+    },
+    created() {
+        //this.reviews_data = this.requareImagesToArray();
+    }
+});
