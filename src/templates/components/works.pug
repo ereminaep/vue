@@ -10,9 +10,9 @@ script(type='text/x-template')#works__components
                     .slider__slide-image
                       img(class="works_img" :src='item.image') 
                 .arrows.arrows--work
-                    button.arrows__item.arrows__item--work.arrows__item--left
+                    button(@click='moveSlides(-1)').arrows__item.arrows__item--work.arrows__item--left
                       +icon('arrow-down', 'arrow__svg')
-                    button.arrows__item.arrows__item--work.arrows__item--right
+                    button(@click='moveSlides(1)').arrows__item.arrows__item--work.arrows__item--right
                       +icon('arrow-down', 'arrow__svg')
               .slider__slide--number {{currentSlide}}     
             .works__description

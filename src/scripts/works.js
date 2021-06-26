@@ -5,7 +5,7 @@ const vueModel = new Vue({
     template: '#works__components',
     data() {
         return {
-            works_data: require('./../data/works.json'),
+            works_data: [],
             skills: require('./../data/skills.json'),
             tags: '',
             currentSlide: 4
@@ -34,8 +34,6 @@ const vueModel = new Vue({
         },
         getSkills: function() {
             let getSkillById = this.getSkillById;
-            let tags = [];
-            let temp = 0;
             this.works_data.map(
                 function(item) {
                     item.tags = [];
@@ -44,11 +42,23 @@ const vueModel = new Vue({
                     })
                 }
             );
+        },
+        moveSlides(number) {
+            if (number == 1) {
+                if (this.currentSlide < this.works_data.length) {
+                    ++this.currentSlide;
+                }
+            }
+            if (number == -1) {
+                if (this.currentSlide > 0) {
+                    --this.currentSlide;
+                }
+            }
         }
     },
     created: function() {
+        this.works_data = require('./../data/works.json');
         this.requareImage();
         this.getSkills();
-        console.log(this.works_data);
     }
 });
