@@ -4,24 +4,23 @@ script(type='text/x-template')#works__components
           .works__content
             .slider
               .slider__slide-full 
-                +image('content/'+works['images'][0], 'works__img-full')
+                img(class="works__img-full" :src='works_data[0].image')
               .slider__slide-items
-                each value in works['images']
-                  .slider__slide-item
+                .slider__slide-item(v-for='item in works_data')
                     .slider__slide-image
-                      +image('content/'+value, 'works__slide-img')
-                  .arrows.arrows--work
-                    .arrows__item.arrows__item--work.arrows__item--left
+                      img(class="works_img" :src='item.image') 
+                .arrows.arrows--work
+                    button.arrows__item.arrows__item--work.arrows__item--left
                       +icon('arrow-down', 'arrow__svg')
-                    .arrows__item.arrows__item--work.arrows__item--right
+                    button.arrows__item.arrows__item--work.arrows__item--right
                       +icon('arrow-down', 'arrow__svg')
               .slider__slide--number 2       
             .works__description
               .tags.works__tags
                 each value in tags
                   .tag #{value}
-              h3.title-level3.works__name #{works['name']}
-              .works__text #{works['description']}
-              a(href="#" class="works__link" target="_blank") 
+              h3.title-level3.works__name {{works_data[0].name}}
+              .works__text {{works_data[0].description}}
+              a(:href="works_data[0].link" class="works__link" target="_blank") 
                 +icon('link', 'works__svg') 
                 span #{lang['work_link']}

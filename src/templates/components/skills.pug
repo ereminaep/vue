@@ -1,8 +1,9 @@
 script(type='text/x-template')#skills__components
     .container.skills__container
-        h2.title-level2.skills__title Чем я могу быть полезен вам
-        .skills__description Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!
-            skills
+        h2.title-level2.skills__title #{lang['skills_title']}
+        .skills__description #{user['skills_description']}
+        +image('content/1.png', 'works__img-full')
+        skills
 
 script(type='text/x-template')#skills-groups
     div
