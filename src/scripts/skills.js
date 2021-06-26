@@ -1,21 +1,18 @@
 import Vue from 'vue';
-let skills_data = require('./../data/skills.json');
 
 let skills = Vue.component('skills', {
+    groups: ['groups'],
     template: "#skills-groups",
     data: function() {
         return {
-            groups: skills_data
+            groups: require('./../data/skills.json')
         }
     }
 })
 
 let skillsList = Vue.component('skillsList', {
     props: ['items'],
-    template: "#skills-list",
-    data: function() {
-        return {}
-    },
+    template: "#skills-list"
 })
 
 let skill = Vue.component('skill', {
@@ -55,6 +52,8 @@ let skill = Vue.component('skill', {
     }
 })
 
-const vueModel = new Vue({});
-
-vueModel.$mount('#skills__widget');
+const vueModel = new Vue({
+    el: '#skills__widget',
+    template: '#skills__components',
+    components: { skillsList, skills, skill }
+});
