@@ -8,7 +8,7 @@ script(type='text/x-template')#works__components
               .slider__slide-items
                 .slider__slide-item(v-for='item in works_data')
                     .slider__slide-image
-                      img(class="works_img" :src='item.image') 
+                      img(class="works_img" :src='item.image' @click='setCurrentSlide(item.id)') 
                 .arrows.arrows--work
                     button(@click='moveSlides(-1)').arrows__item.arrows__item--work.arrows__item--left
                       +icon('arrow-down', 'arrow__svg')

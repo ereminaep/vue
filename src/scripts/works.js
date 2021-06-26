@@ -54,6 +54,9 @@ const vueModel = new Vue({
                     --this.currentSlide;
                 }
             }
+        },
+        setCurrentSlide(number) {
+            this.currentSlide = number;
         }
     },
     created: function() {
