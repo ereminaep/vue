@@ -1,0 +1,27 @@
+script(type='text/x-template')#works__components
+    .container.works__container
+          h2.title-level2.works__title #{lang['works_title']}
+          .works__content
+            .slider
+              .slider__slide-full 
+                +image('content/'+works['images'][0], 'works__img-full')
+              .slider__slide-items
+                each value in works['images']
+                  .slider__slide-item
+                    .slider__slide-image
+                      +image('content/'+value, 'works__slide-img')
+                  .arrows.arrows--work
+                    .arrows__item.arrows__item--work.arrows__item--left
+                      +icon('arrow-down', 'arrow__svg')
+                    .arrows__item.arrows__item--work.arrows__item--right
+                      +icon('arrow-down', 'arrow__svg')
+              .slider__slide--number 2       
+            .works__description
+              .tags.works__tags
+                each value in tags
+                  .tag #{value}
+              h3.title-level3.works__name #{works['name']}
+              .works__text #{works['description']}
+              a(href="#" class="works__link" target="_blank") 
+                +icon('link', 'works__svg') 
+                span #{lang['work_link']}
