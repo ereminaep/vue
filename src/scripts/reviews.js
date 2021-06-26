@@ -10,7 +10,8 @@ const vueModel = new Vue({
         return {
             reviews_data: require('./../data/reviews.json'),
             sliderOptions: {
-                slidesPerView: 2
+                slidesPerView: 2,
+                spaceBetween: 20
             },
             breakpoints: {
                 480: {

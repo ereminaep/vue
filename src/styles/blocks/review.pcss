@@ -5,9 +5,6 @@
     justify-content: center;
     flex-direction: column;
     justify-content: space-between;
-    &+&{
-        margin-left:60px;
-    }
 }
 .review__img{
     width:75px;
@@ -47,20 +44,4 @@
 }
 .review__info{
     margin-left:31px;
-}
-@media(max-width:$bp-desktop){
-}
-@media(max-width:$bp-tablets){
-    .review {
-        &+&{
-            margin-left:20px;
-        }
-    }
-}
-@media(max-width:$bp-phones){
-    .review {
-        &+&{
-            display: none;
-        }
-    }
 }
