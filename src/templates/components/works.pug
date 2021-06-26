@@ -4,7 +4,7 @@ script(type='text/x-template')#works__components
           .works__content
             .slider
               .slider__slide-full 
-                img(class="works__img-full" :src='works_data[0].image')
+                img(class="works__img-full" :src='works_data[currentSlide-1].image')
               .slider__slide-items
                 .slider__slide-item(v-for='item in works_data')
                     .slider__slide-image
@@ -14,13 +14,13 @@ script(type='text/x-template')#works__components
                       +icon('arrow-down', 'arrow__svg')
                     button.arrows__item.arrows__item--work.arrows__item--right
                       +icon('arrow-down', 'arrow__svg')
-              .slider__slide--number 2       
+              .slider__slide--number {{currentSlide}}     
             .works__description
               .tags.works__tags
-                each value in tags
-                  .tag #{value}
-              h3.title-level3.works__name {{works_data[0].name}}
-              .works__text {{works_data[0].description}}
-              a(:href="works_data[0].link" class="works__link" target="_blank") 
+                .tag(v-for='item in works_data[currentSlide-1].tags') 
+                    span {{item}}
+              h3.title-level3.works__name {{works_data[currentSlide-1].name}}
+              .works__text {{works_data[currentSlide-1].description}}
+              a(:href="works_data[currentSlide-1].link" class="works__link" target="_blank") 
                 +icon('link', 'works__svg') 
                 span #{lang['work_link']}
