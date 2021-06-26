@@ -7,7 +7,7 @@ script(type='text/x-template')#works__components
                 img(class="works__img-full" :src='works_data[currentSlide-1].image')
               .slider__slide-items
                 .slider__slide-item(v-for='item in works_data')
-                    .slider__slide-image
+                    .slider__slide-image(:class="{'.slider__slide-image--active': item.id==currentSlide}")
                       img(class="works_img" :src='item.image' @click='setCurrentSlide(item.id)') 
                 .arrows.arrows--work
                     button(@click='moveSlides(-1)').arrows__item.arrows__item--work.arrows__item--left
