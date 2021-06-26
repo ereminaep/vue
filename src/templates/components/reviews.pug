@@ -3,12 +3,12 @@ script(type='text/x-template')#reviews__components
         .talks__header
             h2.talks__title #{lang['talks_title']}
             .arrows
-                button.arrows__item.arrows__item--left
+                button(type="button" @click="slide('prev')" :class="{ 'arrow--dissable': !allowPrev}").arrows__item.arrows__item--left
                     +icon('arrow-down', 'arrow__svg')
-                button.arrows__item.arrows__item--right
+                button(type="button" @click="slide('next')" :class="{ 'arrow--dissable': !allowNext}").arrows__item.arrows__item--right
                     +icon('arrow-down', 'arrow__svg')
-        .reviews
-            .review(v-for='item in reviews_data')
+        swiper.reviews(ref="slider" :options="sliderOptions")
+            swiper-slide.review(v-for='item in reviews_data')
                 .review__text {{ item.text }}
                 .review__person
                         img(class="review_img" :src='item.image')       

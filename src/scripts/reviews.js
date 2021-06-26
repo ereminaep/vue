@@ -1,11 +1,19 @@
 import Vue from 'vue';
+import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
+import 'swiper/swiper-bundle.css'
 
 const vueModel = new Vue({
     el: '#reviews__widget',
     template: '#reviews__components',
+    components: { Swiper, SwiperSlide },
     data() {
         return {
-            reviews_data: require('./../data/reviews.json')
+            reviews_data: require('./../data/reviews.json'),
+            sliderOptions: {
+                slidesPerView: 1
+            },
+            allowNext: true,
+            allowPrev: false
         }
     },
     methods: {
@@ -16,10 +24,21 @@ const vueModel = new Vue({
                     item.image = requiredImg.default;
                 }
             )
+        },
+        slide(direction) {
+            const slider = this.$refs["slider"].$swiper;
+            if (direction == 'next') {
+                slider.slideNext();
+            }
+            if (direction == 'prev') {
+                slider.slidePrev();
+            }
+            this.allowNext = !slider.isEnd;
+            this.allowPrev = !slider.isBeginning;
         }
+
     },
     created: function() {
         this.requareImage();
-        console.log(this.reviews_data);
     }
 });
