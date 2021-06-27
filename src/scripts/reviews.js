@@ -11,13 +11,13 @@ const vueModel = new Vue({
             reviews_data: require('./../data/reviews.json'),
             sliderOptions: {
                 slidesPerView: 2,
-                spaceBetween: 40
-            },
-            breakpoints: {
-                480: {
-                    slidesPerView: 1,
-                    spaceBetween: 0
-                }
+                spaceBetween: 40,
+                breakpoints: {
+                    480: {
+                        slidesPerView: 1,
+                        spaceBetween: 0
+                    }
+                },
             },
             allowNext: true,
             allowPrev: false
