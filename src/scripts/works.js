@@ -8,7 +8,7 @@ const vueModel = new Vue({
             works_data: [],
             skills: require('./../data/skills.json'),
             tags: '',
-            currentSlide: 4
+            currentSlide: 1
         }
     },
     methods: {

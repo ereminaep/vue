@@ -7,7 +7,7 @@ script(type='text/x-template')#skills__components
 
 script(type='text/x-template')#skills-groups
     div
-        .skill__group(v-for='item in groups')
+        .skills__group(v-for='item in groups')
             h3.skill__group__title {{ item.group }} 
             skills-list(v-bind:items='item.items')
 
