@@ -21,16 +21,7 @@ const vueModel = new Vue({
             )
         },
         getSkillById(id) {
-            let result;
-            this.skills.map(
-                function(group) {
-                    group.items.map(function(skill) {
-                        if (skill.id == id) {
-                            result = skill.name;
-                        }
-                    })
-                })
-            return result;
+            return this.skills[id].name;
         },
         getSkills: function() {
             let getSkillById = this.getSkillById;
@@ -62,6 +53,7 @@ const vueModel = new Vue({
     created: function() {
         this.works_data = require('./../data/works.json');
         this.requareImage();
+        console.log(this.getSkillById(1));
         this.getSkills();
     }
 });
