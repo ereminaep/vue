@@ -53,7 +53,6 @@ const vueModel = new Vue({
     created: function() {
         this.works_data = require('./../data/works.json');
         this.requareImage();
-        console.log(this.getSkillById(1));
         this.getSkills();
     }
 });
