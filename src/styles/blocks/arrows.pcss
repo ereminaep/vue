@@ -12,17 +12,18 @@
     align-items:center;
     justify-content:center;
     cursor:pointer;
+    &[disabled]{
+        border:1px solid #414c63;
+        .arrow__svg{
+            fill: #414c63;
+        }
+    }
 }
 .arrows__item--left{
     transform: rotate(180deg);
     margin-right:28px;
 }
-.arrow--dissable {
-    border:1px solid #414c63;
-    .arrow__svg{
-        fill: #414c63;
-    }
-}
+
 .arrow__svg{
     width:17.12px;
     height:17.41px;
