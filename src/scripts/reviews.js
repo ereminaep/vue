@@ -13,7 +13,7 @@ const vueModel = new Vue({
                 slidesPerView: 1,
                 spaceBetween: 40,
                 breakpoints: {
-                    768: {
+                    480: {
                         slidesPerView: 2,
                         spaceBetween: 0
                     }
