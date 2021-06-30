@@ -1,6 +1,7 @@
 .slider{
     position:relative;
     display:flex;
+    overflow:hidden;
 }
 .slider__slide--number{
     color: #E6E6E6;
@@ -27,8 +28,9 @@
 }
 
 .slider__slide-image{
-    height:103px;
     cursor: pointer;
+    width: 178px;
+    height: 100px;
     &:hover{
         border: 3px solid #DC9322;
     }
@@ -45,7 +47,10 @@
     .slider__slide-full{
         display: flex;
         align-items: center;
-        width: 80%;
+    }
+    .slider__slide-image{
+        width: 119.67px;
+        height: 67.35px;
     }
 }
 @media(max-width:$bp-tablets){
