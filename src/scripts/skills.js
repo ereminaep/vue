@@ -24,7 +24,8 @@ let skill = Vue.component('skill', {
             size: 132,
             lineWidth: 8,
             innerColor: 'hsla(0,0%,100%,.3)',
-            outerColor: '#dc9322'
+            outerColor: '#dc9322',
+            rotate: -90
         }
     },
     methods: {
@@ -36,20 +37,21 @@ let skill = Vue.component('skill', {
             ctx.lineWidth = lineWidth
             ctx.stroke();
         },
-        makeCircle: function(canvas, percent) {
+        makeCircle: function(canvas, percent, rotate) {
             if (typeof(G_vmlCanvasManager) !== 'undefined') {
                 G_vmlCanvasManager.initElement(canvas);
             }
             let ctx = canvas.getContext('2d');
             canvas.width = canvas.height = this.size;
             ctx.translate(this.size / 2, this.size / 2);
+            ctx.rotate((-1 / 2 - 90 / 180) * Math.PI);
             let radius = (this.size - this.lineWidth) / 2;
             this.drawCircle(this.innerColor, 1, 100 / 100, ctx, radius);
             this.drawCircle(this.outerColor, this.lineWidth, percent / 100, ctx, radius);
         }
     },
     mounted: function() {
-        this.makeCircle(this.$el.querySelector('canvas'), this.percent);
+        this.makeCircle(this.$el.querySelector('canvas'), this.percent, this.rotate);
     }
 })
 
