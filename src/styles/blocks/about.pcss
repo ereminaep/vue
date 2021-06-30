@@ -2,6 +2,8 @@
    @include section;
     color:$white-color;
     align-items: center;
+    padding:55px 0;
+    scroll-behavior: smooth;
 }
 
 .about__container.container{
@@ -16,6 +18,12 @@
 .about__text{
     color: rgba(255, 255, 255, 0.8);
     margin-bottom:30px;
+    &:before{
+            width: 27px;
+    fill: rgba(219, 2, 0, 0.5);
+    margin-right:25px;
+    margin-top:5px;
+    }
 }
 
 .about__name{
@@ -51,14 +59,24 @@
     .about__container.container{
         width:90%;
     }
-    .about__item{
-        &:first-of-type{
-            margin-right:30px;
-        }
+    .about__item+.about__item{
+        margin-left: 100px;
+    }
+}
+@media(max-width:$bp-tablets){
+    .about__item+.about__item{
+        margin-left: 30px;
     }
 }
 @media (max-width:$bp-phones) {
     .about__container.container{
         flex-direction:column;
     }
+    .about__item{
+        align-self:center;
+        &:nth-of-type(2n+1){
+            margin-bottom:50px;
+        }
+    }
+
 }

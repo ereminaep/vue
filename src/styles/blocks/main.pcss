@@ -3,6 +3,20 @@
     justify-content:center;
     min-height:100vh;
 }
+.main--popup{
+    &:after{
+        content:'';
+        position:absolute;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+        background-color:red;
+        z-index:0;
+        background: url('../images/content/blatt.webp') right;
+        background-size:contain;
+    }
+}
 .main__container{
     display: flex;
     flex-direction:column;
@@ -30,9 +44,20 @@
 }
 @media(max-width:$bp-tablets){
     .main__content{
+        width:100%;
         flex-direction:column;
     }
+    .main__description{
+        margin-right:0;
+        text-align:center;
+    }
+    .main__name{
+        text-align:center;
+        
+    }
+}
+@media(max-width:$bp-phones){
     .main__name{
         @include title_level_2;
-    }
+    } 
 }

@@ -1,23 +1,29 @@
 .skills {
-    background: url('../images/content/skills.webp');
+    background: url('../images/content/skills.webp') no-repeat;
     background-size:cover;
     @include section;
     flex-direction:row;
     color:$white-color;
-    &:before{
+    position:relative;
+    padding-top:55px;
+    &:after{
         content:'';
         background: url('../images/content/hands.webp') no-repeat;
         background-size: contain;
-        width: 40%;
-        position: relative;
-        top: 100px;
+        width: 30%;
+        height: 983px;
+        position: absolute;
+        left: 0;
+        top: 30%;
+        z-index:0;
     }
 }
 .skills__container{
     @include container;
     justify-content:center;
-    width: 68%;
-    margin-bottom:70px;
+    align-items:center;
+    padding: 70px 0;
+    z-index: 10;
 }
 .skills__title{
     margin-bottom:50px;
@@ -29,9 +35,11 @@
     margin-bottom:50px;
 }
 .skills__group{
-    position:relative;
-    left: 8rem;
+    align-self: flex-end;
     margin-bottom:50px;
+    &:last-of-type{
+        margin-bottom:0;
+    }
 }
 .skills__group-title{
     font-weight: bold;
@@ -41,31 +49,57 @@
 }
 .skills__list{
     display: flex;
+    flex-wrap:wrap;
 }
 
 @media(max-width:$bp-desktop){
-    .skills:before{
-        left:-30px;
-        top:6rem;
-    }
-    .skills__group{
-        left:60px;
+    .skills:after{
+        width: 390px;
+        height: 528px;
+        left:-5%;
+        bottom: -10%;
+        top:auto;
     }
 }
 
 @media(max-width:$bp-tablets){
     .skills{
-        flex-direction:column-reverse;
+        flex-direction:column;
+        align-items:center;
+        overflow:hidden;
+        justify-content: space-around;
+        &:after{
+            background: url('../images/content/hands2.webp') no-repeat;
+            background-size:contain;
+            width:320px;
+            height:250px;
+            position:static;
+            margin-bottom:-20px;
+        }
+    }
+    .skills__container{
+        margin-bottom:40px;
+    }
+    .skills__list{
+        justify-content: center;
+    }
+    .skills__group{
+        align-self: center;
     }
     .skills__container{
         flex-direction:column;
         width:90%;
         align-items:center;
+        padding-bottom:0;
     }
     .skills__description{
         width:100%;
     }
-    .skills__group{
-        left:0;
+}
+
+@media(max-width:$bp-phones){
+    .skills__group-title{
+        text-align:center;
     }
+
 }

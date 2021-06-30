@@ -8,6 +8,7 @@
     @include container;
     justify-content:center;
     align-items:flex-start;
+    padding:55px 0;
 }
 .talks__header{
     display:flex;
@@ -20,4 +21,17 @@
 .talks__svg {
     height: 57px;
     width: 77px;
+}
+@media(max-width:$bp-phones){
+    .talks__header {
+        flex-direction: column;
+    }
+    .talks__title{
+        margin-right:0;
+        margin-bottom:20px;
+        text-align:center;
+    }
+    .talks__container{
+        align-items:center;
+    }
 }

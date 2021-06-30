@@ -12,11 +12,18 @@
     align-items:center;
     justify-content:center;
     cursor:pointer;
+    &[disabled]{
+        border:1px solid #414c63;
+        .arrow__svg{
+            fill: #414c63;
+        }
+    }
 }
 .arrows__item--left{
     transform: rotate(180deg);
     margin-right:28px;
 }
+
 .arrow__svg{
     width:17.12px;
     height:17.41px;
@@ -24,14 +31,41 @@
 }
 .arrows--work{
     position:absolute;
-    right:67px;
-    bottom:57px;
+    right: -50px;
     flex-direction:column;
+    .arrows__item{
+        border:0;
+    }
 }
 .arrows__item--work{
     background: #333C49;
+    width:52px;
+    height:52px;
     border:none;
     border-radius:0px;
     margin:0;
     z-index:20;
+}
+@media(max-width:$bp-desktop){
+    .arrows__item{
+        width:35px;
+        height:35px;
+    }
+    .arrow__svg{
+        width:9px;
+        height:11px;
+    }
+    .arrows--work{
+        right:-34px;
+        bottom:0%;
+    }
+    .arrows__item--work{
+        width:34px;
+        height:34px;
+    }
+}
+@media(max-width:$bp-phones){
+    .arrows--work {
+        right:0;
+    }
 }

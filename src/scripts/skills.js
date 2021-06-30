@@ -1,44 +1,62 @@
-let el = document.querySelectorAll('.skill');
-for (let i = 0; i < el.length; i++) {
-    var options = {
-        percent: el[i].getAttribute('data-percent') || 25,
-        size: el[i].getAttribute('data-size') || 220,
-        text: el[i].getAttribute('data-text') || 220,
-        lineWidth: el[i].getAttribute('data-line') || 10,
-        rotate: el[i].getAttribute('data-rotate') || 0
+import Vue from 'vue';
+
+let skills = Vue.component('skills', {
+    groups: ['groups'],
+    template: "#skills-groups",
+    data: function() {
+        return {
+            groups: require('./../data/skill-widget.json'),
+            skills_list: require('./../data/skills.json'),
+        }
     }
+})
 
-    let canvas = document.createElement('canvas');
-    let span = document.createElement('span');
-    span.classList.add('skill__text');
-    span.textContent = options.text;
+let skillsList = Vue.component('skillsList', {
+    props: ['items', 'skills_list'],
+    template: "#skills-list"
+})
 
-    if (typeof(G_vmlCanvasManager) !== 'undefined') {
-        G_vmlCanvasManager.initElement(canvas);
+let skill = Vue.component('skill', {
+    props: ['percent', 'name'],
+    template: "#skill",
+    data: function() {
+        return {
+            size: 132,
+            lineWidth: 8,
+            innerColor: 'hsla(0,0%,100%,.3)',
+            outerColor: '#dc9322',
+            rotate: -90
+        }
+    },
+    methods: {
+        drawCircle: function(color, lineWidth, percent, ctx, radius) {
+            let percent_new = Math.min(Math.max(0, percent || 1), 1);
+            ctx.beginPath();
+            ctx.arc(0, 0, radius, 0, Math.PI * 2 * percent_new, false);
+            ctx.strokeStyle = color;
+            ctx.lineWidth = lineWidth
+            ctx.stroke();
+        },
+        makeCircle: function(canvas, percent, rotate) {
+            if (typeof(G_vmlCanvasManager) !== 'undefined') {
+                G_vmlCanvasManager.initElement(canvas);
+            }
+            let ctx = canvas.getContext('2d');
+            canvas.width = canvas.height = this.size;
+            ctx.translate(this.size / 2, this.size / 2);
+            ctx.rotate((-1 / 2 - 90 / 180) * Math.PI);
+            let radius = (this.size - this.lineWidth) / 2;
+            this.drawCircle(this.innerColor, 1, 100 / 100, ctx, radius);
+            this.drawCircle(this.outerColor, this.lineWidth, percent / 100, ctx, radius);
+        }
+    },
+    mounted: function() {
+        this.makeCircle(this.$el.querySelector('canvas'), this.percent, this.rotate);
     }
+})
 
-    var ctx = canvas.getContext('2d');
-    canvas.width = canvas.height = options.size;
-
-    el[i].appendChild(span);
-    el[i].appendChild(canvas);
-
-    ctx.translate(options.size / 2, options.size / 2);
-    ctx.rotate((-1 / 2 + options.rotate / 180) * Math.PI);
-
-    //imd = ctx.getImageData(0, 0, 240, 240);
-    var radius = (options.size - options.lineWidth) / 2;
-
-    var drawCircle = function(color, lineWidth, percent) {
-        percent = Math.min(Math.max(0, percent || 1), 1);
-        ctx.beginPath();
-        ctx.arc(0, 0, radius, 0, Math.PI * 2 * percent, false);
-        ctx.strokeStyle = color;
-        ctx.lineWidth = lineWidth
-        ctx.stroke();
-    };
-
-    drawCircle('hsla(0,0%,100%,.3)', 1, 100 / 100);
-    drawCircle('#dc9322', options.lineWidth, options.percent / 100);
-
-}
+const vueModel = new Vue({
+    el: '#skills__widget',
+    template: '#skills__components',
+    components: { skillsList, skills, skill }
+});

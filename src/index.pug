@@ -41,65 +41,8 @@
     age:25,
     birth:"1 января 1991",
     skills_description:"Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!",
-    skills:[
-      {
-      group:"Front-end",
-      items:[{
-        name:'HTML5',
-        percent:80
-      },{
-        name:'CSS3',
-        percent:55
-      },{
-        name:'Javascript',
-        percent:40
-      },{
-        name:'Jquery и Vue.js',
-        percent:25
-      }]},{
-            group:"Workflow",
-      items:[{
-        name:'GIT',
-        percent:80
-      },
-      {
-        name:'Terminal',
-        percent:76
-      },
-      {
-        name:'Gulp',
-        percent:30
-      },
-     {
-        name:'Webpack',
-        percent:50
-      }]
-      }],
     footer_description:"Этот сайт я сделал в рамках обучения в Школе онлайн образования Loftschool"
   }
-- 
-  const review=[
-    {
-      name:'Ковальчук Дмитрий',
-      work:'Основатель Loftschool',
-      photo:'1.png',
-      text:'Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!'
-    },
-    {
-      name:'Владимир Сабанцев',
-      work:'Преподаватель',
-      photo:'2.png',
-      text:'Этот код выдержит любые испытания. Только пожалуйста, не загружайте сайт на слишком старых браузерах'
-    }
-  ]
-- 
-  const works={
-    name:"Сайт школы образования",
-    description:"Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 2 месяца только самых тяжелых испытаний и бессонных ночей!",
-    images:["work1.jpg",'work2.jpg','work3.jpg','work4.jpg']
-  }
-
-  const tags=['Html','Css','Javascript']
 
 include ./mixins.pug
 
@@ -139,7 +82,7 @@ html(lang="en")
             .scroll__text 
               a(href='#'+key,class="scroll__link") #{lang['scroll']}
               +icon('down', 'scroll__svg')
-      .about
+      .about#about
         .container.about__container
           .about__item
             .about__image 
@@ -162,65 +105,12 @@ html(lang="en")
               .about__svg 
                 +icon('star', 'about__star')
               .about__text #{user['about_site']}
-      .skills
-        .container.skills__container
-          h2.title-level2.skills__title #{lang['skills_title']}
-          .skills__description #{user['skills_description']}
-          each value, key in user['skills'] 
-            .skills__group
-              h3.skills__group-title #{value['group']}
-              .skills__list
-                each items in value['items'] 
-                  .skill(data-line=8,data-size="132",data-percent=items['percent'],data-text=items['name'])
-
-      .works
-        .container.works__container
-          h2.title-level2.works__title #{lang['works_title']}
-          .works__content
-            .slider
-              .slider__slide-full 
-                +image('content/'+works['images'][0], 'works__img-full')
-              .slider__slide-items
-                each value in works['images']
-                  .slider__slide-item
-                    .slider__slide-image
-                      +image('content/'+value, 'works__slide-img')
-              .arrows.arrows--work
-                .arrows__item.arrows__item--work.arrows__item--left
-                  +icon('arrow-down', 'arrow__svg')
-                .arrows__item.arrows__item--work.arrows__item--right
-                  +icon('arrow-down', 'arrow__svg')
-              .slider__slide--number 2       
-            .works__description
-              .tags.works__tags
-                each value in tags
-                  .tag #{value}
-              h3.title-level3.works__name #{works['name']}
-              .works__text #{works['description']}
-              a(href="#" class="works__link" target="_blank") 
-                +icon('link', 'works__svg') 
-                span #{lang['work_link']}
-
-      .talks
-        .container.talks__container
-          .talks__header
-            h2.talks__title #{lang['talks_title']}
-            .arrows
-              .arrows__item.arrows__item--left
-                +icon('arrow-down', 'arrow__svg')
-              .arrows__item.arrows__item--right
-                +icon('arrow-down', 'arrow__svg')
-          .reviews 
-            each value in review
-              .review
-                .review__text #{value['text']}
-                  .review__quote
-                .review__person
-                  +image('content/'+value['photo'], 'talks__img')
-                  .review__info
-                    .review__name #{value['name']}
-                    .review__work #{value['work']}
-
+      .skills#skills
+          #skills__widget
+      .works#works
+          #works__widget
+      .talks#talks
+          #reviews__widget
       .footer 
         .container.footer__container
           .footer__column
@@ -243,3 +133,6 @@ html(lang="en")
             .quote.footer__quote
               .quote__text #{lang['quote']}
               .quote__author #{lang['quote_author']}
+    include ./templates/components/skills.pug
+    include ./templates/components/reviews.pug
+    include ./templates/components/works.pug

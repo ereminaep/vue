@@ -2,11 +2,9 @@
 .review{
     display:flex;
     flex-wrap:wrap;
-    width:30%;
     justify-content: center;
-    &:nth-of-type(2n+1) {
-        margin-right:60px;
-    }
+    flex-direction: column;
+    justify-content: space-between;
 }
 .review__img{
     width:75px;
@@ -16,6 +14,7 @@
     color: rgba(255, 255, 255, 0.6);
     display:flex;
     @include text;
+    font-weight:normal;
     margin-bottom:30px;
     &:before{
         content:'';
@@ -46,9 +45,4 @@
 }
 .review__info{
     margin-left:31px;
-}
-@media(max-width:$bp-desktop){
-    .review{
-        width:40%;
-    }
 }
