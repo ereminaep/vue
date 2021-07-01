@@ -3,14 +3,19 @@
     headerApp(:title='lang.admin_panel')
       avatar(src="https://picsum.photos/300/300")
       h1.header-username {{user_data.name}}
-    .container
-      tabs
+    tabs
+      div.container
         tab(:name="menu['about']" :selected="true")
-          h1 контент первого блока
+          .admin-block-head
+            .admin-block-title {{lang['block']}} «{{menu['about']}}»
+            round-btn(type='iconed')
+          skill-group(:skills='skillsList')
         tab(:name="menu['works']")
-          h1 контент второго блока
+          .admin-content
+            h1 контент второго блока
         tab(:name="menu['talks']")
-          h1 контент третьего блока
+          .admin-content
+            h1 контент третьего блока
 
 </template>
 
@@ -19,19 +24,27 @@ import headerApp from "./components/header-app/header-app";
 import avatar from "./components/avatar";
 import tabs from "./components/tabs/tabs";
 import tab from "./components/tab/tab";
-
+import roundBtn from "./components/button/button";
+import skillGroup from "./components/skill-group/skill-group";
 
 export default {
   components:{
-    headerApp,avatar,tabs,tab
+    headerApp,avatar,tabs,tab,roundBtn,skillGroup
+  },
+  props:{
+    skills:{
+      type:Array,
+      dafault:[]
+    }
   },
   data() {
         return {
             user_data: require('./../data/user.json'),
             lang: require('./../data/lang.json'),
-            menu: require('./../data/menu.json')
+            menu: require('./../data/menu.json'),
+            skillsList: require('./../data/skill-widget.json'),
         }
-    },
+  }
 };
 </script>
 
@@ -40,6 +53,10 @@ export default {
   @import "normalize.css";
   @import "../styles/mixins.pcss";
   @import "../styles/layout/base.pcss";
+
+  .wrapper{
+    background-color:#F8FAFE;
+  }
 </style>
 
 <style lang="postcss" scoped src="./app.pcss">

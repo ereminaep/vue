@@ -15,7 +15,7 @@ export default {
     }
   },
   components: {
-    default: () => import("./types/defaultBtn"),
+    default: () => import("./types/defaultBtn/defaultBtn.vue"),
     square: () => import("./types/squareBtn"),
     iconed: () => import("./types/iconedBtn"),
     round: () => import("./types/roundBtn"),

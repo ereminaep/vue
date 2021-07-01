@@ -12,5 +12,7 @@
     "quote_author": "Martin Golding",
     "work_link": "Посмотреть сайт",
     "copy": "2020",
-    "admin_panel": "Панель администратора"
+    "admin_panel": "Панель администратора",
+    "logout": "Выход",
+    "block": "Блок"
 }
