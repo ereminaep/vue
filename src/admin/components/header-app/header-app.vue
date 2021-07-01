@@ -1,8 +1,9 @@
 <template lang="pug">
   .header-component
     .container.header-container
-      slot
-      .header-title {{title}}
+      .header-left
+        slot
+        .header-title {{title}}
       .buttons 
         button(type="button").btn Выйти
 
