@@ -2,22 +2,34 @@ import iconedBtn from "../../button.vue";
 import { action } from "@storybook/addon-actions";
 
 const methods = {
-  onClick: action("onClick"),
+    onClick: action("onClick"),
 };
 
 export default {
-  title: "button/iconed",
-  component: iconedBtn,
+    title: "button/iconed",
+    component: iconedBtn,
 };
 
 export const defaultView = () => ({
-  components: { iconedBtn },
-  template: `
+    components: { iconedBtn },
+    template: `
     <iconed-btn type="iconed" @click="onClick" title="Заголовок" />
   `,
-  methods,
+    methods,
 });
 
 defaultView.story = {
-  name: "Стандартный вид",
+    name: "Стандартный вид",
+};
+
+export const MiniView = () => ({
+    components: { iconedBtn },
+    template: `
+    <iconed-btn type="iconed" @click="onClick" />
+  `,
+    methods,
+});
+
+MiniView.story = {
+    name: "Без текста",
 };
