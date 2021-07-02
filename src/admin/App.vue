@@ -9,7 +9,7 @@
           .admin-block-head
             .admin-block-title {{lang['block']}} «{{menu['about']}}»
             round-btn(type='iconed')
-          skill-group(:skills='skillsList')
+          skill-groups(:skills='skillsList' :skillsNames='skillsValues')
         tab(:name="menu['works']")
           .admin-content
             h1 контент второго блока
@@ -25,16 +25,20 @@ import avatar from "./components/avatar";
 import tabs from "./components/tabs/tabs";
 import tab from "./components/tab/tab";
 import roundBtn from "./components/button/button";
-import skillGroup from "./components/skill-group/skill-group";
+import skillGroups from "./components/skill-groups/skill-groups";
 
 export default {
   components:{
-    headerApp,avatar,tabs,tab,roundBtn,skillGroup
+    headerApp,avatar,tabs,tab,roundBtn,skillGroups
   },
   props:{
     skills:{
       type:Array,
       dafault:[]
+    },
+    skillsNames:{
+      type:Object,
+      dafault:{}
     }
   },
   data() {
@@ -43,6 +47,7 @@ export default {
             lang: require('./../data/lang.json'),
             menu: require('./../data/menu.json'),
             skillsList: require('./../data/skill-widget.json'),
+            skillsValues: require('./../data/skills.json'),
         }
   }
 };
