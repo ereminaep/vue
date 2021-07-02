@@ -4,7 +4,7 @@
       app-input(v-model="skill.percent")
       .admin-skill-icons
         icon(symbol="tick" @click='editedChange')
-        icon(symbol="cross")        
+        icon(symbol="cross" @click='editedChange')        
     .admin-skill-item(v-else)
         .admin-skill-name(v-html='skill.name')
         .admin-skill-percent(v-html='skill.percent+" %"')

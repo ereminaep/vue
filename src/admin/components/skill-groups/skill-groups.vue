@@ -1,46 +1,25 @@
 <template lang="pug">
-    div.admin-skill-groups
-        .admin-skill-group(v-for='item in skills') 
-            card
-                .admin-skill-group-title(slot="title") 
-                    span {{item.group}}
-                    .admin-skill-icons 
-                        icon(symbol="tick")
-                        icon(symbol="cross")
-                .admin-skill-list(slot="content")
-                    .admin-skill-item(v-for='skill in item.items')
-                        .admin-skill-name(v-html='getSkillById(skill).name')
-                        .admin-skill-percent(v-html='getSkillById(skill).percent+" %"') 
-                        .admin-skill-icons 
-                            icon(grayscale symbol="pencil")
-                            icon(grayscale symbol="trash")
-
-    
+    .admin-skill-groups
+        .admin-skill-group(v-for='item in groups')
+            skillGroup(:group='item' :skills='skills')
 </template>
 
 <script>
 
 import card from "../card/card";
-import icon from "../icon/icon";
+import skillGroup from "../skill-group/skill-group";
 
 export default {
-    components:{card,icon},
+    components:{card,skillGroup},
     props:{
-        skills:{
+        groups:{
             type:Array,
-            default:[]
+            default:[{
+            }]
         },
-        skillsNames:{
+        skills:{
             type:Object,
             default:{}
-        }
-    },
-    methods: {
-        getSkillById(id) {
-            return {
-                name:this.skillsNames[id].name,
-                percent:this.skillsNames[id].percent
-            }
         }
     }
 }

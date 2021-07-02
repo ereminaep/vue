@@ -9,7 +9,7 @@
           .admin-block-head
             .admin-block-title {{lang['block']}} «{{menu['about']}}»
             round-btn(type='iconed')
-          skill-groups(:skills='skillsList' :skillsNames='skillsValues')
+          skill-groups(:skills='skillsValues' :groups='skillsList')
         tab(:name="menu['works']")
           .admin-content
             h1 контент второго блока
