@@ -23,6 +23,9 @@ export default {
     methods:{
         addTag() {
             this.tags=this.tagsString.trim().split(',');
+            if(this.tags[this.tags.length-1]==''){
+                this.tags.splice(this.tags.length-1, 1);
+            }
         },
         removeTag(index){
            this.tags.splice(index, 1);
