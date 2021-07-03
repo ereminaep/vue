@@ -3,7 +3,7 @@
         editLine(slot="title" v-model='title' :editModeByDefault="empty") 
         .admin-skill-list(slot="content")
             .admin-skill-item(v-for='item in group.items')
-                skill(:skill='getSkillById(item)')
+                skill(:skill='getSkillById(item)' @remove="$emit('remove-skill',$event)" @approve="$emit('edit-skill',$event)")
             addSkill.admin-add-skill(:blocked="empty")
 </template>
 
@@ -34,6 +34,7 @@ export default {
   methods:{
     getSkillById(id) {
             return {
+                id:this.skills[id].id,
                 name:this.skills[id].name,
                 percent:this.skills[id].percent,
                 edited:false

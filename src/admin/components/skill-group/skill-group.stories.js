@@ -1,4 +1,11 @@
 import skillGroup from "./skill-group.vue";
+import { action } from "@storybook/addon-actions";
+
+const methods = {
+    onRemove: action("onRemove"),
+    onRemoveSkill: action("onRemoveSkill"),
+    onEditSkill: action("onEditSkill"),
+}
 
 export default {
     title: "skillGroup"
@@ -7,7 +14,7 @@ export default {
 export const defaultView = () => ({
     components: { skillGroup },
     template: `
-    <skillGroup :group='group' :skills='skills' ></skillGroup>
+    <skillGroup :group='group' :skills='skills' @remove="onRemove" @remove-skill="onRemoveSkill" @edit-skill="onEditSkill" ></skillGroup>
   `,
     props: {
         group: {
@@ -64,6 +71,7 @@ export const defaultView = () => ({
             }
         }
     },
+    methods
 });
 
 defaultView.story = {
