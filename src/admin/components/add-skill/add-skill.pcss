@@ -1,6 +1,7 @@
 .admin-add-skill{
     display:flex;
     align-items:flex-end;
+    position:relative;
     .admin-add-skill-input{
         margin-left:20px;
     }
@@ -17,6 +18,18 @@
 
         }  
       }
+    &.blocked{
+        filter:grayscale(50%);
+        pointer-events:none;
+        &:after{
+            content:'';
+            position:absolute;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+        }
+    }
 }
 .admin-add-skill-input-name{
     width:220px;
@@ -26,4 +39,9 @@
 .admin-add-skill-input-percent{
     width:75px;
     margin-right:8px;
+    display:flex;
+    &:after{
+        content:'%';
+        margin-left:-20px;
+    }
 }

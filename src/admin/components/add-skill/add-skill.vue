@@ -1,6 +1,6 @@
 <template lang="pug">
-    .admin-add-skill
-        appInput(v-model="skill.name").admin-add-skill-input-name
+    .admin-add-skill(:class="{blocked:blocked}")
+        appInput(v-model="skill.name" placeholder="Новый навык").admin-add-skill-input-name
         appInput(v-model="skill.percent").admin-add-skill-input-percent
         iconedBtn(type="iconed" @click="onClick" title='')
 </template>
@@ -19,11 +19,13 @@ export default {
           default:function(){
                 return{
                     name:'',
-                    percent:'100 %',
+                    percent:'100',
                     etited:false
                 }
           }
-      }
+      },
+      blocked:Boolean
+
   },
   methods:{
       onClick(){

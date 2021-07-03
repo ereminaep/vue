@@ -5,7 +5,7 @@
             round-btn(type='iconed' @click='addGroup')
         .admin-skill-groups
             .admin-skill-group(v-if="newGroup").admin-skill-group-table
-                skillGroup(:group='{}' :skills='{}')
+                skillGroup(empty)
             .admin-skill-group(v-for='item in groups').admin-skill-group-table
                 skillGroup(:group='item' :skills='skills')
 </template>

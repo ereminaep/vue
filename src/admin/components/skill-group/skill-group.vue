@@ -1,10 +1,10 @@
 <template lang="pug">
     card 
-        editLine(slot="title" v-model='title') 
+        editLine(slot="title" v-model='title' :editModeByDefault="empty") 
         .admin-skill-list(slot="content")
             .admin-skill-item(v-for='item in group.items')
                 skill(:skill='getSkillById(item)')
-            addSkill.admin-add-skill
+            addSkill.admin-add-skill(:blocked="empty")
 </template>
 
 <script>
@@ -23,7 +23,8 @@ export default {
     skills:{
       type: Object,
       default: {}
-    }
+    },
+    empty:Boolean
   },
   data(){
     return {
