@@ -1,13 +1,13 @@
 <template lang="pug">
   .admin-skill-item(v-if="edited")
     .admin-skill-name
-      app-input(v-model="skill.name" :errorMessage='errorMessage' required).admin-skill-input
+      app-input(v-model="oldSkill.name" :errorMessage='errorMessage' required).admin-skill-input
     .admin-skill-percent  
-      app-input(v-model="skill.percent" :errorMessage='errorMessage' required).admin-skill-input
+      app-input(v-model="oldSkill.percent" :errorMessage='errorMessage' required).admin-skill-input
       span.admin-skill-percent-symbol--focus %
     .admin-skill-icons
-      icon(symbol="tick" @click='editedChange')
-      icon(symbol="cross" @click='resetChange')        
+      icon(symbol="tick" @click="$emit('approve',oldSkill)")
+      icon(symbol="cross" @click='editedChange')        
   .admin-skill-item(v-else)
       .admin-skill-name(v-html='skill.name')
       .admin-skill-percent
@@ -15,7 +15,7 @@
         .admin-skill-percent-symbol %
       .admin-skill-icons
         icon(grayscale symbol="pencil" @click='editedChange')
-        icon(grayscale symbol="trash")
+        icon(grayscale symbol="trash" @click="$emit('remove',skill.id)")
 </template>
 
 <script>
@@ -28,9 +28,11 @@ export default {
     skill: {
       type: Object,
       default: {
+          id:0,
           name:'',
           percent:''
-      }
+      },
+      required:true
     }
   },
   data() {
@@ -38,20 +40,14 @@ export default {
         errorMessage:'',
         edited:false,
         oldSkill:{
-           name:'',
-           percent:''         
+           id:this.skill.id,
+           name:this.skill.name,
+           percent:this.skill.percent         
         }
     }
   },
   methods:{
     editedChange(e){
-      this.oldSkill.name=this.name;
-      this.oldSkill.percent=this.percent;
-      this.edited = !this.edited; 
-    },
-    resetChange(e){
-      this.name=this.oldSkill.name;
-      this.percent=this.oldSkill.percent;
       this.edited = !this.edited; 
     }
   }

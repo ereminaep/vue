@@ -1,6 +1,6 @@
 <template lang="pug">
     card 
-        skillGroupTitle(slot="title" :title='group.group') 
+        editLine(slot="title" v-model='title') 
         .admin-skill-list(slot="content")
             .admin-skill-item(v-for='item in group.items')
                 skill(:skill='getSkillById(item)')
@@ -9,12 +9,12 @@
 
 <script>
 import skill from "../skill/skill";
-import skillGroupTitle from "../skill-group-title/skill-group-title";
+import editLine from "../editLine/editLine";
 import card from "../card/card";
-import addSkill from "../add-skill/add-skill.vue";
+import addSkill from "../add-skill/add-skill";
 
 export default {
-  components:{skill,card,skillGroupTitle,addSkill},
+  components:{skill,card,editLine,addSkill},
   props: {
     group: {
       type: Object,
@@ -23,6 +23,11 @@ export default {
     skills:{
       type: Object,
       default: {}
+    }
+  },
+  data(){
+    return {
+      title:this.group.group
     }
   },
   methods:{

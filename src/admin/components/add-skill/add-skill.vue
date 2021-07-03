@@ -2,7 +2,7 @@
     .admin-add-skill
         appInput(v-model="skill.name").admin-add-skill-input-name
         appInput(v-model="skill.percent").admin-add-skill-input-percent
-        iconedBtn(type="iconed" @click="onClick" title='').admin-add-skill-button
+        iconedBtn(type="iconed" @click="onClick" title='')
 </template>
 
 <script>
