@@ -1,8 +1,8 @@
 <template lang="pug">
     .admin-add-skill(:class="{blocked:blocked}")
-        appInput(v-model="skill.name" placeholder="Новый навык").admin-add-skill-input-name
-        appInput(v-model="skill.percent").admin-add-skill-input-percent
-        iconedBtn(type="iconed" @click="onClick" title='')
+        appInput(v-model="skill.name" placeholder="Новый навык" required :errorMessage='errorMessage.name').admin-add-skill-input-name
+        appInput(v-model="skill.percent" required :errorMessage='errorMessage.percent').admin-add-skill-input-percent
+        iconedBtn(type="iconed" @click="addNewSkil($event)" title='')
 </template>
 
 <script>
@@ -27,8 +27,33 @@ export default {
       blocked:Boolean
 
   },
+  data(){
+      return{
+          errorText:'Заполните поле',
+          errorMessage:{
+              name:"",
+              percent:""
+          }
+      }
+  },
   methods:{
-      onClick(){
+      addNewSkil(e){
+          let valid=true;
+          if(this.skill.name=='') {
+              valid=false;
+              this.errorMessage.name=this.errorText;
+          } else{
+              this.errorMessage.name='';
+          }
+          if(this.skill.percent=='') {
+              valid=false;
+              this.errorMessage.percent=this.errorText;
+          } else {
+              this.errorMessage.percent=''
+          }
+          if(!valid) {
+              e.preventDefault();
+          }
       }
   }
 }
