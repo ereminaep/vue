@@ -15,8 +15,7 @@ export default {
     title: {
       type: String,
       default: "" 
-    },
-    simple: Boolean
+    }
   }
 };
 </script>

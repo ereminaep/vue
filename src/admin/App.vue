@@ -1,7 +1,7 @@
 <template lang="pug">
   .app-container
     headerApp(:title='lang.admin_panel')
-      avatar(src="https://picsum.photos/300/300")
+      avatar(:src='userPic')
       h1.header-username {{user_data.name}}
     tabs
       div.container
@@ -41,6 +41,11 @@ export default {
       type:Object,
       dafault:{
       }    
+    }
+  },
+  computed:{
+    userPic(){
+      return require(`./../images/${this.user_data.image}`).default;
     }
   },
   data() {
