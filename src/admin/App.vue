@@ -5,12 +5,12 @@
       h1.header-username {{user_data.name}}
     tabs
       div.container
-        tab(:name="menu['about']" :selected="true")
+        tab(:name="menu['about']" link='/admin/#about' :selected="true")
           skill-groups(:skills='skillsValues' :groups='skillsList' :title='{block:lang.block,name:menu.about}')
-        tab(:name="menu['works']")
+        tab(:name="menu['works']" link='/admin/#works')
           .admin-content
             h1 контент второго блока
-        tab(:name="menu['talks']")
+        tab(:name="menu['talks']" link='/admin/#reviews')
           .admin-content
             h1 контент третьего блока
 
