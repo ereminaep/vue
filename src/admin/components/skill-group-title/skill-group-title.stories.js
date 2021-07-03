@@ -10,10 +10,6 @@ export const defaultView = () => ({
         title: {
             type: String,
             default: 'Frontend'
-        },
-        edited: {
-            type: Boolean,
-            default: false
         }
     },
     template: `

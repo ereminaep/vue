@@ -6,10 +6,7 @@
     tabs
       div.container
         tab(:name="menu['about']" :selected="true")
-          .admin-block-head
-            .admin-block-title {{lang['block']}} «{{menu['about']}}»
-            round-btn(type='iconed')
-          skill-groups(:skills='skillsValues' :groups='skillsList')
+          skill-groups(:skills='skillsValues' :groups='skillsList' :title='{block:lang.block,name:menu.about}')
         tab(:name="menu['works']")
           .admin-content
             h1 контент второго блока
@@ -39,6 +36,11 @@ export default {
     skillsNames:{
       type:Object,
       dafault:{}
+    },
+    title:{
+      type:Object,
+      dafault:{
+      }    
     }
   },
   data() {
@@ -49,6 +51,11 @@ export default {
             skillsList: require('./../data/skill-widget.json'),
             skillsValues: require('./../data/skills.json'),
         }
+  },
+  methods:{
+    addGroup(){
+      this.addGroup=!this.addGroup;
+    }
   }
 };
 </script>

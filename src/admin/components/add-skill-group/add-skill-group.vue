@@ -1,6 +1,6 @@
 <template lang="pug">
     card 
-        skillGroupTitle(slot="title" :title='group.group') 
+        skillGroupTitle(slot="title" :title='group.group' :edited='true') 
         .admin-skill-list(slot="content")
             .admin-skill-item(v-for='item in group.items')
                 skill(:skill='getSkillById(item)')
@@ -37,4 +37,4 @@ export default {
 }
 </script>
 
-<style lang="postcss" scoped src="./skill-group.pcss"></style>
+<style lang="postcss" scoped src="./add-skill-group.pcss"></style>
