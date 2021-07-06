@@ -6,6 +6,10 @@ const skills = {
     mutations: {
         removeSkill(state, skillId) {
             state.skills[skillId].active = false;
+        },
+        changeSkill(state, skill) {
+            state.skills[skill.id].name = skill.name;
+            state.skills[skill.id].percent = skill.percent;
         }
     },
     actions: {},

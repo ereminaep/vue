@@ -3,7 +3,7 @@
         editLine(slot="title" v-model='title' :editModeByDefault="empty") 
         .list(slot="content")
             .item(v-for='item in group.items' v-if='true')
-              skill(:skill='getSkillById(item)' @approve="$emit('edit-skill',$event)")
+              skill(:skill='getSkillById(item)')
             addSkill.add-skill(:blocked="empty")
 </template>
 

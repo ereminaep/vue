@@ -6,7 +6,7 @@
       app-input(v-model="oldSkill.percent").input
       span.percent-symbol--focus %
     .admin-skill-icons
-      icon(symbol="tick" @click="$emit('approve',oldSkill);")
+      icon(symbol="tick" @click="changeExistingSkill(oldSkill)")
       icon(symbol="cross" @click='editedChange')        
   .item(v-else)
       .name(v-html='skill.name')
@@ -36,15 +36,22 @@ export default {
         oldSkill:{
            id:this.skill.id,
            name:this.skill.name,
-           percent:this.skill.percent         
+           percent:this.skill.percent,
+           active:true       
         }
     }
   },
   methods:{
-    ...mapMutations(['removeSkill']),
+    ...mapMutations([
+      'removeSkill',
+      'changeSkill'
+      ]),
     removeExistingSkill(){
-      console.log(this.skill.id);
       this.removeSkill(this.skill.id);
+    },
+    changeExistingSkill(skill){
+      this.changeSkill(skill);
+      this.editedChange();
     },
     editedChange(e){
       this.edited = !this.edited; 
