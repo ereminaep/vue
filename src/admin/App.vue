@@ -7,6 +7,7 @@
       div.container
         tab(:name="menu['about']" link='/admin/#about' :selected="true")
           skill-groups(:skills='skillsValues' :groups='skillsList' :title='{block:lang.block,name:menu.about}')
+          router-view
         tab(:name="menu['works']" link='/admin/#works')
           .admin-content
             h1 контент второго блока
