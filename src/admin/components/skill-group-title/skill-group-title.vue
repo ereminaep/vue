@@ -1,13 +1,13 @@
 <template lang="pug">
-    .admin-skill-group-title(slot="title")(v-if="!edited") 
+    .title(slot="title")(v-if="!edited") 
         span {{name}}
-        .admin-skill-icons 
+        .icons 
             icon(grayscale symbol="pencil" @click='editedChange')
-    .admin-skill-group-title(slot="title")(v-else)
+    .title(slot="title")(v-else)
         app-input(v-model="name")
-        .admin-skill-icons 
-            icon(symbol="tick" @click='editedChange').admin-skill-icon
-            icon(symbol="cross" @click='editedChange').admin-skill-icon
+        .icons 
+            icon(symbol="tick" @click='editedChange')
+            icon(symbol="cross" @click='editedChange')
 
 </template>
 

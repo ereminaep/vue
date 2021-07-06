@@ -1,24 +1,23 @@
 <template lang="pug">
     div
-        .admin-block-head
-            .admin-block-title {{title.block}} «{{title.name}}»
+        .head
+            .title Блок «Обо мне» 
             round-btn(type='iconed' @click='addGroup')
-        .admin-skill-groups
-            .admin-skill-group(v-if="newGroup").admin-skill-group-table
+        .skill-groups
+            .skill-group(v-if="newGroup")
                 skillGroup(empty)
-            .admin-skill-group(v-for='item in groups').admin-skill-group-table
+            .skill-group(v-for='item in groups')
                 skillGroup(:group='item' :skills='skills')
 </template>
 
 <script>
 
-import card from "../card/card";
 import skillGroup from "../skill-group/skill-group";
 import roundBtn from "../button/button";
 
 
 export default {
-    components:{card,skillGroup,roundBtn},
+    components:{skillGroup,roundBtn},
     data() {
         return{
             newGroup:false
@@ -33,13 +32,6 @@ export default {
         skills:{
             type:Object,
             default:{}
-        },
-        title:{
-            type:Object,
-            default:{
-                name:'Название блока',
-                block:'Блок'
-            }
         }
     },
     methods:{

@@ -1,7 +1,7 @@
 <template lang="pug">
-    .admin-add-skill(:class="{blocked:blocked}")
-        appInput(v-model="skill.name" placeholder="Новый навык" required :errorMessage='errorMessage.name').admin-add-skill-input-name
-        appInput(v-model="skill.percent" required :errorMessage='errorMessage.percent').admin-add-skill-input-percent
+    .add-skill(:class="{blocked:blocked}")
+        appInput(v-model="skill.name" placeholder="Новый навык" required :errorMessage='errorMessage.name').input-name
+        appInput(v-model="skill.percent" required :errorMessage='errorMessage.percent').input-percent
         iconedBtn(type="iconed" @click="addNewSkil($event)" title='')
 </template>
 
