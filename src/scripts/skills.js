@@ -5,7 +5,7 @@ let skills = Vue.component('skills', {
     template: "#skills-groups",
     data: function() {
         return {
-            groups: require('./../data/skill-widget.json'),
+            groups: require('./../data/categories.json'),
             skills_list: require('./../data/skills.json'),
         }
     }
