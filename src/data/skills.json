@@ -2,41 +2,49 @@
     "1": {
         "id": 1,
         "name": "HTML5",
-        "percent": 80
+        "percent": 80,
+        "active": true
     },
     "2": {
         "id": 2,
         "name": "CSS3",
-        "percent": 55
+        "percent": 55,
+        "active": true
     },
     "3": {
         "id": 3,
         "name": "Javascript",
-        "percent": 40
+        "percent": 40,
+        "active": true
     },
     "4": {
         "id": 4,
         "name": "Jquery и Vue.js",
-        "percent": 25
+        "percent": 25,
+        "active": true
     },
     "5": {
         "id": 5,
         "name": "GIT",
-        "percent": 80
+        "percent": 80,
+        "active": true
     },
     "6": {
         "id": 6,
         "name": "Terminal",
-        "percent": 76
+        "percent": 76,
+        "active": true
     },
     "7": {
         "id": 7,
         "name": "Gulp",
-        "percent": 30
+        "percent": 30,
+        "active": true
     },
     "8": {
         "id": 8,
         "name": "Webpack",
-        "percent": 50
+        "percent": 50,
+        "active": true
     }
 }

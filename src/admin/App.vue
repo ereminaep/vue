@@ -1,12 +1,12 @@
 <template lang="pug">
-  .app-container
+  .app-container 
     headerApp(title='Панель администрирования')
       avatar(:src='userPic')
-      h1.header-username {{user_data.name}}
+      h1.header-username {{user.name}}
     tabs
       div.container
         tab(name="Обо мне" link='/admin/#about' :selected="true")
-          skill-groups(:skills='skills' :groups='categories')
+          skill-groups(:skills='activeSkills' :groups='categriesWithActiveSkills')
         tab(name="Работы" link='/admin/#works')
           .admin-content
             h1 контент второго блока
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+
 import headerApp from "./components/header-app/header-app";
 import avatar from "./components/avatar";
 import tabs from "./components/tabs/tabs";
@@ -25,24 +26,24 @@ import roundBtn from "./components/button/button";
 import skillGroups from "./components/skill-groups/skill-groups";
 
 import {mapState} from 'vuex';
+import {mapGetters} from 'vuex';
 
 export default {
   components:{
     headerApp,avatar,tabs,tab,roundBtn,skillGroups
   },
   computed:{
+    ...mapGetters([
+      'activeSkills',
+      'categriesWithActiveSkills'
+    ]),
     ...mapState({
-      skills:state=>state.skills.skills,
-      categories:state=>state.skills.categories
+      categories:state=>state.skills.categories,
+      user:state=>state.user.user
     }),
     userPic(){
-      return require(`./../images/${this.user_data.image}`).default;
+      return require(`./../images/${this.user.image}`).default;
     }
-  },
-  data() {
-        return {
-            user_data: require('./../data/user.json')
-        }
   },
   methods:{
     addGroup(){
@@ -50,9 +51,11 @@ export default {
     }
   }
 };
+
 </script>
 
 <style lang="postcss">
+
   @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
   @import "normalize.css";
   @import "../styles/mixins.pcss";

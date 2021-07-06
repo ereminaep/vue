@@ -1,10 +1,10 @@
 <template lang="pug">
     card 
         editLine(slot="title" v-model='title' :editModeByDefault="empty") 
-        .admin-skill-list(slot="content")
-            .admin-skill-item(v-for='item in group.items')
-                skill(:skill='getSkillById(item)' @remove="$emit('remove-skill',$event)" @approve="$emit('edit-skill',$event)")
-            addSkill.admin-add-skill(:blocked="empty")
+        .list(slot="content")
+            .item(v-for='item in group.items' v-if='true')
+              skill(:skill='getSkillById(item)' @approve="$emit('edit-skill',$event)")
+            addSkill.add-skill(:blocked="empty")
 </template>
 
 <script>
@@ -17,12 +17,10 @@ export default {
   components:{skill,card,editLine,addSkill},
   props: {
     group: {
-      type: Object,
-      default: {}
+      type: Object
     },
     skills:{
-      type: Object,
-      default: {}
+      type: Object
     },
     empty:Boolean
   },
@@ -37,7 +35,7 @@ export default {
                 id:this.skills[id].id,
                 name:this.skills[id].name,
                 percent:this.skills[id].percent,
-                edited:false
+                actuve:this.skills[id].percent
             }
         }
     }

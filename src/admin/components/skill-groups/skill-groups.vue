@@ -15,7 +15,6 @@
 import skillGroup from "../skill-group/skill-group";
 import roundBtn from "../button/button";
 
-
 export default {
     components:{skillGroup,roundBtn},
     data() {
@@ -25,13 +24,10 @@ export default {
     },
     props:{
         groups:{
-            type:Array,
-            default:[{
-            }]
+            type:Array
         },
         skills:{
-            type:Object,
-            default:{}
+            type:Object
         }
     },
     methods:{

@@ -15,24 +15,19 @@
         .percent-symbol %
       .icons
         icon(grayscale symbol="pencil" @click='editedChange')
-        icon(grayscale symbol="trash" @click="$emit('remove',skill.id)")
+        icon(grayscale symbol="trash" @click="removeExistingSkill")
 </template>
 
 <script>
 import icon from "../icon/icon";
 import appInput from "../input/input.vue";
+import {mapMutations} from 'vuex';
 
 export default {
   components:{icon,appInput},
   props: {
     skill: {
-      type: Object,
-      default: {
-          id:0,
-          name:'',
-          percent:''
-      },
-      required:true
+      type: Object
     }
   },
   data() {
@@ -46,6 +41,11 @@ export default {
     }
   },
   methods:{
+    ...mapMutations(['removeSkill']),
+    removeExistingSkill(){
+      console.log(this.skill.id);
+      this.removeSkill(this.skill.id);
+    },
     editedChange(e){
       this.edited = !this.edited; 
     }
