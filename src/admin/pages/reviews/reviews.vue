@@ -1,3 +1,16 @@
 <template lang="pug">
-    h1 Страница отзывы
+    topApp
+        h1 Страница отзывы
 </template>
+
+<script>
+
+import topApp from "../../components/top-app/top-app";
+
+export default {
+  components:{
+    topApp
+  }
+};
+
+</script>

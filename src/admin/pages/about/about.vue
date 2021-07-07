@@ -1,18 +1,22 @@
 <template lang="pug">
     div
-        skill-groups(:skills='activeSkills' :groups='categriesWithActiveSkills')
+        topApp
+        .container    
+            skill-groups(:skills='activeSkills' :groups='categriesWithActiveSkills')
 </template>
 
 <script>
 
 import skillGroups from "../../components/skill-groups/skill-groups";
+import topApp from "../../components/top-app/top-app";
 
 import {mapState} from 'vuex';
 import {mapGetters} from 'vuex';
 
 export default {
   components:{
-    skillGroups
+    skillGroups,
+    topApp
   },
   computed:{
     ...mapGetters([
