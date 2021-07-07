@@ -26,7 +26,7 @@ export default {
   },
   data(){
     return {
-      title:this.group.group
+      title:this.group.category
     }
   },
   methods:{
