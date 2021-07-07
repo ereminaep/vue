@@ -10,6 +10,27 @@ const skills = {
         changeSkill(state, skill) {
             state.skills[skill.id].name = skill.name;
             state.skills[skill.id].percent = skill.percent;
+        },
+        addSkill(state, skill) {
+            console.log(state.getters.activeSkills.skills);
+            let id = Number(Object.keys(state.getters.activeSkills).pop()) + 1;
+
+            let newSkill = {
+                name: skill.name,
+                percent: skill.percent,
+                active: true,
+                categoryId: skill.categoryId,
+                id: id
+            }
+
+            state.getters.activeSkills[id] = newSkill;
+
+            for (let value of state.categories) {
+                if (value.id == skill.categoryId) {
+                    value.items.push(String(id));
+                }
+            }
+
         }
     },
     actions: {},
@@ -26,10 +47,8 @@ const skills = {
         categriesWithActiveSkills(state) {
             let result = state.categories;
             for (let value of result) {
-                console.log(value.items);
                 value.items = value.items.filter(item => state.skills[item].active);
             }
-
             return result;
         }
     }

@@ -1,8 +1,8 @@
 <template lang="pug">
     .add-skill(:class="{blocked:blocked}")
-        appInput(v-model="skill.name" placeholder="Новый навык" required :errorMessage='errorMessage.name').input-name
-        appInput(v-model="skill.percent" required :errorMessage='errorMessage.percent').input-percent
-        iconedBtn(type="iconed" @click="addNewSkil($event)" title='')
+        appInput(v-model="name" placeholder="Новый навык").input-name
+        appInput(v-model="percent").input-percent
+        iconedBtn(type="iconed" @click="addNewSkill" title='')
 </template>
 
 <script>
@@ -10,51 +10,33 @@
 import addSkill from "../add-skill/add-skill";
 import appInput from "../input/input.vue";
 import iconedBtn from "../button/button";
+import { mapMutations  } from 'vuex'
 
 export default {
   components:{addSkill,appInput,iconedBtn},
-  props: {
-      skill:{
-          type:Object,
-          default:function(){
-                return{
-                    name:'',
-                    percent:'100',
-                    etited:false
-                }
-          }
-      },
-      blocked:Boolean
+  methods:{
+    ...mapMutations ([
+      'addSkill'
+    ]),
+    addNewSkill() {
+        let newSkill={
+            name:this.name,
+            percent:this.percent,
+            categoryId:this.categoryId
+        };
 
+        this.addSkill(newSkill);
+    }
   },
   data(){
-      return{
-          errorText:'Заполните поле',
-          errorMessage:{
-              name:"",
-              percent:""
-          }
-      }
+    return {
+        name:'',
+        percent:'100'
+    }
   },
-  methods:{
-      addNewSkil(e){
-          let valid=true;
-          if(this.skill.name=='') {
-              valid=false;
-              this.errorMessage.name=this.errorText;
-          } else{
-              this.errorMessage.name='';
-          }
-          if(this.skill.percent=='') {
-              valid=false;
-              this.errorMessage.percent=this.errorText;
-          } else {
-              this.errorMessage.percent=''
-          }
-          if(!valid) {
-              e.preventDefault();
-          }
-      }
+  props: {
+      blocked:Boolean,
+      categoryId:Number
   }
 }
 </script>

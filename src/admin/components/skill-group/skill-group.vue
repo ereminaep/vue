@@ -4,7 +4,7 @@
         .list(slot="content")
             .item(v-for='item in group.items' v-if='true')
               skill(:skill='getSkillById(item)')
-            addSkill.add-skill(:blocked="empty")
+            addSkill.add-skill(:blocked="empty" :categoryId="group.id")
 </template>
 
 <script>
@@ -31,12 +31,12 @@ export default {
   },
   methods:{
     getSkillById(id) {
-            return {
-                id:this.skills[id].id,
-                name:this.skills[id].name,
-                percent:this.skills[id].percent,
-                actuve:this.skills[id].percent
-            }
+          return {
+              id:this.skills[id].id,
+              name:this.skills[id].name,
+              percent:this.skills[id].percent,
+              actuve:this.skills[id].percent
+          }
         }
     }
 }
