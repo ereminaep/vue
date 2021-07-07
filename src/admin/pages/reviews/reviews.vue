@@ -1,6 +1,8 @@
 <template lang="pug">
-    topApp
-        h1 Страница отзывы
+    div
+        topApp
+        .container 
+            h1 Страница отзывов
 </template>
 
 <script>
