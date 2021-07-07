@@ -9,7 +9,22 @@
 import topApp from "./components/top-app/top-app";
 
 export default {
-  components:{topApp}
+  components:{topApp},
+  methods:{
+    redirectLogin(){
+      console.log(1);
+      console.log(localStorage.getItem('token'));
+      if(!localStorage.getItem('token')) {
+        this.$router.push('/admin/login/');
+      }
+    }
+  },
+  beforeUpdate() {
+    this.redirectLogin();
+  },
+  created(){
+    this.redirectLogin();
+  }
 };
 
 </script>
