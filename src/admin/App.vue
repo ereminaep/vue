@@ -3,16 +3,9 @@
     headerApp(title='Панель администрирования')
       avatar(:src='userPic')
       h1.header-username {{user.name}}
-    tabs
-      div.container
-        tab(name="Обо мне" link='/admin/#about' :selected="true")
-          skill-groups(:skills='activeSkills' :groups='categriesWithActiveSkills')
-        tab(name="Работы" link='/admin/#works')
-          .admin-content
-            h1 контент второго блока
-        tab(name="Отзывы" link='/admin/#reviews')
-          .admin-content
-            h1 контент третьего блока
+    top-menu
+    .container
+      router-view
 
 </template>
 
@@ -20,34 +13,23 @@
 
 import headerApp from "./components/header-app/header-app";
 import avatar from "./components/avatar";
-import tabs from "./components/tabs/tabs";
-import tab from "./components/tab/tab";
-import roundBtn from "./components/button/button";
-import skillGroups from "./components/skill-groups/skill-groups";
+import topMenu from "./components/menu/menu";
+
+import about from "./pages/about/about";
 
 import {mapState} from 'vuex';
 import {mapGetters} from 'vuex';
 
 export default {
   components:{
-    headerApp,avatar,tabs,tab,roundBtn,skillGroups
+    headerApp,avatar,about,topMenu
   },
   computed:{
-    ...mapGetters([
-      'activeSkills',
-      'categriesWithActiveSkills'
-    ]),
     ...mapState({
-      categories:state=>state.skills.categories,
       user:state=>state.user.user
     }),
     userPic(){
       return require(`./../images/${this.user.image}`).default;
-    }
-  },
-  methods:{
-    addGroup(){
-      this.addGroup=!this.addGroup;
     }
   }
 };

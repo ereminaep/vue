@@ -1,0 +1,27 @@
+.menu{
+    padding: 1.6875rem 0;
+    background: #fff;
+    margin-bottom: 3.125rem;
+    
+}
+.menu-list{
+    display:flex;
+}
+.menu-item{
+    list-style-type: none;
+    font-size:16px;
+    padding:0 20px 20px 20px;
+    margin-bottom:-20px;
+    text-decoration:none;
+    &:hover{
+        color:rgba(56, 59, 207, 1);
+        border-bottom:2px solid rgba(56, 59, 207, 1);
+    }
+    &+&{
+        margin-left:20px;
+    }
+    &.router-link-exact-active{
+        color:rgba(56, 59, 207, 1);
+        border-bottom:2px solid rgba(56, 59, 207, 1);        
+    }
+}
