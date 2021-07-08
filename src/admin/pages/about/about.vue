@@ -2,39 +2,74 @@
     div
         topApp
         .container    
-            skill-groups(:skills='{}' :groups='categories')
-            pre {{categories}}
+          .head
+            .title Блок «Обо мне» 
+            round-btn(type='iconed')
+          .skill-groups
+            .skill-group(v-for='item in categories')
+              skillGroup(:group='item' :skills='categories.skills')
 </template>
 
 <script>
 
-import skillGroups from "../../components/skill-groups/skill-groups";
 import topApp from "../../components/top-app/top-app";
+import skillGroup from "../../components/skill-group/skill-group";
+import roundBtn from "../../components/button/button";
 
 import {mapState} from 'vuex';
 import {mapActions} from 'vuex';
 
+import $axions from "../../requests";
+
 export default {
   components:{
-    skillGroups,
-    topApp
+    skillGroup,
+    topApp,
+    roundBtn
   },
-   computed: {
+  computed: {
     ...mapState("categories",{
-      categories: state => state.categories
+      categories: state => state.data
     })
   },
   methods: {
     ...mapActions({
-       createCategoryAction:"categories/create",
-       fetchCategoriesAction: "categories/fetch",
-    })
+      createCategoryAction: "categories/create",
+      fetchCategoriesAction: "categories/fetch",
+      addSkillAction: "skills/add",
+      removeSkillAction: "skills/remove",
+      editSkillAction: "skills/edit",
+    }),
+    async createSkill(skill, categoryId) {
+      const newSkill = {
+        ...skill,
+        category: categoryId
+      }
+      await this.addSkillAction(newSkill);
+      skill.title = "";
+      skill.percent = "";
+    },
+    removeSkill(skill) {
+      this.removeSkillAction(skill);
+    },
+    async editSkill(skill) {
+      await this.editSkillAction(skill);
+      skill.editmode = false;
+    },
+    async createCategory(categoryTitle) {
+      try {
+        await this.createCategoryAction(categoryTitle);
+        this.emptyCatIsShown = false;
+      } catch (error) {
+        console.log(error.message); 
+      }
+    }
   },
-  
   created() {
     this.fetchCategoriesAction();
-  }
+  },
 };
 
 </script>
 
+<style lang="postcss" scoped src="./about.pcss"></style>

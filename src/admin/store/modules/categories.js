@@ -1,12 +1,4 @@
-import axios from 'axios';
-
-const baseUrl = 'https://webdev-api.loftschool.com';
-const token = localStorage.getItem('token') || "";
-
-axios.defaults.baseURL = baseUrl;
-axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
-const cetegories = {
+export default {
     namespaced: true,
     state: {
         data: [],
@@ -58,7 +50,7 @@ const cetegories = {
         },
         async fetch({ commit }) {
             try {
-                const { data } = await this.axios.get('/categories/1')
+                const { data } = await this.$axios.get('/categories/466')
                 commit("SET_CATEGORIES", data)
             } catch (error) {
                 console.log(error);
@@ -66,5 +58,3 @@ const cetegories = {
         }
     }
 }
-
-export default cetegories;

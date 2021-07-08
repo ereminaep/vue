@@ -16,9 +16,6 @@ import appButton from "../button/button";
 import $axions from "../../requests";
 
 
-
-
-
 export default {
   components:{
     appInput,appButton
@@ -32,20 +29,16 @@ export default {
     }
   },
   methods:{
-    login(){
-      $axions.post('/login', {
-        name: this.user.name,
-        password: this.user.password
-      })
-      .then(function (response) {
-        console.log(response);
+    async login(){
+
+      const response =await $axions.post('/login', {name: this.user.name,password: this.user.password});
+
         const token=response.data.token;
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         localStorage.setItem('token',token);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+        $axions.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        
+        this.$router.push('/admin/');
+
     }
   }
 }
