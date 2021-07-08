@@ -1,6 +1,6 @@
 <template lang="pug">
     card 
-        editLine(slot="title" v-model='title' :editModeByDefault="empty") 
+        editLine(slot="title" v-model='title' :editModeByDefault="empty" :id='group.id') 
         .list(slot="content")
             .item(v-for='item in group.items' v-if='true')
               skill(:skill='getSkillById(item)')

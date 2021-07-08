@@ -23,7 +23,7 @@
           <icon symbol="tick" @click="onApprove"></icon>
         </div>
         <div class="button-icon">
-          <icon symbol="cross" @click="$emit('remove')"></icon>
+          <icon symbol="cross" @click="remove()"></icon>
         </div>
       </div>
     </div>
@@ -31,11 +31,16 @@
 </template>
 
 <script>
+import {mapMutations} from 'vuex';
 export default {
   props: {
     value: {
       type: String,
       default: ""
+    },
+    id:{
+      type:Number,
+      default:0
     },
     errorText: {
       type: String,
@@ -51,12 +56,18 @@ export default {
     };
   },
   methods: {
+    ...mapMutations([
+      'removeCategorie'
+    ]),
     onApprove() {
       if (this.title.trim() === this.value.trim()) {
         this.editmode = false;
       } else {
         this.$emit("approve", this.value);
       }
+    },
+    remove(){
+      this.removeCategorie(this.id);
     }
   },
   components: {

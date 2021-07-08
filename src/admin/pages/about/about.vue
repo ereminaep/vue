@@ -2,8 +2,8 @@
     div
         topApp
         .container    
-            skill-groups(:skills='activeSkills' :groups='getCategories')
-            pre {{getCategories}}
+            skill-groups(:skills='{}' :groups='categories')
+            pre {{categories}}
 </template>
 
 <script>
@@ -11,19 +11,28 @@
 import skillGroups from "../../components/skill-groups/skill-groups";
 import topApp from "../../components/top-app/top-app";
 
-import {mapGetters} from 'vuex';
+import {mapState} from 'vuex';
+import {mapActions} from 'vuex';
 
 export default {
   components:{
     skillGroups,
     topApp
   },
-  computed:{
-    ...mapGetters([
-      'activeSkills',
-      'categriesWithActiveSkills',
-      'getCategories'
-    ])
+   computed: {
+    ...mapState("categories",{
+      categories: state => state.categories
+    })
+  },
+  methods: {
+    ...mapActions({
+       createCategoryAction:"categories/create",
+       fetchCategoriesAction: "categories/fetch",
+    })
+  },
+  
+  created() {
+    this.fetchCategoriesAction();
   }
 };
 
