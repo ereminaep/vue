@@ -12,14 +12,11 @@
 <script>
 
 import appInput from "../input/input.vue";
-import axios from 'axios';
 import appButton from "../button/button";
+import $axions from "../../requests";
 
-const baseUrl='https://webdev-api.loftschool.com';
-const token=localStorage.getItem('token') || "";
 
-axios.defaults.baseURL = 'https://webdev-api.loftschool.com';
-axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
 
 
 export default {
@@ -36,11 +33,12 @@ export default {
   },
   methods:{
     login(){
-      axios.post('/login', {
+      $axions.post('/login', {
         name: this.user.name,
         password: this.user.password
       })
       .then(function (response) {
+        console.log(response);
         const token=response.data.token;
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         localStorage.setItem('token',token);
