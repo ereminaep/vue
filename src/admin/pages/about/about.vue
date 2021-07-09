@@ -4,10 +4,19 @@
         .container    
           .head
             .title Блок «Обо мне» 
-            round-btn(type='iconed')
+            round-btn(type='iconed' @click='newCategorie=!newCategorie')
           .skill-groups
+            .skill-group(v-if='newCategorie')  
+              skillGroup(:empty='true' :group={title:''}
+              )
             .skill-group(v-for='item in categories')
-              skillGroup(:group='item' @add-skill="createSkill" @change-skill="editSkill" @remove-skill="removeSkill")
+              skillGroup(:group='item'
+                @edit-category="editCategory"
+                @remove-category="removeCategory"
+                @add-skill="createSkill" 
+                @change-skill="editSkill" 
+                @remove-skill="removeSkill"
+              )
           pre {{categories}}
 </template>
 
@@ -23,6 +32,11 @@ import {mapActions} from 'vuex';
 import $axions from "../../requests";
 
 export default {
+  data(){
+    return {
+      newCategorie:false
+    }
+  },
   components:{
     skillGroup,
     topApp,
@@ -36,6 +50,8 @@ export default {
   methods: {
     ...mapActions({
       createCategoryAction: "categories/create",
+      editCategoryAction: "categories/edit",
+      removeCategoryAction: "categories/remove",
       fetchCategoriesAction: "categories/fetch",
       addSkillAction: "skills/add",
       removeSkillAction: "skills/remove",
@@ -60,11 +76,29 @@ export default {
       } catch (error) {
         console.log(error.message); 
       }
+    },
+    async editCategory(categoryData) {
+      try {
+        await this.editCategoryAction(categoryData);
+      } catch (error) {
+        console.log(error.message); 
+      }
+    },
+    async removeCategory(categoryId) {
+      try {
+        console.log(1);
+        await this.removeCategoryAction(categoryId);
+      } catch (error) {
+        console.log(error.message); 
+      }
     }
   },
   created() {
     this.fetchCategoriesAction();
   },
+  mounted(){
+    console.log(this.newCategorie);
+  }
 };
 
 </script>

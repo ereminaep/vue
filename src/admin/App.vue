@@ -14,7 +14,7 @@ export default {
     redirectLogin(){
       console.log(localStorage.getItem('token'));
       if(!localStorage.getItem('token')) {
-        //this.$router.push('/admin/login/');
+        this.$router.push('/admin/login/');
       }
     }
   },

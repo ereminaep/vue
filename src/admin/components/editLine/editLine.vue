@@ -20,18 +20,18 @@
       </div>
       <div class="buttons">
         <div class="button-icon">
-          <icon symbol="tick" @click="onApprove"></icon>
+          <icon symbol="tick" @click="$emit('edit-category',{title:value,id:id}); editmode=false"></icon>
         </div>
         <div class="button-icon">
-          <icon symbol="cross" @click="remove()"></icon>
+          <icon symbol="cross" @click="$emit('remove-category',id)"></icon>
         </div>
+        <p>{{id}}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import {mapMutations} from 'vuex';
 export default {
   props: {
     value: {
@@ -52,23 +52,12 @@ export default {
   data() {
     return {
       editmode: this.editModeByDefault,
-      title: this.value
-    };
-  },
-  methods: {
-    ...mapMutations([
-      'removeCategorie'
-    ]),
-    onApprove() {
-      if (this.title.trim() === this.value.trim()) {
-        this.editmode = false;
-      } else {
-        this.$emit("approve", this.value);
+      title: this.value,
+      category:{
+        title: this.value,
+        id:this.id
       }
-    },
-    remove(){
-      this.removeCategorie(this.id);
-    }
+    };
   },
   components: {
     icon: () => import("components/icon"),
