@@ -1,57 +1,31 @@
-const skills = {
-    state: {
-        skills: require('./../../../data/skills.json'),
-        categories: require('./../../../data/categories.json')
-    },
-    mutations: {
-        removeSkill(state, skillId) {
-            state.skills[skillId].active = false;
+export default {
+    namespaced: true,
+    actions: {
+        async add({ commit }, skill) {
+            try {
+                const { data } = await this.$axios.post('/skills', skill);
+                commit("categories/ADD_SKILL", data, { root: true })
+            } catch (error) {
+                throw new Error("Ошибка")
+            }
         },
-        changeSkill(state, skill) {
-            state.skills[skill.id].name = skill.name;
-            state.skills[skill.id].percent = skill.percent;
+        async remove({ commit }, skillToRemove) {
+            try {
+                const { data } = await this.$axios.delete(`/skills/${skillToRemove.id}`);
+                commit("categories/REMOVE_SKILL", skillToRemove, { root: true })
+            } catch (error) {
+                console.log(error);
+                throw new Error("Ошибка")
+            }
         },
-        addSkill(state, skill) {
-            console.log(state.getters.activeSkills.skills);
-            let id = Number(Object.keys(state.getters.activeSkills).pop()) + 1;
-
-            let newSkill = {
-                name: skill.name,
-                percent: skill.percent,
-                active: true,
-                categoryId: skill.categoryId,
-                id: id
+        async edit({ commit }, skillToEdit) {
+            try {
+                const { data } = await this.$axios.post(`/skills/${skillToEdit.id}`, skillToEdit);
+                commit("categories/EDIT_SKILL", data.skill, { root: true })
+            } catch (error) {
+                console.log(error);
+                throw new Error("Ошибка")
             }
-
-            state.getters.activeSkills[id] = newSkill;
-
-            for (let value of state.categories) {
-                if (value.id == skill.categoryId) {
-                    value.items.push(String(id));
-                }
-            }
-
-        }
-    },
-    actions: {},
-    getters: {
-        activeSkills(state) {
-            let result = {};
-            for (let key in state.skills) {
-                if (state.skills[key].active) {
-                    result[key] = state.skills[key];
-                }
-            }
-            return result;
-        },
-        categriesWithActiveSkills(state) {
-            let result = state.categories;
-            for (let value of result) {
-                value.items = value.items.filter(item => state.skills[item].active);
-            }
-            return result;
         }
     }
 }
-
-export default skills;

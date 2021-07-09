@@ -1,8 +1,8 @@
 <template lang="pug">
     .add-skill(:class="{blocked:blocked}")
-        appInput(v-model="name" placeholder="Новый навык").input-name
-        appInput(v-model="percent").input-percent
-        iconedBtn(type="iconed" @click="addNewSkill" title='')
+        appInput(v-model="skill.title" placeholder="Новый навык").input-name
+        appInput(v-model="skill.percent").input-percent
+        iconedBtn(type="iconed" @click="$emit('add-skill',skill)" title='')
 </template>
 
 <script>
@@ -14,29 +14,19 @@ import { mapMutations  } from 'vuex'
 
 export default {
   components:{addSkill,appInput,iconedBtn},
-  methods:{
-    ...mapMutations ([
-      'addSkill'
-    ]),
-    addNewSkill() {
-        let newSkill={
-            name:this.name,
-            percent:this.percent,
-            categoryId:this.categoryId
-        };
-
-        this.addSkill(newSkill);
-    }
-  },
   data(){
     return {
-        name:'',
-        percent:'100'
+      skill:{
+        title:'',
+        percent:'',
+        category:this.categoryId
+      }
+
     }
   },
   props: {
-      blocked:Boolean,
-      categoryId:Number
+    blocked:Boolean,
+    categoryId:Number
   }
 }
 </script>

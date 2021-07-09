@@ -2,9 +2,9 @@
     card 
         editLine(slot="title" v-model='title' :editModeByDefault="empty" :id='group.id') 
         .list(slot="content")
-            .item(v-for='item in group.items' v-if='true')
-              skill(:skill='getSkillById(item)')
-            addSkill.add-skill(:blocked="empty" :categoryId="group.id")
+            .item(v-for='item in group.skills' v-if='true')
+              skill(:skill='item' @remove-skill="$emit('remove-skill', $event)" @change-skill="$emit('change-skill', $event)")
+            addSkill.add-skill(:blocked="empty" :categoryId="group.id" @add-skill="$emit('add-skill', $event)")
 </template>
 
 <script>
@@ -28,17 +28,7 @@ export default {
     return {
       title:this.group.category
     }
-  },
-  methods:{
-    getSkillById(id) {
-          return {
-              id:this.skills[id].id,
-              name:this.skills[id].name,
-              percent:this.skills[id].percent,
-              actuve:this.skills[id].percent
-          }
-        }
-    }
+  }
 }
 </script>
 

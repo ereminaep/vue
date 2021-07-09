@@ -7,7 +7,8 @@
             round-btn(type='iconed')
           .skill-groups
             .skill-group(v-for='item in categories')
-              skillGroup(:group='item' :skills='categories.skills')
+              skillGroup(:group='item' @add-skill="createSkill" @change-skill="editSkill" @remove-skill="removeSkill")
+          pre {{categories}}
 </template>
 
 <script>
@@ -40,12 +41,8 @@ export default {
       removeSkillAction: "skills/remove",
       editSkillAction: "skills/edit",
     }),
-    async createSkill(skill, categoryId) {
-      const newSkill = {
-        ...skill,
-        category: categoryId
-      }
-      await this.addSkillAction(newSkill);
+    async createSkill(skill) {
+      await this.addSkillAction(skill);
       skill.title = "";
       skill.percent = "";
     },
