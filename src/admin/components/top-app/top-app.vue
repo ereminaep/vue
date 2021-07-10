@@ -1,6 +1,6 @@
 <template lang="pug">
     div
-        headerApp(title='Панель администрирования')
+        headerApp(title='Панель администрирования' @logout='logout')
             avatar(:src='userPic')
             h1.header-username {{user.name}}
         top-menu
@@ -15,6 +15,8 @@ import topMenu from "../menu/menu";
 import {mapState} from 'vuex';
 import {mapGetters} from 'vuex';
 
+import $axios from "../../requests";
+
 export default {
   components:{
     headerApp,avatar,topMenu
@@ -25,6 +27,12 @@ export default {
     }),
     userPic(){
       return require(`../../../images/${this.user.image}`).default;
+    }
+  },
+  methods:{
+    async logout(){
+        const response =await $axios.post('/logout');
+        this.$router.push('/admin/login/');    
     }
   }
 };

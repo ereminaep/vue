@@ -12,7 +12,6 @@
       ) 
       .list(
         slot="content")
-        pre {{group.skills}}
         .item(v-for='item in group.skills')
           skill(
             :skill='item' 

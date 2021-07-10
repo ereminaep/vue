@@ -30,6 +30,7 @@ export default {
                         category.skills = [];
                     }
                     category.skills.push(newSkill);
+
                 }
 
                 return category;

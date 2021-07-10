@@ -61,6 +61,7 @@ export default {
       await this.addSkillAction(skill);
       skill.title = "";
       skill.percent = "";
+      this.fetchCategoriesAction();
     },
     removeSkill(skill) {
       this.removeSkillAction(skill);
