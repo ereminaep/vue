@@ -28,7 +28,7 @@ let skills = Vue.component('skills', {
 })
 
 let skillsList = Vue.component('skillsList', {
-    props: ['items', 'skills_list'],
+    props: ['items'],
     template: "#skills-list"
 })
 
