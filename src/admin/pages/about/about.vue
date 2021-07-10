@@ -8,6 +8,7 @@
           .skill-groups
             .skill-group(v-if='newCategorie')  
               skillGroup(:empty='true' :group={title:''}
+              @create-category="createCategory"
               )
             .skill-group(v-for='item in categories')
               skillGroup(:group='item'
@@ -17,7 +18,6 @@
                 @change-skill="editSkill" 
                 @remove-skill="removeSkill"
               )
-          pre {{categories}}
 </template>
 
 <script>
@@ -72,7 +72,7 @@ export default {
     async createCategory(categoryTitle) {
       try {
         await this.createCategoryAction(categoryTitle);
-        this.emptyCatIsShown = false;
+        this.newCategorie=!this.newCategorie;
       } catch (error) {
         console.log(error.message); 
       }
@@ -86,7 +86,6 @@ export default {
     },
     async removeCategory(categoryId) {
       try {
-        console.log(1);
         await this.removeCategoryAction(categoryId);
       } catch (error) {
         console.log(error.message); 
@@ -95,9 +94,6 @@ export default {
   },
   created() {
     this.fetchCategoriesAction();
-  },
-  mounted(){
-    console.log(this.newCategorie);
   }
 };
 

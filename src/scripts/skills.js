@@ -29,6 +29,9 @@ let skill = Vue.component('skill', {
         }
     },
     methods: {
+        ...mapActions({
+            fetchCategoriesAction: "categories/fetch",
+        }),
         drawCircle: function(color, lineWidth, percent, ctx, radius) {
             let percent_new = Math.min(Math.max(0, percent || 1), 1);
             ctx.beginPath();

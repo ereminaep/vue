@@ -5,7 +5,10 @@ export default {
     },
     mutations: {
         SET_CATEGORIES: (state, categories) => (state.data = categories),
-        ADD_CATEGORY: (state, category) => state.data.unshift(category),
+        ADD_CATEGORY: (state, category) => {
+            console.log(state.data);
+            state.data.unshift(category)
+        },
         EDIT_CATEGORY: (state, newCategory) => {
             state.data = state.data.map(category => {
                 if (category.id === newCategory.id) {

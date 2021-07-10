@@ -1,10 +1,19 @@
 <template lang="pug">
     card 
-      editLine(slot="title" v-model='title' :id='group.id' :editModeByDefault="empty" :category='group' @remove-category="$emit('remove-category', $event)" @edit-category="$emit('edit-category', $event)" ) 
+      editLine(slot="title" 
+        v-model='title' 
+        :id='group.id' 
+        :editModeByDefault="empty" 
+        :category='group.category' 
+        @remove-category="$emit('remove-category', $event)" 
+        @edit-category="$emit('edit-category', $event)" 
+        @create-category="$emit('create-category', $event)" 
+      ) 
       .list(slot="content")
-          .item(v-for='item in group.skills' v-if='true')
-            skill(:skill='item' @remove-skill="$emit('remove-skill', $event)" @change-skill="$emit('change-skill', $event)")
-          addSkill.add-skill(:blocked="empty" :categoryId="group.id" @add-skill="$emit('add-skill', $event)")
+        .item(v-for='item in group.skills' v-if='true')
+          skill(:skill='item' @remove-skill="$emit('remove-skill', $event)" @change-skill="$emit('change-skill', $event)")
+        addSkill.add-skill(:blocked="empty" :categoryId="group.id" @add-skill="$emit('add-skill', $event)")
+        pre {{group}}
 </template>
 
 <script>
