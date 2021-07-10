@@ -5,7 +5,6 @@
                 router-link( tag="a" to='/admin/').menu-item О нас
                 router-link( tag="a" to='/admin/works/').menu-item Работы
                 router-link( tag="a" to='/admin/reviews/').menu-item Отзывы
-                router-link( tag="a" to='/admin/login/').menu-item Логин
 </template>
 
 <script>
