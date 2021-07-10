@@ -2,7 +2,7 @@
     .add-skill(:class="{blocked:blocked}")
         appInput(v-model="skill.title" placeholder="Новый навык").input-name
         appInput(v-model="skill.percent").input-percent
-        iconedBtn(type="iconed" @click="$emit('add-skill',skill)" title='')
+        iconedBtn(type="iconed" @click="addSkill" title='')
 </template>
 
 <script>
@@ -18,16 +18,29 @@ export default {
     return {
       skill:{
         title:'',
-        percent:'',
-        category:this.categoryId
+        percent:''
       }
-
     }
   },
   props: {
     blocked:Boolean,
     categoryId:Number
+  },
+  methods:{
+    addSkill(){
+      let skill={
+        title:this.skill.title,
+        percent:this.skill.percent,
+        category:this.categoryId
+      }
+
+      this.$emit('add-skill',skill);
+
+      this.skill.title='';
+      this.skill.percent=''; 
+    }
   }
+
 }
 </script>
 

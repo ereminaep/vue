@@ -1,7 +1,7 @@
 <template>
   <div class="edit-line-component" :class="{'blocked' : blocked}">
     <div class="title" v-if="editmode === false">
-      <div class="text">{{category}}</div>
+      <div class="text">{{group.category}}</div>
       <div class="icon">
         <icon symbol="pencil" grayscale @click="editmode = true"></icon>
       </div>
@@ -9,13 +9,12 @@
     <div v-else class="title">
       <div class="input">
         <app-input
-          placeholder="Название новой группы"
-          :value="category"
-          :errorText="errorText"
-          @input="$emit('input', $event)"
-          @keydown.native.enter="editCategory"
-          autofocus="autofocus"
-          no-side-paddings="no-side-paddings"
+            v-model="group.category"
+            placeholder="Название новой группы"
+            :errorText="errorText"
+            @keydown.native.enter="editCategory"
+            autofocus="autofocus"
+            no-side-paddings="no-side-paddings"
         ></app-input>
       </div>
       <div class="buttons">
@@ -23,7 +22,7 @@
           <icon symbol="tick" @click="editCategory"></icon>
         </div>
         <div class="button-icon">
-          <icon symbol="cross" @click="$emit('remove-category',id)"></icon>
+          <icon symbol="cross" @click="$emit('remove-category',group.id); editmode = false"></icon>
         </div>
       </div>
     </div>
@@ -37,12 +36,8 @@ export default {
       type: String,
       default: ""
     },
-    category: {
-      type: String,
-    },
-    id:{
-      type:Number,
-      default:0
+    group:{
+      type: Object
     },
     errorText: {
       type: String,
@@ -54,17 +49,16 @@ export default {
   },
   data() {
     return {
-      editmode: this.editModeByDefault,
-      title: this.value
-    };
+      editmode: this.editModeByDefault
+    }
   },
   methods:{
     editCategory(){
       this.editmode=false;
-      if(this.id) {
-        this.$emit('edit-category',{title:this.category,id:this.id}); 
+      if(this.group.id) {
+        this.$emit('edit-category',{title:this.group.category,id:this.group.id}); 
       } else {
-        this.$emit('create-category',this.category); 
+        this.$emit('create-category',this.group.category); 
       }
     }
   },

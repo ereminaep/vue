@@ -6,28 +6,32 @@ export default {
     mutations: {
         SET_CATEGORIES: (state, categories) => { state.data = categories },
         ADD_CATEGORY: (state, category) => {
-            console.log(state.data);
             state.data.unshift(category)
+            return category;
         },
         EDIT_CATEGORY: (state, newCategory) => {
             state.data = state.data.map(category => {
                 if (category.id === newCategory.id) {
-                    category.skills.name = newCategory.name;
+                    category.category = newCategory.category;
                 }
                 return category;
             })
+
+            console.log(state);
         },
         REMOVE_CATEGORY: (state, categoryId) => {
-            console.log(123);
-            console.log(state);
             state.data = state.data.filter(item => item.id != categoryId);
             return state;
         },
         ADD_SKILL: (state, newSkill) => {
             state.data = state.data.map(category => {
                 if (category.id === newSkill.category) {
+                    if (category.skills == undefined) {
+                        category.skills = [];
+                    }
                     category.skills.push(newSkill);
                 }
+
                 return category;
             })
         },
@@ -68,7 +72,7 @@ export default {
         async edit({ commit }, categoryData) {
             try {
                 const { data } = await this.$axios.post(`/categories/${categoryData.id}`, { title: categoryData.title });
-                commit("categories/EDIT_CATEGORY", data.category)
+                commit("EDIT_CATEGORY", data.category)
             } catch (error) {
                 console.log(error);
                 throw new Error("Ошибка")

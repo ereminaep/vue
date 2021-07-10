@@ -1,19 +1,27 @@
 <template lang="pug">
     card 
-      editLine(slot="title" 
+      editLine(
+        slot="title" 
         v-model='title' 
-        :id='group.id' 
+        :group='group' 
         :editModeByDefault="empty" 
         :category='group.category' 
         @remove-category="$emit('remove-category', $event)" 
         @edit-category="$emit('edit-category', $event)" 
         @create-category="$emit('create-category', $event)" 
       ) 
-      .list(slot="content")
-        .item(v-for='item in group.skills' v-if='true')
-          skill(:skill='item' @remove-skill="$emit('remove-skill', $event)" @change-skill="$emit('change-skill', $event)")
-        addSkill.add-skill(:blocked="empty" :categoryId="group.id" @add-skill="$emit('add-skill', $event)")
-        pre {{group}}
+      .list(
+        slot="content")
+        pre {{group.skills}}
+        .item(v-for='item in group.skills')
+          skill(
+            :skill='item' 
+            @remove-skill="$emit('remove-skill', $event)" 
+            @change-skill="$emit('change-skill', $event)")
+        addSkill.add-skill(
+          :blocked="empty" 
+          :categoryId="group.id" 
+          @add-skill="$emit('add-skill', $event)")
 </template>
 
 <script>
@@ -26,9 +34,6 @@ export default {
   components:{skill,card,editLine,addSkill},
   props: {
     group: {
-      type: Object
-    },
-    skills:{
       type: Object
     },
     empty:Boolean

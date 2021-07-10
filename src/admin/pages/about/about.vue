@@ -94,7 +94,6 @@ export default {
   },
   created() {
     this.fetchCategoriesAction();
-    console.log(this.categories);
   }
 };
 

@@ -4,6 +4,7 @@ export default {
         async add({ commit }, skill) {
             try {
                 const { data } = await this.$axios.post('/skills', skill);
+                console.log(data);
                 commit("categories/ADD_SKILL", data, { root: true })
             } catch (error) {
                 throw new Error("Ошибка")
