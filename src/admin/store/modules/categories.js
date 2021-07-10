@@ -4,7 +4,7 @@ export default {
         data: [],
     },
     mutations: {
-        SET_CATEGORIES: (state, categories) => (state.data = categories),
+        SET_CATEGORIES: (state, categories) => { state.data = categories },
         ADD_CATEGORY: (state, category) => {
             console.log(state.data);
             state.data.unshift(category)

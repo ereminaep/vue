@@ -10,7 +10,7 @@
       <div class="input">
         <app-input
           placeholder="Название новой группы"
-          :value="value"
+          :value="category"
           :errorText="errorText"
           @input="$emit('input', $event)"
           @keydown.native.enter="editCategory"
@@ -37,8 +37,8 @@ export default {
       type: String,
       default: ""
     },
-    category:{
-      type: Object
+    category: {
+      type: String,
     },
     id:{
       type:Number,
@@ -55,22 +55,17 @@ export default {
   data() {
     return {
       editmode: this.editModeByDefault,
-      title: this.value,
-      category:{
-        title: this.value,
-        id:this.id
-      }
+      title: this.value
     };
   },
   methods:{
     editCategory(){
       this.editmode=false;
       if(this.id) {
-        this.$emit('edit-category',{title:this.value,id:this.id}); 
+        this.$emit('edit-category',{title:this.category,id:this.id}); 
       } else {
-        this.$emit('create-category',this.value); 
+        this.$emit('create-category',this.category); 
       }
-      this.value=this.category.title;
     }
   },
   components: {

@@ -6,14 +6,14 @@ script(type='text/x-template')#skills__components
 
 script(type='text/x-template')#skills-groups
     div 
-        .skills__group(v-for='(value, property) in groups')
-            h3.skills__group-title {{ value.group }} 
-            skills-list(:items='value.items' :skills_list='skills_list')
+        .skills__group(v-for='value in categories')
+            h3.skills__group-title {{ value.category }} 
+            skills-list(:items='value.skills' :skills_list='skills_list')
 
 script(type='text/x-template')#skills-list
     .skills__list
         .skill(v-for='value in items')
-            skill(v-bind:percent='skills_list[value].percent' v-bind:name='skills_list[value].name')
+            skill(v-bind:percent='value.percent' v-bind:name='value.title')
 
 script(type='text/x-template')#skill
     div
