@@ -52,7 +52,7 @@ export default {
     }),
     async login(){
       if ((await this.$validate()) === false) return;
-      if(isValid==false) return;
+      
       this.isSubmitDisabled=true;
 
       try{
@@ -70,7 +70,6 @@ export default {
       } finally{
         this.isSubmitDisabled=false;
       }
-
     }
   }
 }
