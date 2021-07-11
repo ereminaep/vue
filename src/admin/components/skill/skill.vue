@@ -46,7 +46,7 @@ export default {
       return Validator.value(value)
         .required("Введите процент")
         .integer("Процент должен быть числом")
-        .lessThan(100,"Процент не может быть больше 100")
+        .lessThan(100,"Процент не может быть больше 1000")
     },
   },
   data() {
