@@ -1,11 +1,12 @@
 <template lang="pug">
   .app-container 
     router-view
-    .notify-container(:class='{active:isTooltipShown}')
+    div(:class="['notify-container', {active: isTooltipShown}]")
       .notification
         notification(
           :text="tooltipText"
           :type="tooltipType"
+          @click="hideTooltip"
         )
 </template>
 
@@ -14,21 +15,24 @@
 import topApp from "./components/top-app/top-app";
 import notification from "./components/notification";
 
-import{mapState,MapActions} from "vuex";
+import{mapState,mapActions} from "vuex";
 
 export default {
   components:{topApp,notification},
   computed:{
     ...mapState("tooltips",{
-        isTooltipShown:state=>state.isShown,
-        tooltipText:state=>state.text,
-        tooltipType:state=>state.type
+      isTooltipShown: (state) => state.isShown,
+      tooltipText: (state) => state.text,
+      tooltipType: (state) => state.type
     })
   },
   methods:{
+    ...mapActions({
+      hideTooltip: "tooltips/hide"
+    }),
     redirectLogin(){
       if(!localStorage.getItem('token')) {
-        this.$router.push('/admin/login/');
+        this.$router.replace('/admin/login/');
       }
     }
   },

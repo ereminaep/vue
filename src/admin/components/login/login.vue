@@ -63,6 +63,7 @@ export default {
           this.$router.push('/admin/');
         }
         catch(error){
+          console.log(111);
           this.showTooltip({
             text: error.response.data.error,
             type: "error"
