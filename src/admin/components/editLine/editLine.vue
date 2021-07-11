@@ -11,7 +11,7 @@
         <app-input
             v-model="group.category"
             placeholder="Название новой группы"
-            :errorText="errorText"
+            :errorMessage="validation.firstError('group.category')"
             @keydown.native.enter="editCategory"
             autofocus="autofocus"
             no-side-paddings="no-side-paddings"
@@ -30,7 +30,11 @@
 </template>
 
 <script>
+
+import {Validator, mixin as ValidatorMixin} from 'simple-vue-validator';
+
 export default {
+  mixins:[ValidatorMixin],
   props: {
     value: {
       type: String,
@@ -52,14 +56,21 @@ export default {
       editmode: this.editModeByDefault
     }
   },
+  validators:{
+    "group.category":value=>{
+      return Validator.value(value).required("Введите название ");
+    }
+  },
   methods:{
-    editCategory(){
+    async editCategory(){
+      if ((await this.$validate()) === false) return;
       this.editmode=false;
       if(this.group.id) {
         this.$emit('edit-category',{title:this.group.category,id:this.group.id}); 
       } else {
         this.$emit('create-category',this.group.category); 
       }
+      this.editmode=false;
     }
   },
   components: {

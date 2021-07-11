@@ -1,9 +1,15 @@
 <template lang="pug">
   .item(v-if="edited")
     .name
-      app-input(v-model="oldSkill.title").input
+      app-input(
+        v-model="oldSkill.title"
+        :errorMessage="validation.firstError('oldSkill.title')"
+      ).input
     .percent  
-      app-input(v-model="oldSkill.percent").input
+      app-input(
+        v-model="oldSkill.percent"
+        :errorMessage="validation.firstError('oldSkill.percent')"
+      ).input
       span.percent-symbol--focus %
     .admin-skill-icons
       icon(symbol="tick" @click="updateSkill")
@@ -21,13 +27,27 @@
 <script>
 import icon from "../icon/icon";
 import appInput from "../input/input.vue";
+import {Validator, mixin as ValidatorMixin} from 'simple-vue-validator';
 
 export default {
+  mixins:[ValidatorMixin],
   components:{icon,appInput},
   props: {
     skill: {
       type: Object
     }
+  },
+  validators:{
+    "oldSkill.title":value=>{
+      return Validator
+        .value(value).required("Введите название скилла");
+    },
+    "oldSkill.percent":value=>{
+      return Validator.value(value)
+        .required("Введите процент")
+        .integer("Процент должен быть числом")
+        .lessThan(100,"Процент не может быть больше 100")
+    },
   },
   data() {
     return {
@@ -44,7 +64,8 @@ export default {
     editedChange(e){
       this.edited = !this.edited; 
     },
-    updateSkill(){
+    async updateSkill(){
+      if ((await this.$validate()) === false) return;
       this.$emit('change-skill',this.oldSkill);
       this.editedChange();
     }

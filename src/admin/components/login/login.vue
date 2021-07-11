@@ -51,28 +51,26 @@ export default {
       showTooltip: "tooltips/show"
     }),
     async login(){
-      this.$validate().then(async(isValid)=>{
-        if(isValid==false) return;
-        this.isSubmitDisabled=true;
+      if ((await this.$validate()) === false) return;
+      if(isValid==false) return;
+      this.isSubmitDisabled=true;
 
-        try{
-          const response = await $axios.post('/login', this.user);
-          const token=response.data.token;
-          localStorage.setItem('token',token);
-          $axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-          this.$router.push('/admin/');
-        }
-        catch(error){
-          console.log(111);
-          this.showTooltip({
-            text: error.response.data.error,
-            type: "error"
-          })
-        } finally{
-          this.isSubmitDisabled=false;
-        }
+      try{
+        const response = await $axios.post('/login', this.user);
+        const token=response.data.token;
+        localStorage.setItem('token',token);
+        $axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        this.$router.push('/admin/');
+      }
+      catch(error){
+        this.showTooltip({
+          text: error.response.data.error,
+          type: "error"
+        })
+      } finally{
+        this.isSubmitDisabled=false;
+      }
 
-      })
     }
   }
 }
