@@ -30,9 +30,7 @@ export default {
                         category.skills = [];
                     }
                     category.skills.push(newSkill);
-
                 }
-
                 return category;
             })
         },
@@ -62,38 +60,48 @@ export default {
         }
     },
     actions: {
-        async create({ commit }, title) {
+        async create({ commit, dispatch }, title) {
             try {
                 const { data } = await this.$axios.post('/categories', { title })
                 commit("ADD_CATEGORY", data);
             } catch (error) {
-                throw new Error("произошла ошибка");
+                dispatch('tooltips/show', {
+                    text: "Ошибка добавления категории",
+                    type: "error"
+                }, { root: true });
             }
         },
-        async edit({ commit }, categoryData) {
+        async edit({ commit, dispatch }, categoryData) {
             try {
                 const { data } = await this.$axios.post(`/categories/${categoryData.id}`, { title: categoryData.title });
                 commit("EDIT_CATEGORY", data.category)
             } catch (error) {
-                console.log(error);
-                throw new Error("Ошибка")
+                dispatch('tooltips/show', {
+                    text: "Ошибка редактирования категории",
+                    type: "error"
+                }, { root: true });
             }
         },
-        async remove({ commit }, categoryId) {
+        async remove({ commit, dispatch }, categoryId) {
             try {
                 const { data } = await this.$axios.delete(`/categories/${categoryId}`)
-                commit("categories/REMOVE_CATEGORY", categoryId, { root: true });
+                commit("REMOVE_CATEGORY", categoryId);
             } catch (error) {
-                console.log(error);
-                throw new Error("Ошибка")
+                dispatch('tooltips/show', {
+                    text: "Ошибка удаления категории",
+                    type: "error"
+                }, { root: true });
             }
         },
-        async fetch({ commit }) {
+        async fetch({ commit, dispatch }) {
             try {
                 const { data } = await this.$axios.get('/categories/466')
                 commit("SET_CATEGORIES", data)
             } catch (error) {
-                console.log(error);
+                dispatch('tooltips/show', {
+                    text: "Ошибка загрузки данных",
+                    type: "error"
+                }, { root: true });
             }
         }
     }

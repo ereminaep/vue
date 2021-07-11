@@ -8,7 +8,7 @@ export default {
                 commit("categories/ADD_SKILL", data, { root: true })
             } catch (error) {
                 dispatch('tooltips/show', {
-                    text: error.response.data.message,
+                    text: "Ошибка добавления скилла",
                     type: "error"
                 }, { root: true });
             }
@@ -19,7 +19,7 @@ export default {
                 commit("categories/REMOVE_SKILL", skillToRemove, { root: true })
             } catch (error) {
                 dispatch('tooltips/show', {
-                    text: error.response.data.message,
+                    text: "Ошибка удаления скилла",
                     type: "error"
                 }, { root: true });
             }
@@ -30,7 +30,7 @@ export default {
                 commit("categories/EDIT_SKILL", data.skill, { root: true })
             } catch (error) {
                 dispatch('tooltips/show', {
-                    text: error.response.data.message,
+                    text: "Ошибка редактирования скилла",
                     type: "error"
                 }, { root: true });
             }
