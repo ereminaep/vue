@@ -9,6 +9,7 @@
             .skill-group(v-if='newCategorie')  
               skillGroup(:empty='true' :group={title:''}
               @create-category="createCategory"
+              @remove-category="removeCategory"
               )
             .skill-group(v-for='item in categories')
               skillGroup(:group='item'
@@ -32,6 +33,9 @@ import {mapActions} from 'vuex';
 import $axions from "../../requests";
 
 export default {
+  props:{
+    empty:Boolean
+  },
   data(){
     return {
       newCategorie:false
@@ -71,6 +75,7 @@ export default {
       skill.editmode = false;
     },
     async createCategory(categoryTitle) {
+      console.log(categoryTitle);
       try {
         await this.createCategoryAction(categoryTitle);
         this.newCategorie=!this.newCategorie;
@@ -85,9 +90,13 @@ export default {
         console.log(error.message); 
       }
     },
-    async removeCategory(categoryId) {
+    async removeCategory(category) {
+      if(category.category==undefined) {
+        this.newCategorie=!this.newCategorie;
+        return;
+      }
       try {
-        await this.removeCategoryAction(categoryId);
+        await this.removeCategoryAction(category.category);
       } catch (error) {
         console.log(error.message); 
       }

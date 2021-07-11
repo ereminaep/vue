@@ -22,7 +22,7 @@
           <icon symbol="tick" @click="editCategory"></icon>
         </div>
         <div class="button-icon">
-          <icon symbol="cross" @click="$emit('remove-category',group.id); editmode = false"></icon>
+          <icon symbol="cross" @click="$emit('remove-category',{category:group.id,empty:blocked}); editmode = false"></icon>
         </div>
       </div>
     </div>
@@ -63,14 +63,20 @@ export default {
   },
   methods:{
     async editCategory(){
+
+      if(this.group.category==undefined){
+        this.group.category='';
+      }
+
       if ((await this.$validate()) === false) return;
-      this.editmode=false;
+
       if(this.group.id) {
         this.$emit('edit-category',{title:this.group.category,id:this.group.id}); 
+        this.editmode=false;
       } else {
         this.$emit('create-category',this.group.category); 
+        this.editmode=false;
       }
-      this.editmode=false;
     }
   },
   components: {
