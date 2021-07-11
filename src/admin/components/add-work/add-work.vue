@@ -4,12 +4,12 @@
       .form-side
         .img-load
           .drop-text Перетащите или загрузите для загрузки изображения
-          appButton(title="Загрузить" typeAttr="file" @change="$emit('load')").file
+          appButton(title="Загрузить" v-model="work.photo" typeAttr="file" @change="$emit('load')").file
       .form-side
-        appInput(title="Название").work-input
-        appInput(title="Ссылка").work-input
-        appInput(title="Сообщение" fieldType="textarea").work-input
-        tags
+        appInput(title="Название" v-model="work.name").work-input
+        appInput(title="Ссылка" v-model="work.link").work-input
+        appInput(title="Сообщение" v-model="work.description" fieldType="textarea").work-input
+        tags(:items='work.tags')
         .buttons
           appButton(plain title="Отмена" @click.prevent="$emit('reset')")
           appButton(title="Отправить" @click.prevent="$emit('save')")

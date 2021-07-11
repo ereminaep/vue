@@ -22,7 +22,7 @@ export const defaultView = () => ({
                 description: "Описание Описание Описание Описание Описание",
                 link: "https://google.com",
                 photo: "https://bipbap.ru/wp-content/uploads/2018/04/0_7c773_e4f21b71_XL-640x400.jpg",
-                tags: ['html', 'css', 'vue']
+                tags: 'html, css, vue'
             }
         }
     },
