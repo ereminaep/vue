@@ -1,15 +1,30 @@
 <template lang="pug">
   .app-container 
     router-view
-
+    .notify-container(:class='{active:isTooltipShown}')
+      .notification
+        notification(
+          :text="tooltipText"
+          :type="tooltipType"
+        )
 </template>
 
 <script>
 
 import topApp from "./components/top-app/top-app";
+import notification from "./components/notification";
+
+import{mapState,MapActions} from "vuex";
 
 export default {
-  components:{topApp},
+  components:{topApp,notification},
+  computed:{
+    ...mapState("tooltips",{
+        isTooltipShown:state=>state.isShown,
+        tooltipText:state=>state.text,
+        tooltipType:state=>state.type
+    })
+  },
   methods:{
     redirectLogin(){
       if(!localStorage.getItem('token')) {
