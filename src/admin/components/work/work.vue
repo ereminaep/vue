@@ -5,12 +5,13 @@
       .tags
         .tag(v-for="item in work.tags")
           span {{item}}
-    .name {{work.name}}
-    .description {{work.description}}
-    .link  {{work.link}}
-    .icons
-      icon(symbol="pencil" @click="$emit('edit',work.id)" title="Править")
-      icon(symbol="cross" @click="$emit('remove',work.id)" title="Удалить")
+    .work-content
+      .name {{work.name}}
+      .description {{work.description}}
+      .link  {{work.link}}
+      .icons
+        icon(symbol="pencil" @click="$emit('edit',work.id)" title="Править")
+        icon(symbol="cross" @click="$emit('remove',work.id)" title="Удалить")
 
 
     

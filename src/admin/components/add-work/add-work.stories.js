@@ -1,18 +1,19 @@
-import work from "./work.vue";
+import addWork from "./add-work.vue";
 import { action } from "@storybook/addon-actions";
 
 export default {
-    title: "work",
-    components: { work }
+    title: "add-work",
+    components: { addWork }
 };
 
 const methods = {
-    onEdit: action("onEdit"),
-    onRemove: action("onRemove")
+    onSave: action("onSave"),
+    onReset: action("onReset"),
+    onLoad: action("onLoad")
 }
 
 export const defaultView = () => ({
-    components: { work },
+    components: { addWork },
     props: {
         work: {
             default: {
@@ -26,7 +27,7 @@ export const defaultView = () => ({
         }
     },
     template: `
-    <work :work='work' @edit="onEdit" @remove="onRemove"/>
+    <add-work :work='work' @load="onLoad" @save='onSave' @reset='onReset'/>
   `,
     methods
 
