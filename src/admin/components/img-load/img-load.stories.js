@@ -8,6 +8,6 @@ export default {
 export const defaultView = () => ({
     components: { imgLoad },
     template: `
-    <img-load/>
+    <img-load/ type="default">
   `,
 });

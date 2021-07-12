@@ -6,12 +6,14 @@
 .image{
     position:relative;
     overflow:hidden;
-    height:190px;
+    width:54px;
+    height:54px;
+    margin-right:20px;
     img{
         width:100%;
         object-fit:cover;
+        border-radius:50%;
     }
-    margin-bottom:34px;
 }
 .name{
     font-weight: bold;
@@ -19,11 +21,17 @@
     line-height: 25px;
     color: #414C63;
 }
+.work{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    color: rgba(65, 76, 99, 0.5);
+}
 .description{
     font-size: 16px;
     line-height: 30px;
     font-weight: 600;
-    margin-bottom:26px;
+    margin-bottom:50px;
     color: rgba(65, 76, 99, 0.5);
     flex-grow:1;
 }
@@ -41,4 +49,7 @@
     display:flex;
     flex-direction:column;
     flex-grow:1;
+}
+.head{
+    display:flex;
 }

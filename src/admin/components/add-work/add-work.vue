@@ -3,6 +3,7 @@
     form(slot="content" id="addWord").form
       .form-side
         img-load(
+          type="default"
           @load="onLoad" 
           @removeImg="onRemoveImg"
           :photo='currentWork.photo'

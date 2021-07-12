@@ -1,11 +1,13 @@
 <template lang="pug">
-  .review
-    .image
-      img(:src='"https://webdev-api.loftschool.com/"+review.photo', alt="alt")
-    .review-content
-      .name {{review.author}}
+  card
+    div(slot="title").head
+      .image
+        img(:src='"https://webdev-api.loftschool.com/"+review.photo', alt="alt")
+      .author
+        .name {{review.author}} 
+        .work {{review.occ}}
+    .review-content(slot="content")
       .description {{review.text}}
-      .link  {{review.occ}}
       .icons
         icon(symbol="pencil" @click="$emit('edit',review)" title="Править")
         icon(symbol="cross" @click="$emit('remove',review.id)" title="Удалить")
@@ -16,9 +18,10 @@
 
 <script>
 import icon from "../icon/icon.vue";
+import card from "../card/card";
 
 export default {
-  components:{icon},
+  components:{icon,card},
   props: {
     review: {
       type: Object

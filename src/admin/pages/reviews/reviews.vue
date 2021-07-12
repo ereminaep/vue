@@ -3,7 +3,7 @@
       topApp
       .container    
         .head
-          .title Блок «Работы»
+          .title Блок «Отзывы»
         addReview(
           v-if='add' 
           type='add'

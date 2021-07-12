@@ -4,27 +4,29 @@
       .form-side
         img-load(
           @load="onLoad" 
+          type="round"
           @removeImg="onRemoveImg"
           :photo='currentReview.photo'
           :errorMessage="validation.firstError('currentReview.photo')"
-        )
+        ).img-load
       .form-side
-        appInput(
-          title="Имя автора" 
-          v-model="currentReview.author"
-           :errorMessage="validation.firstError('currentReview.author')"
-          ).review-input
-        appInput(
-          title="Титул автора" 
-          v-model="currentReview.occ"
-           :errorMessage="validation.firstError('currentReview.occ')"
-          ).review-input
+        .form-line
+          appInput(
+            title="Имя автора" 
+            v-model="currentReview.author"
+            :errorMessage="validation.firstError('currentReview.author')"
+            ).review-input
+          appInput(
+            title="Титул автора" 
+            v-model="currentReview.occ"
+            :errorMessage="validation.firstError('currentReview.occ')"
+            ).review-input
         appInput(
           title="Отзыв" 
           v-model="currentReview.text" 
           fieldType="textarea"
           :errorMessage="validation.firstError('currentReview.text')"
-        ).review-input
+        ).review-textarea
         .buttons
           appButton(plain title="Отмена" @click.prevent="$emit('reset')")
           appButton(title="Отправить" @click.prevent="send")

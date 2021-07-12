@@ -12,12 +12,10 @@ export default {
         EDIT_REVIEW: (state, newReview) => {
             state.data = state.data.map(review => {
                 if (review.id === newReview.id) {
-                    console.log(work.id);
-                    review.title = newReview.title;
-                    review.techs = newReview.techs;
+                    review.author = newReview.author;
+                    review.occ = newReview.occ;
                     review.photo = newReview.photo;
-                    review.link = newReview.link;
-                    review.description = newReview.description;
+                    review.text = newReview.text;
                 }
                 return review;
             })
@@ -41,7 +39,7 @@ export default {
         },
         async edit({ commit, dispatch }, reviewData) {
             try {
-                const { data } = await this.$axios.post(`/works/${reviewData.id}`, reviewData.data);
+                const { data } = await this.$axios.post(`/reviews/${reviewData.id}`, reviewData.data);
                 commit("EDIT_REVIEW", data.review)
             } catch (error) {
                 dispatch('tooltips/show', {
