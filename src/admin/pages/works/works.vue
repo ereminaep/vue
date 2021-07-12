@@ -79,9 +79,9 @@ export default {
       this.add=false;
       this.edit=true;
       this.currentWork=work;
+      window.scrollTo({ top: 200, behavior: 'smooth' });
     },
     async changeWork(work){
-      console.log(work);
       try {
         await this.editWorkAction(work);
         this.edit=false;

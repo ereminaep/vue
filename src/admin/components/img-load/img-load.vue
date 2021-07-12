@@ -65,6 +65,7 @@ export default {
       },
       removeFile() {
         this.image = '';
+        this.$emit('removeImg')
       }
     },
     created(){

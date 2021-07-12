@@ -4,6 +4,7 @@
       .form-side
         img-load(
           @load="onLoad" 
+          @removeImg="onRemoveImg"
           :photo='currentWork.photo'
           :errorMessage="validation.firstError('currentWork.photo')"
         )
@@ -121,6 +122,9 @@ export default {
     },
     addTag(tags){
       this.currentWork.techs=tags;
+    },
+    onRemoveImg(){
+      this.currentWork.photo='';
     }
   },
   created(){
