@@ -5,7 +5,7 @@
         slot
         .header-title {{title}}
       .buttons 
-        button(type="button").btn Выйти
+        button(type="button" @click="$emit('logout')").btn Выйти
 
 </template>
 

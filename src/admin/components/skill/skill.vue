@@ -1,52 +1,62 @@
 <template lang="pug">
-  .admin-skill-item(v-if="edited")
-    .admin-skill-name
-      app-input(v-model="oldSkill.name" :errorMessage='errorMessage.name' required).admin-skill-input
-    .admin-skill-percent  
-      app-input(v-model="oldSkill.percent" :errorMessage='errorMessage.percent' required).admin-skill-input
-      span.admin-skill-percent-symbol--focus %
+  .item(v-if="edited")
+    .name
+      app-input(
+        v-model="oldSkill.title"
+        :errorMessage="validation.firstError('oldSkill.title')"
+      ).input
+    .percent  
+      app-input(
+        v-model="oldSkill.percent"
+        :errorMessage="validation.firstError('oldSkill.percent')"
+      ).input
+      span.percent-symbol--focus %
     .admin-skill-icons
-      icon(symbol="tick" @click="$emit('approve',oldSkill); validationSkill($event)")
+      icon(symbol="tick" @click="updateSkill")
       icon(symbol="cross" @click='editedChange')        
-  .admin-skill-item(v-else)
-      .admin-skill-name(v-html='skill.name')
-      .admin-skill-percent
-        .admin-skill-percent-value {{skill.percent}}
-        .admin-skill-percent-symbol %
-      .admin-skill-icons
+  .item(v-else)
+      .name(v-html='skill.title')
+      .percent
+        .percent-value {{skill.percent}}
+        .percent-symbol %
+      .icons
         icon(grayscale symbol="pencil" @click='editedChange')
-        icon(grayscale symbol="trash" @click="$emit('remove',skill.id)")
+        icon(grayscale symbol="trash" @click="$emit('remove-skill',skill)")
 </template>
 
 <script>
 import icon from "../icon/icon";
 import appInput from "../input/input.vue";
+import {Validator, mixin as ValidatorMixin} from 'simple-vue-validator';
 
 export default {
+  mixins:[ValidatorMixin],
   components:{icon,appInput},
   props: {
     skill: {
-      type: Object,
-      default: {
-          id:0,
-          name:'',
-          percent:''
-      },
-      required:true
+      type: Object
     }
+  },
+  validators:{
+    "oldSkill.title":value=>{
+      return Validator
+        .value(value).required("Введите название скилла");
+    },
+    "oldSkill.percent":value=>{
+      return Validator.value(value)
+        .required("Введите процент")
+        .integer("Процент должен быть числом")
+        .lessThan(100,"Процент не может быть больше 1000")
+    },
   },
   data() {
     return {
         edited:false,
         oldSkill:{
            id:this.skill.id,
-           name:this.skill.name,
-           percent:this.skill.percent         
-        },
-        errorText:'Заполните поле',
-          errorMessage:{
-              name:"",
-              percent:""
+           title:this.skill.title,
+           percent:this.skill.percent,
+           category:this.skill.category       
         }
     }
   },
@@ -54,25 +64,12 @@ export default {
     editedChange(e){
       this.edited = !this.edited; 
     },
-    validationSkill(e){
-          let valid=true;
-          if(this.oldSkill.name=='') {
-              valid=false;
-              this.errorMessage.name=this.errorText;
-          } else{
-              this.errorMessage.name='';
-          }
-          if(this.oldSkill.percent=='') {
-              valid=false;
-              this.errorMessage.percent=this.errorText;
-          } else {
-              this.errorMessage.percent=''
-          }
-          if(!valid) {
-              e.preventDefault();
-          }
-      }
-  }
+    async updateSkill(){
+      if ((await this.$validate()) === false) return;
+      this.$emit('change-skill',this.oldSkill);
+      this.editedChange();
+    }
+  },
 }
 </script>
 

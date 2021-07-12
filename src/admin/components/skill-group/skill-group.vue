@@ -1,10 +1,26 @@
 <template lang="pug">
     card 
-        editLine(slot="title" v-model='title' :editModeByDefault="empty") 
-        .admin-skill-list(slot="content")
-            .admin-skill-item(v-for='item in group.items')
-                skill(:skill='getSkillById(item)' @remove="$emit('remove-skill',$event)" @approve="$emit('edit-skill',$event)")
-            addSkill.admin-add-skill(:blocked="empty")
+      editLine(
+        slot="title" 
+        v-model='title' 
+        :group='group' 
+        :editModeByDefault="empty" 
+        :category='group.category' 
+        @remove-category="$emit('remove-category', $event)" 
+        @edit-category="$emit('edit-category', $event)" 
+        @create-category="$emit('create-category', $event)" 
+      ) 
+      .list(
+        slot="content")
+        .item(v-for='item in group.skills')
+          skill(
+            :skill='item' 
+            @remove-skill="$emit('remove-skill', $event)" 
+            @change-skill="$emit('change-skill', $event)")
+        addSkill.add-skill(
+          :blocked="empty" 
+          :categoryId="group.id" 
+          @add-skill="$emit('add-skill', $event)")
 </template>
 
 <script>
@@ -17,30 +33,15 @@ export default {
   components:{skill,card,editLine,addSkill},
   props: {
     group: {
-      type: Object,
-      default: {}
-    },
-    skills:{
-      type: Object,
-      default: {}
+      type: Object
     },
     empty:Boolean
   },
   data(){
     return {
-      title:this.group.group
+      title:this.group.category
     }
-  },
-  methods:{
-    getSkillById(id) {
-            return {
-                id:this.skills[id].id,
-                name:this.skills[id].name,
-                percent:this.skills[id].percent,
-                edited:false
-            }
-        }
-    }
+  }
 }
 </script>
 

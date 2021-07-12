@@ -1,18 +1,34 @@
 import Vue from 'vue';
 
+import { store } from '../admin/store';
+import $axios from "../admin/requests";
+
+store.$axios = $axios;
+
+import { mapState } from 'vuex';
+import { mapActions } from 'vuex';
+
 let skills = Vue.component('skills', {
     groups: ['groups'],
     template: "#skills-groups",
-    data: function() {
-        return {
-            groups: require('./../data/skill-widget.json'),
-            skills_list: require('./../data/skills.json'),
-        }
+    store,
+    computed: {
+        ...mapState("categories", {
+            categories: state => state.data
+        })
+    },
+    methods: {
+        ...mapActions({
+            fetchCategoriesAction: "categories/fetch",
+        })
+    },
+    created() {
+        this.fetchCategoriesAction();
     }
 })
 
 let skillsList = Vue.component('skillsList', {
-    props: ['items', 'skills_list'],
+    props: ['items'],
     template: "#skills-list"
 })
 
@@ -55,8 +71,12 @@ let skill = Vue.component('skill', {
     }
 })
 
-const vueModel = new Vue({
+
+
+
+new Vue({
     el: '#skills__widget',
     template: '#skills__components',
+    store,
     components: { skillsList, skills, skill }
 });
