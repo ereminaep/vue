@@ -53,6 +53,7 @@ export default {
       type: Object,
       default:function(){
         return {
+          id:0,
           title:'',
           description:'',
           link:'',
@@ -93,7 +94,7 @@ export default {
     }
   },
   methods:{
-    async send(){
+    async send() {
 
      if ((await this.$validate()) === false) return;
       let formData = new FormData();
@@ -104,7 +105,16 @@ export default {
       formData.append('photo', this.currentWork.photo);
       formData.append('description', this.currentWork.description);
 
-      this.$emit('add',formData);
+      if(this.type=='add') {
+       this.$emit('add',formData);
+      } else {
+       this.$emit('edit',{
+          id:this.currentWork.id,
+          data:formData
+        }
+      );
+      }
+
     },
     onLoad(image){
       this.currentWork.photo=image;
@@ -114,13 +124,12 @@ export default {
     }
   },
   created(){
-
     this.currentWork.title = (this.work.title!=undefined) ? this.work.title : '';
     this.currentWork.description = (this.work.description!=undefined) ? this.work.description : '';
     this.currentWork.link = (this.work.link!=undefined) ? this.work.link : '';
     this.currentWork.techs = (this.work.techs!=undefined) ? this.work.techs : '';
     this.currentWork.photo = (this.work.photo!=undefined) ? this.work.photo : '';
-    
+    this.currentWork.id = (this.work.id!=undefined) ? this.work.id : '';
   }
 }
 </script>

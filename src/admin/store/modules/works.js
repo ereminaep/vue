@@ -10,9 +10,15 @@ export default {
             return work;
         },
         EDIT_WORK: (state, newWork) => {
+            console.log(newWork);
             state.data = state.data.map(work => {
                 if (work.id === newWork.id) {
-                    work.name = newWork.name;
+                    console.log(work.id);
+                    work.title = newWork.title;
+                    work.techs = newWork.techs;
+                    work.photo = newWork.photo;
+                    work.link = newWork.link;
+                    work.description = newWork.description;
                 }
                 return work;
             })
@@ -34,10 +40,10 @@ export default {
                 }, { root: true });
             }
         },
-        async edit({ commit, dispatch }, categoryData) {
+        async edit({ commit, dispatch }, workData) {
             try {
-                const { data } = await this.$axios.post(`/works/${categoryData.id}`, { title: categoryData.title });
-                commit("EDIT_WORK", data.category)
+                const { data } = await this.$axios.post(`/works/${workData.id}`, workData.data);
+                commit("EDIT_WORK", data.work)
             } catch (error) {
                 dispatch('tooltips/show', {
                     text: "Ошибка редактирования работы",

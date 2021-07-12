@@ -16,6 +16,7 @@
           type='edit'
           :work='currentWork'
           @reset='onReset'
+          @edit="changeWork"
         )
         .work-items
           squareBtn(type="square" title="Добавить работу" @click="add=true;edit=false;").work-item
@@ -47,16 +48,16 @@ export default {
   },
   data(){ 
     return {
-    currentWork:{},
-    add:false,
-    edit:false
-  }
-
+      currentWork:{},
+      add:false,
+      edit:false
+    }
   },
   methods: {
     ...mapActions({
       createWorkAction: "works/create",
       fetchWorksAction: "works/fetch",
+      editWorkAction: "works/edit",
       removeWorkAction: "works/remove"
     }),
     async removeWork(work) {
@@ -74,10 +75,19 @@ export default {
         console.log(error.message); 
       }
     },
-    editWork(work){
+    async editWork(work){
       this.add=false;
       this.edit=true;
       this.currentWork=work;
+    },
+    async changeWork(work){
+      console.log(work);
+      try {
+        await this.editWorkAction(work);
+        this.edit=false;
+      } catch (error) {
+        console.log(error.message); 
+      }
     },
     onReset(){
       this.edit=false;
