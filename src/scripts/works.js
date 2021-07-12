@@ -1,42 +1,37 @@
 import Vue from 'vue';
 
+import { store } from '../admin/store';
+import $axios from "../admin/requests";
+
+store.$axios = $axios;
+
+import { mapState } from 'vuex';
+import { mapActions } from 'vuex';
+
 const vueModel = new Vue({
     el: '#works__widget',
+    store,
     template: '#works__components',
+    computed: {
+        ...mapState("works", {
+            works: state => state.data
+        })
+    },
+    created() {
+        this.fetchWorksAction();
+    },
     data() {
         return {
-            works_data: [],
-            skills: require('./../data/skills.json'),
-            tags: '',
             currentSlide: 1
         }
     },
     methods: {
-        requareImage: function() {
-            this.works_data.map(
-                function(item) {
-                    let requiredImg = require(`../images/content/${item.image}`);
-                    item.image = requiredImg.default;
-                }
-            )
-        },
-        getSkillById(id) {
-            return this.skills[id].name;
-        },
-        getSkills: function() {
-            let getSkillById = this.getSkillById;
-            this.works_data.map(
-                function(item) {
-                    item.tags = [];
-                    item.skills.map(function(value) {
-                        item.tags.push(getSkillById(value));
-                    })
-                }
-            );
-        },
+        ...mapActions({
+            fetchWorksAction: "works/fetch",
+        }),
         moveSlides(number) {
             if (number == 1) {
-                if (this.currentSlide < this.works_data.length) {
+                if (this.currentSlide < this.works.length) {
                     ++this.currentSlide;
                 }
             }
@@ -48,11 +43,13 @@ const vueModel = new Vue({
         },
         setCurrentSlide(number) {
             this.currentSlide = number;
+        },
+        getTags(string) {
+            let tags = string.trim().split(',');
+            if (tags[tags.length - 1] == '') {
+                tags.splice(tags.length - 1, 1);
+            }
+            return tags;
         }
-    },
-    created: function() {
-        this.works_data = require('./../data/works.json');
-        this.requareImage();
-        this.getSkills();
     }
 });

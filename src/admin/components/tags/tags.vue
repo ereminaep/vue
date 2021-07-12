@@ -43,8 +43,6 @@ export default {
             if(this.tags[this.tags.length-1]==''){
                 this.tags.splice(this.tags.length-1, 1);
             }
-            console.log(this.tagsString);
-            console.log(this.tags);
             this.$emit('add-tag',this.tagsString);
         },
         removeTag(index){
