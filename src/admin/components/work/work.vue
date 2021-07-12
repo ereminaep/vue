@@ -1,16 +1,16 @@
 <template lang="pug">
   .work
     .image
-      img(:src='work.photo', alt="alt")
+      img(:src='"https://webdev-api.loftschool.com/"+work.photo', alt="alt")
       .tags
-        .tag(v-for="item in work.tags")
+        .tag(v-for="item in getTags(work.techs)")
           span {{item}}
     .work-content
-      .name {{work.name}}
+      .name {{work.title}}
       .description {{work.description}}
       .link  {{work.link}}
       .icons
-        icon(symbol="pencil" @click="$emit('edit',work.id)" title="Править")
+        icon(symbol="pencil" @click="$emit('edit',work)" title="Править")
         icon(symbol="cross" @click="$emit('remove',work.id)" title="Удалить")
 
 
@@ -29,6 +29,16 @@ export default {
   },
   data() {
     return {
+    }
+  },
+  methods:{
+    getTags(tagsString){
+      let tags=[];
+      tags=tagsString.trim().split(',');
+      if(tags[tags.length-1]==''){
+          tags.splice(this.tags.length-1, 1);
+      }
+      return tags;
     }
   }
 }

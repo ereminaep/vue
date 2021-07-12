@@ -1,9 +1,15 @@
 <template lang="pug">
     div
-        app-input(@input="addTag" v-model="items" title="Добавление тэга")
+        app-input(
+            @input="addTag" 
+            v-model="tagsString" 
+            title="Добавление тэга")
         .tags
             div(v-for="(tag, index) in tags")
-                tag(:title='tag' :index:='index' @remove='removeTag(index)')
+                tag(
+                    :title='tag' 
+                    :index:='index' 
+                    @remove='removeTag(index)')
 </template>
 
 <script>
@@ -12,26 +18,30 @@ import tag from "../tag/tag.vue";
 
 export default {
     components:{appInput,tag},
-    props: {
-        items:String
+    props:{
+        items:''
     },
     data(){
         return{
             tagsString:'',
-            tags:[]
+            tags:[],
+            title:''
         }
     },
     methods:{
         addTag() {
-            this.tags=this.items.trim().split(',');
+            this.tags=this.tagsString.trim().split(',');
             if(this.tags[this.tags.length-1]==''){
                 this.tags.splice(this.tags.length-1, 1);
             }
         },
         removeTag(index){
            this.tags.splice(index, 1);
-           this.items=this.tags.join(',');
+           this.tagsString=this.tags.join(',');
         }
+    },
+    computed(){
+        this.tagsString=this.items;
     },
     mounted(){
         this.addTag();

@@ -15,8 +15,8 @@ export default {
     topApp
   },
   mounted(){
-    $axions.post('/works',{photo:'https://bipbap.ru/wp-content/uploads/2018/04/0_7c773_e4f21b71_XL-640x400.jpg',title:'заголовок',link:'http://google.com',description:'текст',techs:'html,css'}).then(function(response){console.log(response)});
-
+    $axions.get('/works/466').then(function(response){console.log(response)});
+    console.log();
   }
 };
 

@@ -16,8 +16,6 @@ export default {
                 }
                 return category;
             })
-
-            console.log(state);
         },
         REMOVE_CATEGORY: (state, categoryId) => {
             state.data = state.data.filter(item => item.id != categoryId);
