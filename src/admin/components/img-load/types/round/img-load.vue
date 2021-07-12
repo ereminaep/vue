@@ -1,18 +1,9 @@
 <template lang="pug">
-     div
-        div(class="drop display-inline align-center" @dragover.prevent @drop="onDrop" :class="{'error': errorMessage}")
-            div(v-if="!image" class="drop-text")
-                span(v-if="!errorMessage") Перетащите или загрузите для загрузки изображения
-                span(v-else) {{errorMessage}} 
-                appButton(
-                    typeAttr="file" 
-                    name="image" 
-                    @change="onChange" 
-                    title="Загрузить"
-                    :errorMessage="errorMessage")
-            div(class="hidden display-inline align-center" v-else v-bind:class="{ 'image': true }")
-                img(:src="image" alt="" class="img")
-                appButton(class="btn" @click="removeFile" title="Удалить")
+    div
+      div.image-load
+        div(v-if="image" class="drop-image" :style="{backgroundImage:`url(${image})`}")
+      appButton(typeAttr="file" plain name="image"  @change="onChange" title="Загрузить")
+      span(v-if="errorMessage") {{errorMessage}}
 </template>
 
 <script>

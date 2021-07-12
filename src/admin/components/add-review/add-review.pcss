@@ -1,12 +1,15 @@
 .form{
     display:flex;
     margin:0 14px;
-    justify-content: space-around;
+    justify-content: flex-start;
     margin-bottom:20px;
 }
 .form-side{
     &:first-of-type{
-        margin-right:10px;
+        margin-right:30px;
+    }
+    &:last-of-type{
+        width:600px;
     }
 }
 .buttons{
@@ -16,21 +19,7 @@
 .work-input{
     margin-bottom:10px;
 }
-.img-load{
-    width:200px;
-    height:200px;
-    background: #DEE4ED;
-    border: 1px dashed #A1A1A1;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    border-radius:50%;
-    overflow:hidden;
-    .drop-text{
-        display:none;
-    }
-}
+
 .drop-text{
     width:220px;
     margin-bottom:40px;
@@ -45,9 +34,11 @@
 .form-line{
     display:flex;
     flex-direction:row;
+    justify-content:space-between;
 }
 .review-input{
     margin-bottom:20px;
+    width: 49%;
     &+&{
         margin-left:20px;
     }
