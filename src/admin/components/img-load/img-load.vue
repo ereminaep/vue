@@ -1,9 +1,15 @@
 <template lang="pug">
      div
-        div(class="drop display-inline align-center" @dragover.prevent @drop="onDrop")
+        div(class="drop display-inline align-center" @dragover.prevent @drop="onDrop" :class="{'error': errorMessage}")
             div(v-if="!image" class="drop-text")
-                span Перетащите или загрузите для загрузки изображения
-                appButton(typeAttr="file" name="image" @change="onChange" title="Загрузить")
+                span(v-if="!errorMessage") Перетащите или загрузите для загрузки изображения
+                span(v-else) {{errorMessage}} 
+                appButton(
+                    typeAttr="file" 
+                    name="image" 
+                    @change="onChange" 
+                    title="Загрузить"
+                    :errorMessage="errorMessage")
             div(class="hidden display-inline align-center" v-else v-bind:class="{ 'image': true }")
                 img(:src="image" alt="" class="img")
                 appButton(class="btn" @click="removeFile" title="Удалить")
@@ -15,7 +21,17 @@ import appInput from "../input/input.vue";
 import appButton from "../button/button.vue";
 
 export default {
-components:{appInput,appButton},
+    props:{
+        photo:{
+            type:String,
+            default:""
+        },
+        errorMessage:{
+            type:String,
+            default:""         
+        }
+    },
+    components:{appInput,appButton}, 
     data(){
         return{
             image: ''
@@ -31,6 +47,7 @@ components:{appInput,appButton},
       onChange(e) {
         var files = e.target.files;
         this.createFile(files[0]);
+        this.$emit('load',files[0]);
       },
       createFile(file) {
         if (!file.type.match('image.*')) {
@@ -49,6 +66,11 @@ components:{appInput,appButton},
       removeFile() {
         this.image = '';
       }
+    },
+    created(){
+        if(this.photo) {
+            this.image='https://webdev-api.loftschool.com/'+this.photo;
+        }
     }
 }
 </script>

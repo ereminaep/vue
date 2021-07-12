@@ -2,7 +2,11 @@
   card(:title="title[type]")
     form(slot="content" id="addWord").form
       .form-side
-        img-load
+        img-load(
+          @load="onLoad" 
+          :photo='currentWork.photo'
+          :errorMessage="validation.firstError('currentWork.photo')"
+        )
       .form-side
         appInput(
           title="Название" 
@@ -20,9 +24,13 @@
           fieldType="textarea"
           :errorMessage="validation.firstError('currentWork.description')"
         ).work-input
-        tags(:items='currentWork.tags')
+        tags(
+          :items='currentWork.techs' 
+          @add-tag='addTag'
+          :errorMessage="validation.firstError('currentWork.techs')"
+          )
         .buttons
-          appButton(plain title="Отмена" @click.prevent="reset")
+          appButton(plain title="Отмена" @click.prevent="$emit('reset')")
           appButton(title="Отправить" @click.prevent="send")
 
 </template>
@@ -49,7 +57,7 @@ export default {
           description:'',
           link:'',
           photo:'',
-          tags:''
+          techs:''
         }
       }
     },
@@ -67,8 +75,11 @@ export default {
     "currentWork.link":value=>{
       return Validator.value(value).required("Введите ссылку на работу");
     },
+    "currentWork.techs":value=>{
+      return Validator.value(value).required("Введите тэги");
+    },
     "currentWork.photo":value=>{
-      return Validator.value(value).required("Загрузите фото работы");
+      return Validator.value(value).required("Загрузите изображение");
     }
   },
   data() {
@@ -77,64 +88,39 @@ export default {
         'add':"Добавление работы",
         'edit':"Редактирование работы"
       },
-      currentWork:{
-        title:this.work.title,
-        description:this.work.description,
-        link:this.work.link,
-        photo:this.work.photo,
-        tags:this.work.tags
-      },
+      currentWork:{},
       image:''
     }
   },
   methods:{
-    onDrop: function(e) {
-      e.stopPropagation();
-      e.preventDefault();
-      var files = e.dataTransfer.files;
-      this.createFile(files[0]);
-      },
-    onChange(e) {
-        var files = e.target.files;
-        this.createFile(files[0]);
-      },
-    createFile(file) {
-      if (!file.type.match('image.*')) {
-        alert('Select an image');
-        return;
-      }
-      var img = new Image();
-      var reader = new FileReader();
-      var vm = this;
-
-      reader.onload = function(e) {
-        vm.image = e.target.result;
-      }
-      reader.readAsDataURL(file);
-    },
-    removeFile() {
-        this.image = '';
-    },
-    async reset(){
-      
-    },
     async send(){
 
-      if ((await this.$validate()) === false) return;
-
+     if ((await this.$validate()) === false) return;
       let formData = new FormData();
 
       formData.append('title', this.currentWork.title);
-      formData.append('techs', '123123');
+      formData.append('techs', this.currentWork.techs);
       formData.append('link', this.currentWork.link);
-      formData.append('photo', this.currentWork.photo.target.files[0]);
+      formData.append('photo', this.currentWork.photo);
       formData.append('description', this.currentWork.description);
 
       this.$emit('add',formData);
     },
-    onDrop(){
-
+    onLoad(image){
+      this.currentWork.photo=image;
+    },
+    addTag(tags){
+      this.currentWork.techs=tags;
     }
+  },
+  created(){
+
+    this.currentWork.title = (this.work.title!=undefined) ? this.work.title : '';
+    this.currentWork.description = (this.work.description!=undefined) ? this.work.description : '';
+    this.currentWork.link = (this.work.link!=undefined) ? this.work.link : '';
+    this.currentWork.techs = (this.work.techs!=undefined) ? this.work.techs : '';
+    this.currentWork.photo = (this.work.photo!=undefined) ? this.work.photo : '';
+    
   }
 }
 </script>

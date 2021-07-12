@@ -3,7 +3,9 @@
         app-input(
             @input="addTag" 
             v-model="tagsString" 
+            :errorMessage="errorMessage"
             title="Добавление тэга")
+            
         .tags
             div(v-for="(tag, index) in tags")
                 tag(
@@ -19,7 +21,14 @@ import tag from "../tag/tag.vue";
 export default {
     components:{appInput,tag},
     props:{
-        items:''
+        items:{
+            type:String,
+            default:''
+        },
+        errorMessage:{
+            type:String,
+            default:''
+        }
     },
     data(){
         return{
@@ -34,16 +43,20 @@ export default {
             if(this.tags[this.tags.length-1]==''){
                 this.tags.splice(this.tags.length-1, 1);
             }
+            console.log(this.tagsString);
+            console.log(this.tags);
+            this.$emit('add-tag',this.tagsString);
         },
         removeTag(index){
            this.tags.splice(index, 1);
            this.tagsString=this.tags.join(',');
         }
     },
-    computed(){
-        this.tagsString=this.items;
+    created(){
+        
     },
     mounted(){
+        this.tagsString=this.items;
         this.addTag();
     }
 }

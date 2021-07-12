@@ -8,15 +8,17 @@
           v-if='add' 
           type='add'
           @add="createWork"
+          @reset='onReset'
           :work='{}'
         )
         addWork(
           v-else-if='edit'
           type='edit'
           :work='currentWork'
+          @reset='onReset'
         )
         .work-items
-          squareBtn(type="square" title="Добавить работу" @click="add=!add").work-item
+          squareBtn(type="square" title="Добавить работу" @click="add=true;edit=false;").work-item
           work(
             v-for='item in works' 
             :work='item'
@@ -65,20 +67,21 @@ export default {
       }
     },
     async createWork(work) {
-        for(let [name, value] of work) {
-          console.log(`${name} = ${value}`); 
-      }
       try {
         await this.createWorkAction(work);
-        this.add=!this.add;
+        this.add=false;
       } catch (error) {
         console.log(error.message); 
       }
     },
     editWork(work){
+      this.add=false;
       this.edit=true;
-      console.log(work);
       this.currentWork=work;
+    },
+    onReset(){
+      this.edit=false;
+      this.add=false;
     }
   },
   created() {
