@@ -1,9 +1,0 @@
-[{
-    "id": 1,
-    "group": "Front-end",
-    "items": ["1", "2", "3", "4"]
-}, {
-    "id": 2,
-    "group": "Workflow",
-    "items": ["5", "6", "7", "8"]
-}]
