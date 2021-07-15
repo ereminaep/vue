@@ -105,7 +105,8 @@ export default {
         },
         async fetch({ commit, dispatch }) {
             try {
-                const { data } = await this.$axios.get('/categories/466')
+                const { data: { user } } = await this.$axios.get('/user')
+                const { data } = await this.$axios.get(`/categories/${user.id}`)
                 commit("SET_CATEGORIES", data)
             } catch (error) {
                 dispatch('tooltips/show', {

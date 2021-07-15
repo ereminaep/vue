@@ -76,7 +76,8 @@ export default {
         },
         async fetch({ commit, dispatch }) {
             try {
-                const { data } = await this.$axios.get('/works/466')
+                const { data: { user } } = await this.$axios.get('/user')
+                const { data } = await this.$axios.get(`/works/${user.id}`)
                 commit("SET_WORKS", data)
             } catch (error) {
                 dispatch('tooltips/show', {
