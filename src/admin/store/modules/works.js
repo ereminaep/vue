@@ -33,6 +33,10 @@ export default {
             try {
                 const { data } = await this.$axios.post('/works', work)
                 commit("ADD_WORK", data);
+                dispatch('tooltips/show', {
+                    text: "Работа успешно добавлена",
+                    type: "success"
+                }, { root: true });
             } catch (error) {
                 dispatch('tooltips/show', {
                     text: "Ошибка добавления работы",
@@ -43,7 +47,11 @@ export default {
         async edit({ commit, dispatch }, workData) {
             try {
                 const { data } = await this.$axios.post(`/works/${workData.id}`, workData.data);
-                commit("EDIT_WORK", data.work)
+                commit("EDIT_WORK", data.work);
+                dispatch('tooltips/show', {
+                    text: "Работа успешно отредактирована",
+                    type: "success"
+                }, { root: true });
             } catch (error) {
                 dispatch('tooltips/show', {
                     text: "Ошибка редактирования работы",
@@ -55,6 +63,10 @@ export default {
             try {
                 const { data } = await this.$axios.delete(`/works/${workId}`)
                 commit("REMOVE_WORK", workId);
+                dispatch('tooltips/show', {
+                    text: "Работа успешно удалена",
+                    type: "success"
+                }, { root: true });
             } catch (error) {
                 dispatch('tooltips/show', {
                     text: "Ошибка удаления работы",

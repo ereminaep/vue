@@ -30,9 +30,13 @@ export default {
             try {
                 const { data } = await this.$axios.post('/reviews', review)
                 commit("ADD_REVIEW", data);
+                dispatch('tooltips/show', {
+                    text: "Отзыв успешно добавлен",
+                    type: "success"
+                }, { root: true });
             } catch (error) {
                 dispatch('tooltips/show', {
-                    text: "Ошибка добавления работы",
+                    text: "Ошибка добавления отзыва",
                     type: "error"
                 }, { root: true });
             }
@@ -40,10 +44,14 @@ export default {
         async edit({ commit, dispatch }, reviewData) {
             try {
                 const { data } = await this.$axios.post(`/reviews/${reviewData.id}`, reviewData.data);
-                commit("EDIT_REVIEW", data.review)
+                commit("EDIT_REVIEW", data.review);
+                dispatch('tooltips/show', {
+                    text: "Отзыв успешно отредактирован",
+                    type: "success"
+                }, { root: true });
             } catch (error) {
                 dispatch('tooltips/show', {
-                    text: "Ошибка редактирования работы",
+                    text: "Ошибка редактирования отзыва",
                     type: "error"
                 }, { root: true });
             }
@@ -52,9 +60,13 @@ export default {
             try {
                 const { data } = await this.$axios.delete(`/reviews/${reviewId}`)
                 commit("REMOVE_REVIEW", reviewId);
+                dispatch('tooltips/show', {
+                    text: "Отзыв успешно удален",
+                    type: "success"
+                }, { root: true });
             } catch (error) {
                 dispatch('tooltips/show', {
-                    text: "Ошибка удаления работы",
+                    text: "Ошибка удаления отзыва",
                     type: "error"
                 }, { root: true });
             }

@@ -62,6 +62,10 @@ export default {
             try {
                 const { data } = await this.$axios.post('/categories', { title })
                 commit("ADD_CATEGORY", data);
+                dispatch('tooltips/show', {
+                    text: "Категория успешно добавлена",
+                    type: "success"
+                }, { root: true });
             } catch (error) {
                 dispatch('tooltips/show', {
                     text: "Ошибка добавления категории",
@@ -72,7 +76,11 @@ export default {
         async edit({ commit, dispatch }, categoryData) {
             try {
                 const { data } = await this.$axios.post(`/categories/${categoryData.id}`, { title: categoryData.title });
-                commit("EDIT_CATEGORY", data.category)
+                commit("EDIT_CATEGORY", data.category);
+                dispatch('tooltips/show', {
+                    text: "Категория успешно отредактирована",
+                    type: "success"
+                }, { root: true });
             } catch (error) {
                 dispatch('tooltips/show', {
                     text: "Ошибка редактирования категории",
@@ -84,6 +92,10 @@ export default {
             try {
                 const { data } = await this.$axios.delete(`/categories/${categoryId}`)
                 commit("REMOVE_CATEGORY", categoryId);
+                dispatch('tooltips/show', {
+                    text: "Категория успешно удалена",
+                    type: "success"
+                }, { root: true });
             } catch (error) {
                 dispatch('tooltips/show', {
                     text: "Ошибка удаления категории",

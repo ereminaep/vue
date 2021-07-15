@@ -1,24 +1,24 @@
 <template lang="pug">
     div
-        topApp
-        .container    
-          .head
-            .title Блок «Обо мне» 
-            round-btn(type='iconed' @click='newCategorie=!newCategorie')
-          .skill-groups
-            .skill-group(v-if='newCategorie')  
-              skillGroup(:empty='true' :group={title:''}
-              @create-category="createCategory"
+      topApp
+      .container    
+        .head
+          .title Блок «Обо мне» 
+          round-btn(type='iconed' @click='newCategorie=!newCategorie')
+        .skill-groups
+          .skill-group(v-if='newCategorie')  
+            skillGroup(:empty='true' :group={title:''}
+            @create-category="createCategory"
+            @remove-category="removeCategory"
+            )
+          .skill-group(v-for='item in categories')
+            skillGroup(:group='item'
+              @edit-category="editCategory"
               @remove-category="removeCategory"
-              )
-            .skill-group(v-for='item in categories')
-              skillGroup(:group='item'
-                @edit-category="editCategory"
-                @remove-category="removeCategory"
-                @add-skill="createSkill" 
-                @change-skill="editSkill" 
-                @remove-skill="removeSkill"
-              )
+              @add-skill="createSkill" 
+              @change-skill="editSkill" 
+              @remove-skill="removeSkill"
+            )
 </template>
 
 <script>
@@ -29,8 +29,6 @@ import roundBtn from "../../components/button/button";
 
 import {mapState} from 'vuex';
 import {mapActions} from 'vuex';
-
-import $axions from "../../requests";
 
 export default {
   props:{
@@ -75,7 +73,6 @@ export default {
       skill.editmode = false;
     },
     async createCategory(categoryTitle) {
-      console.log(categoryTitle);
       try {
         await this.createCategoryAction(categoryTitle);
         this.newCategorie=!this.newCategorie;
