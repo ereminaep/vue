@@ -76,8 +76,14 @@ export default {
         },
         async fetch({ commit, dispatch }) {
             try {
-                const { data: { user } } = await this.$axios.get('/user')
-                const { data } = await this.$axios.get(`/works/${user.id}`)
+                let userId;
+                try {
+                    const { data: { user } } = await this.$axios.get('/user')
+                    userId = user.id
+                } catch (error) {
+                    userId = 466;
+                }
+                const { data } = await this.$axios.get(`/works/${userId}`)
                 commit("SET_WORKS", data)
             } catch (error) {
                 dispatch('tooltips/show', {

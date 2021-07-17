@@ -11,7 +11,7 @@ script(type='text/x-template')#reviews__components
             swiper-slide.review(v-for='item in reviews')
                 .review__text {{ item.text }}
                 .review__person
-                        img(class="review_img" :src="'https://webdev-api.loftschool.com/'+item.photo")       
-                        .review__info
-                            .review__name {{ item.name }}
-                            .review__work {{ item.work }}
+                    img(class="review_img" :src="'https://webdev-api.loftschool.com/'+item.photo")       
+                    .review__info
+                        .review__name {{ item.name }}
+                        .review__work {{ item.work }}
