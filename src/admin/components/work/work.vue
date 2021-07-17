@@ -35,9 +35,6 @@ export default {
     getTags(tagsString){
       let tags=[];
       tags=tagsString.trim().split(',');
-      if(tags[tags.length-1]==''){
-          tags.splice(this.tags.length-1, 1);
-      }
       return tags;
     }
   }
