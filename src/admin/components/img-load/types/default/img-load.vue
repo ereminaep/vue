@@ -23,8 +23,7 @@ import appButton from "../../../button/button.vue";
 export default {
     props:{
         photo:{
-            type:String,
-            default:""
+            type:File
         },
         errorMessage:{
             type:String,

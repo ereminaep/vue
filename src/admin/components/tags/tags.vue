@@ -40,18 +40,15 @@ export default {
     methods:{
         addTag() {
             this.tags=this.tagsString.trim().split(',');
-            if(this.tags[this.tags.length-1]==''){
-                this.tags.splice(this.tags.length-1, 1);
-            }
+            let results = this.tags.filter(item=>item.trim());
+            this.tags=results;
+            ///this.tagsString=results.join(',');
             this.$emit('add-tag',this.tagsString);
         },
         removeTag(index){
            this.tags.splice(index, 1);
            this.tagsString=this.tags.join(',');
         }
-    },
-    created(){
-        
     },
     mounted(){
         this.tagsString=this.items;
