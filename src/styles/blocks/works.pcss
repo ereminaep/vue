@@ -30,6 +30,11 @@
     margin-left:50px;
     width:30%;
 }
+.works__img-full{
+    object-fit: cover;
+    width: 100%;
+    height:100%;
+}
 .works__img{
     width:100%;
 }
@@ -48,6 +53,10 @@
 }
 
 @media(max-width:$bp-desktop){
+    .works__img-full{
+        object-fit: cover;
+        box-sizing: border-box;
+    }
     .works__description{
        width:25%;
        margin-left:15px;

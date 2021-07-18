@@ -3,8 +3,9 @@ script(type='text/x-template')#works__components
           h2.title-level2.works__title #{lang['works_title']}
           .works__content
             .slider
-              .slider__slide-full 
-                img(class="works__img-full" :src="'https://webdev-api.loftschool.com/'+works[currentSlide-1].photo")
+              .slider__slide-full
+                transition 
+                  img(class="works__img-full" :src="'https://webdev-api.loftschool.com/'+works[currentSlide-1].photo")
               .slider__slide-items
                 .slider__slide-item(v-for='(item, index) in works')
                     .slider__slide-image(:class="{'slider__slide-image--active': currentSlide==index+1}")

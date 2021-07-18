@@ -13,5 +13,5 @@ script(type='text/x-template')#reviews__components
                 .review__person
                     img(class="review_img" :src="'https://webdev-api.loftschool.com/'+item.photo")       
                     .review__info
-                        .review__name {{ item.name }}
-                        .review__work {{ item.work }}
+                        .review__name {{ item.author }}
+                        .review__work {{ item.occ }}

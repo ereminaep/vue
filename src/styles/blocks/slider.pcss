@@ -23,14 +23,18 @@
 
 .slider__slide-full{
     margin-right:120px;
-    width: 90%;
+    width: 975px;
+    height: 549px;
+    flex-grow: 1;
     z-index:10;
+    object-fit: cover;
 }
 
 .slider__slide-image{
     cursor: pointer;
     width: 178px;
     height: 100px;
+    object-fit: cover;
     &:hover{
         border: 3px solid #DC9322;
     }
@@ -47,15 +51,24 @@
     .slider__slide-full{
         display: flex;
         align-items: center;
+        width: 637.57px;
+        height: 359px;
     }
     .slider__slide-image{
         width: 119.67px;
         height: 67.35px;
+        object-fit: cover;
     }
 }
 @media(max-width:$bp-tablets){
     .slider{
         margin-bottom: 2.1875rem;
+    }
+    .slider__slide-full{
+        display: flex;
+        align-items: center;
+        width: 90%;
+        height: auto;
     }
 }
 
