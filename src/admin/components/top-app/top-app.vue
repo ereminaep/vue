@@ -23,7 +23,7 @@ export default {
   },
   computed:{
     ...mapState({
-      user:state=>state.user.user
+      user:state=>state.user.user_data
     }),
     userPic(){
       return require(`../../../images/${this.user.image}`).default;
@@ -33,6 +33,7 @@ export default {
     async logout(){
         const response =await $axios.post('/logout');
         this.$router.push('/admin/login/');    
+        localStorage.removeItem("token");
     }
   }
 };

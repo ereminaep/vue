@@ -3,24 +3,25 @@ script(type='text/x-template')#works__components
           h2.title-level2.works__title #{lang['works_title']}
           .works__content
             .slider
-              .slider__slide-full 
-                img(class="works__img-full" :src='works_data[currentSlide-1].image')
+              .slider__slide-full
+                transition 
+                  img(class="works__img-full" :src="'https://webdev-api.loftschool.com/'+works[currentSlide-1].photo")
               .slider__slide-items
-                .slider__slide-item(v-for='(item, index) in works_data')
+                .slider__slide-item(v-for='(item, index) in works')
                     .slider__slide-image(:class="{'slider__slide-image--active': currentSlide==index+1}")
-                      img(class="works__img" :src='item.image' @click='setCurrentSlide(item.id)') 
+                      img(class="works__img" :src="'https://webdev-api.loftschool.com/'+item.photo" @click='setCurrentSlide(index+1)') 
                 .arrows.arrows--work
                     button(@click='moveSlides(-1)' :disabled="currentSlide==1").arrows__item.arrows__item--work.arrows__item--left
                       +icon('arrow-down', 'arrow__svg')
-                    button(@click='moveSlides(1)' :disabled="currentSlide==works_data.length").arrows__item.arrows__item--work.arrows__item--right
+                    button(@click='moveSlides(1)' :disabled="currentSlide==works.length").arrows__item.arrows__item--work.arrows__item--right
                       +icon('arrow-down', 'arrow__svg')
               .slider__slide--number {{currentSlide}}     
             .works__description
               .tags.works__tags
-                .tag(v-for='item in works_data[currentSlide-1].tags') 
+                .tag(v-for='item in getTags(works[currentSlide-1].techs)') 
                     span {{item}}
-              h3.title-level3.works__name {{works_data[currentSlide-1].name}}
-              .works__text {{works_data[currentSlide-1].description}}
-              a(:href="works_data[currentSlide-1].link" class="works__link" target="_blank") 
+              h3.title-level3.works__name {{works[currentSlide-1].name}}
+              .works__text {{works[currentSlide-1].description}}
+              a(:href="works[currentSlide-1].link" class="works__link" target="_blank") 
                 +icon('link', 'works__svg') 
                 span #{lang['work_link']}

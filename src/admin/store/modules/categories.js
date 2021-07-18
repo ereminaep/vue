@@ -16,8 +16,6 @@ export default {
                 }
                 return category;
             })
-
-            console.log(state);
         },
         REMOVE_CATEGORY: (state, categoryId) => {
             state.data = state.data.filter(item => item.id != categoryId);
@@ -64,6 +62,10 @@ export default {
             try {
                 const { data } = await this.$axios.post('/categories', { title })
                 commit("ADD_CATEGORY", data);
+                dispatch('tooltips/show', {
+                    text: "Категория успешно добавлена",
+                    type: "success"
+                }, { root: true });
             } catch (error) {
                 dispatch('tooltips/show', {
                     text: "Ошибка добавления категории",
@@ -74,7 +76,11 @@ export default {
         async edit({ commit, dispatch }, categoryData) {
             try {
                 const { data } = await this.$axios.post(`/categories/${categoryData.id}`, { title: categoryData.title });
-                commit("EDIT_CATEGORY", data.category)
+                commit("EDIT_CATEGORY", data.category);
+                dispatch('tooltips/show', {
+                    text: "Категория успешно отредактирована",
+                    type: "success"
+                }, { root: true });
             } catch (error) {
                 dispatch('tooltips/show', {
                     text: "Ошибка редактирования категории",
@@ -86,6 +92,10 @@ export default {
             try {
                 const { data } = await this.$axios.delete(`/categories/${categoryId}`)
                 commit("REMOVE_CATEGORY", categoryId);
+                dispatch('tooltips/show', {
+                    text: "Категория успешно удалена",
+                    type: "success"
+                }, { root: true });
             } catch (error) {
                 dispatch('tooltips/show', {
                     text: "Ошибка удаления категории",
@@ -95,7 +105,14 @@ export default {
         },
         async fetch({ commit, dispatch }) {
             try {
-                const { data } = await this.$axios.get('/categories/466')
+                let userId;
+                try {
+                    const { data: { user } } = await this.$axios.get('/user')
+                    userId = user.id
+                } catch (error) {
+                    userId = 466;
+                }
+                const { data } = await this.$axios.get(`/categories/${userId}`)
                 commit("SET_CATEGORIES", data)
             } catch (error) {
                 dispatch('tooltips/show', {

@@ -11,7 +11,7 @@
         :errorMessage="validation.firstError('oldSkill.percent')"
       ).input
       span.percent-symbol--focus %
-    .admin-skill-icons
+    .admin-skill-icons.icons
       icon(symbol="tick" @click="updateSkill")
       icon(symbol="cross" @click='editedChange')        
   .item(v-else)
@@ -46,7 +46,7 @@ export default {
       return Validator.value(value)
         .required("Введите процент")
         .integer("Процент должен быть числом")
-        .lessThan(100,"Процент не может быть больше 1000")
+        .lessThan(100,"Процент не может быть больше 100")
     },
   },
   data() {

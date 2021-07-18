@@ -10,6 +10,7 @@
           v-model='user.name').input-login
         app-input(
           icon="key"
+          type="password"
           :errorMessage="validation.firstError('user.password')"
           title="Пароль" 
           v-model='user.password').input-login

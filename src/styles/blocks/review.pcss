@@ -5,10 +5,15 @@
     justify-content: center;
     flex-direction: column;
     justify-content: space-between;
+    flex-grow: 1;
+    margin-right:10px;
 }
-.review__img{
+.review_img{
     width:75px;
     height:75px;
+    border-radius:50%;
+    object-fit: cover;
+    
 }
 .review__text{
     color: rgba(255, 255, 255, 0.6);
@@ -16,6 +21,7 @@
     @include text;
     font-weight:normal;
     margin-bottom:30px;
+    flex-grow: 1;
     &:before{
         content:'';
         background: svg-load('quote.svg', fill=#303133, width=100%, height=100%) no-repeat;

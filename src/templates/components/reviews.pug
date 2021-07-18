@@ -8,10 +8,10 @@ script(type='text/x-template')#reviews__components
                 button(type="button" @click="slide('next')" :disabled="!allowNext").arrows__item.arrows__item--right
                     +icon('arrow-down', 'arrow__svg')
         swiper.reviews(ref="slider" :options="sliderOptions")
-            swiper-slide.review(v-for='item in reviews_data')
+            swiper-slide.review(v-for='item in reviews')
                 .review__text {{ item.text }}
                 .review__person
-                        img(class="review_img" :src='item.image')       
-                        .review__info
-                            .review__name {{ item.name }}
-                            .review__work {{ item.work }}
+                    img(class="review_img" :src="'https://webdev-api.loftschool.com/'+item.photo")       
+                    .review__info
+                        .review__name {{ item.author }}
+                        .review__work {{ item.occ }}
